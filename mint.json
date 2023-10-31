@@ -21,12 +21,12 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:contact@structuredlabs.io"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://app.structuredlabs.io"
   },
   "tabs": [
     {
@@ -38,12 +38,12 @@
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "url": "https://docs.structuredlabs.io/introduction"
     },
     {
       "name": "Community",
       "icon": "slack",
-      "url": "https://mintlify.com/community"
+      "url": "https://structured-users.slack.com/"
     },
     {
       "name": "Blog",
@@ -75,8 +75,8 @@
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "twitter": "https://twitter.com/StructuredLabs",
+    "github": "https://github.com/StructuredLabs",
+    "linkedin": "https://www.linkedin.com/company/structuredlabs/"
   }
 }
