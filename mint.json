@@ -36,11 +36,6 @@
   ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://docs.structuredlabs.io/introduction"
-    },
-    {
       "name": "Community",
       "icon": "slack",
       "url": "https://structured-users.slack.com/"
@@ -77,6 +72,9 @@
   "footerSocials": {
     "twitter": "https://twitter.com/StructuredLabs",
     "github": "https://github.com/StructuredLabs",
-    "linkedin": "https://www.linkedin.com/company/structuredlabs/"
+    "linkedin": "https://www.linkedin.com/company/structuredlabs/",
+    "website": "https://www.structuredlabs.io",
+    "email": "mailto:contact@structuredlabs.io",
+    "slack": "https://structured-users.slack.com/"
   }
 }
