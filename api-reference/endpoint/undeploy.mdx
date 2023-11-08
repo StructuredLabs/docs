@@ -1,0 +1,87 @@
+---
+title: "Undeploy API Block"
+api: "POST https://api.structuredlabs.io/v1/blocks"
+description: "This endpoint creates a new API block from a natural language description."
+---
+
+### Body
+
+<ParamField body="prompt" type="string">
+  The natural language description of the API functionality you want to create.
+</ParamField>
+<ParamField body="preConditions" type="object" optional="true">
+  Any preconditions for the API functionality, such as required input ranges or
+  authentication.
+</ParamField>
+<ParamField body="postConditions" type="object" optional="true">
+  Post-conditions for the API functionality, including the expected format of
+  the output.
+</ParamField>
+<ParamField body="rateLimit" type="number" optional="true">
+  The number of requests allowed per time frame for this API block.
+</ParamField>
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates whether the API block creation was successful. Returns `true` if successful, `false` if not.
+</ResponseField>
+<ResponseField name="block" type="object">
+The details of the newly created API block.
+
+<Expandable title="Toggle object">
+<ResponseField name="id" type="string">
+  The unique identifier of the API block.
+</ResponseField>
+<ResponseField name="endpoint" type="string">
+  The URL endpoint at which the new API block can be accessed.
+</ResponseField>
+<ResponseField name="apiKey" type="string">
+  The API key required for authorized access to the API block.
+</ResponseField>
+<ResponseField name="rateLimit" type="number">
+  The rate limit configuration for the API block, reflecting the number of allowed requests per time frame.
+</ResponseField>
+<ResponseField name="status" type="string">
+  The current status of the API block, such as 'pending', 'deployed', or 'failed'.
+</ResponseField>
+</Expandable>
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+curl --location --request POST 'https://api.structuredlabs.io/v1/blocks' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "prompt": "Calculate compound interest",
+    "preConditions": {
+        "principalRange": "[1000, 5000]",
+        "rateRange": "[1, 10]",
+        "timeRange": "[1, 5]"
+    },
+    "postConditions": {
+        "resultFormat": "currency"
+    },
+    "rateLimit": 100
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "success": true,
+  "block": {
+    "id": "blk_123456",
+    "endpoint": "https://api.structuredlabs.io/v1/blocks/blk_123456",
+    "apiKey": "api_key_xyz123",
+    "rateLimit": 100,
+    "status": "deployed"
+  }
+}
+```
+
+</ResponseExample>

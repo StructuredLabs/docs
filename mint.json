@@ -66,7 +66,10 @@
         "api-reference/endpoint/getblock",
         "api-reference/endpoint/create",
         "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
+        "api-reference/endpoint/delete",
+        "api-reference/endpoint/deploy",
+        "api-reference/endpoint/undeploy",
+        "api-reference/endpoint/stats"
       ]
     }
   ],
