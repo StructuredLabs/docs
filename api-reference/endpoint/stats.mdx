@@ -1,17 +1,14 @@
 ---
 title: "Stats API Blocks"
-api: "GET https://api.structuredlabs.io/v1/blocks"
-description: "This endpoint retrieves a list of all API blocks created by the user."
+api: "GET https://api.structuredlabs.io/v1/blocks/{blockId}/stats"
+description: "This endpoint retrieves usage and performance statistics for a specific API block."
 ---
 
-### Body
+### Path Parameters
 
-<ParamField query="page" type="number" optional="true">
-  The page number for paginated results.
-</ParamField>
-
-<ParamField query="limit" type="number" optional="true">
-  The number of items to display per page.
+<ParamField path="blockId" type="string">
+  The unique identifier of the API block for which you want to retrieve
+  statistics.
 </ParamField>
 
 ### Response
@@ -21,16 +18,15 @@ description: "This endpoint retrieves a list of all API blocks created by the us
   `false` if not.
 </ResponseField>
 
-<ResponseField name="blocks" type="array">
-  An array of objects, each representing an API block and its details.
+<ResponseField name="stats" type="object">
+  The usage and performance statistics of the specified API block.
 </ResponseField>
 
 <RequestExample>
 
 ```bash Example Request
-# Example Request to list all API blocks
-curl --location --request GET 'https://api.structuredlabs.io/v1/blocks' \
---header 'Content-Type: application/json' \
+# Example Request to retrieve statistics for a specific API block
+curl --location --request GET 'https://api.structuredlabs.io/v1/blocks/{blockId}/stats' \
 --header 'Authorization: Bearer <api_key>'
 ```
 
@@ -41,21 +37,13 @@ curl --location --request GET 'https://api.structuredlabs.io/v1/blocks' \
 ```json Response
 {
   "success": true,
-  "blocks": [
-    {
-      "id": "blk_123456",
-      "name": "Compound Interest Calculator",
-      "endpoint": "https://api.structuredlabs.io/v1/blocks/blk_123456",
-      "status": "deployed"
-    },
-    {
-      "id": "blk_654321",
-      "name": "Mortgage Estimator",
-      "endpoint": "https://api.structuredlabs.io/v1/blocks/blk_654321",
-      "status": "deployed"
-    }
-    // ... more blocks
-  ]
+  "stats": {
+    "id": "blk_123456",
+    "totalCalls": 1500,
+    "successfulCalls": 1450,
+    "failedCalls": 50,
+    "averageResponseTime": 120
+  }
 }
 ```
 
