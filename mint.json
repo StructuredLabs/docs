@@ -53,7 +53,7 @@
     },
     {
       "group": "Features",
-      "pages": ["features/blocks", "features/search", "features/integrations"]
+      "pages": ["features/blocks", "features/probe", "features/integrations"]
     },
     {
       "group": "API Documentation",
