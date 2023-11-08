@@ -1,7 +1,7 @@
 ---
-title: "Get All API Blocks"
+title: "Get All Blocks"
 api: "GET https://api.structuredlabs.io/v1/blocks"
-description: "This endpoint retrieves a list of all API blocks created by the user."
+description: "This endpoint retrieves a list of all blocks created by the user."
 ---
 
 ### Body
@@ -22,13 +22,13 @@ description: "This endpoint retrieves a list of all API blocks created by the us
 </ResponseField>
 
 <ResponseField name="blocks" type="array">
-  An array of objects, each representing an API block and its details.
+  An array of objects, each representing an block and its details.
 </ResponseField>
 
 <RequestExample>
 
 ```bash Example Request
-# Example Request to list all API blocks
+# Example Request to list all blocks
 curl --location --request GET 'https://api.structuredlabs.io/v1/blocks' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <api_key>'

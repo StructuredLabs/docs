@@ -1,13 +1,13 @@
 ---
-title: "Update API Block"
+title: "Update Block"
 api: "PUT https://api.structuredlabs.io/v1/blocks/{blockId}"
-description: "This endpoint updates an existing API block with new configurations or modifications."
+description: "This endpoint updates an existing block with new configurations or modifications."
 ---
 
 ### Path Parameters
 
 <ParamField path="blockId" type="string">
-  The unique identifier of the API block to update.
+  The unique identifier of the block to update.
 </ParamField>
 
 ### Body
@@ -26,7 +26,7 @@ description: "This endpoint updates an existing API block with new configuration
 </ParamField>
 
 <ParamField body="rateLimit" type="number" optional="true">
-  The new rate limit configuration for the API block, if changes are needed.
+  The new rate limit configuration for the block, if changes are needed.
 </ParamField>
 
 ### Response
@@ -38,12 +38,12 @@ description: "This endpoint updates an existing API block with new configuration
 
 <ResponseField name="block" type="object">
 
-The updated contents of the API block.
+The updated contents of the block.
 
 <Expandable title="Toggle object">
 
 <ResponseField name="id" type="string">
-  The unique identifier of the API block.
+  The unique identifier of the block.
 </ResponseField>
 
 <ResponseField name="prompt" type="string">
@@ -51,19 +51,19 @@ The updated contents of the API block.
 </ResponseField>
 
 <ResponseField name="preConditions" type="object">
-  The updated preconditions set for the API block.
+  The updated preconditions set for the block.
 </ResponseField>
 
 <ResponseField name="postConditions" type="object">
-  The updated post-conditions set for the API block.
+  The updated post-conditions set for the block.
 </ResponseField>
 
 <ResponseField name="rateLimit" type="number">
-  The updated rate limit for the API block.
+  The updated rate limit for the block.
 </ResponseField>
 
 <ResponseField name="status" type="string">
-  The current status of the API block after the update.
+  The current status of the block after the update.
 </ResponseField>
 
 </Expandable>
@@ -73,7 +73,7 @@ The updated contents of the API block.
 <RequestExample>
 
 ```bash Example Request
-# Example Request to update an API block
+# Example Request to update an block
 curl --location --request PUT 'https://api.structuredlabs.io/v1/blocks/{blockId}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <api_key>' \

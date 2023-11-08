@@ -1,7 +1,7 @@
 ---
-title: "Create API Block"
+title: "Create Block"
 api: "POST https://api.structuredlabs.io/v1/blocks"
-description: "This endpoint creates a new API block from a natural language description."
+description: "This endpoint creates a new block from a natural language description."
 ---
 
 ### Body
@@ -24,26 +24,26 @@ description: "This endpoint creates a new API block from a natural language desc
 ### Response
 
 <ResponseField name="success" type="boolean">
-  Indicates whether the API block creation was successful. Returns `true` if successful, `false` if not.
+  Indicates whether the block creation was successful. Returns `true` if successful, `false` if not.
 </ResponseField>
 <ResponseField name="block" type="object">
-The details of the newly created API block.
+The details of the newly created block.
 
 <Expandable title="Toggle object">
 <ResponseField name="id" type="string">
-  The unique identifier of the API block.
+  The unique identifier of the block.
 </ResponseField>
 <ResponseField name="endpoint" type="string">
-  The URL endpoint at which the new API block can be accessed.
+  The URL endpoint at which the new block can be accessed.
 </ResponseField>
 <ResponseField name="apiKey" type="string">
   The API key required for authorized access to the API block.
 </ResponseField>
 <ResponseField name="rateLimit" type="number">
-  The rate limit configuration for the API block, reflecting the number of allowed requests per time frame.
+  The rate limit configuration for the block, reflecting the number of allowed requests per time frame.
 </ResponseField>
 <ResponseField name="status" type="string">
-  The current status of the API block, such as 'pending', 'deployed', or 'failed'.
+  The current status of the block, such as 'pending', 'deployed', or 'failed'.
 </ResponseField>
 </Expandable>
 </ResponseField>

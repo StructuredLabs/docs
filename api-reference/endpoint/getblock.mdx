@@ -1,13 +1,13 @@
 ---
-title: "Get API Block Details"
+title: "Get Block Details"
 api: "GET https://api.structuredlabs.io/v1/blocks/{blockId}"
-description: "This endpoint retrieves the details of a specific API block."
+description: "This endpoint retrieves the details of a specific block."
 ---
 
 ### Body
 
 <ParamField path="blockId" type="string">
-  The unique identifier of the API block to retrieve.
+  The unique identifier of the block to retrieve.
 </ParamField>
 
 ### Response
@@ -19,29 +19,28 @@ description: "This endpoint retrieves the details of a specific API block."
 
 <ResponseField name="block" type="object">
 
-The detailed information of the API block.
+The detailed information of the block.
 
 <Expandable title="Toggle object">
 
 <ResponseField name="id" type="string">
-  The unique identifier of the API block.
+  The unique identifier of the block.
 </ResponseField>
 
 <ResponseField name="name" type="string">
-  The name given to the API block.
+  The name given to the block.
 </ResponseField>
 
 <ResponseField name="endpoint" type="string">
-  The URL endpoint where the API block is accessible.
+  The URL endpoint where the block is accessible.
 </ResponseField>
 
 <ResponseField name="status" type="string">
-  The current status of the API block, such as 'active', 'inactive', or
-  'deploying'.
+  The current status of the block, such as 'active', 'inactive', or 'deploying'.
 </ResponseField>
 
 <ResponseField name="rateLimit" type="number" optional="true">
-  The rate limit that has been set for the API block, if any.
+  The rate limit that has been set for the block, if any.
 </ResponseField>
 
 </Expandable>
@@ -51,7 +50,7 @@ The detailed information of the API block.
 <RequestExample>
 
 ```bash Example Request
-# Example Request to get details of a specific API block
+# Example Request to get details of a specific block
 curl --location --request GET 'https://api.structuredlabs.io/v1/blocks/{blockId}' \
 --header 'Authorization: Bearer <api_key>'
 --data-raw '{

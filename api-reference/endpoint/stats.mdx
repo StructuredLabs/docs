@@ -1,14 +1,13 @@
 ---
-title: "Stats API Blocks"
+title: "Block Stats"
 api: "GET https://api.structuredlabs.io/v1/blocks/{blockId}/stats"
-description: "This endpoint retrieves usage and performance statistics for a specific API block."
+description: "This endpoint retrieves usage and performance statistics for a specific block."
 ---
 
 ### Path Parameters
 
 <ParamField path="blockId" type="string">
-  The unique identifier of the API block for which you want to retrieve
-  statistics.
+  The unique identifier of the block for which you want to retrieve statistics.
 </ParamField>
 
 ### Response
@@ -19,13 +18,13 @@ description: "This endpoint retrieves usage and performance statistics for a spe
 </ResponseField>
 
 <ResponseField name="stats" type="object">
-  The usage and performance statistics of the specified API block.
+  The usage and performance statistics of the specified block.
 </ResponseField>
 
 <RequestExample>
 
 ```bash Example Request
-# Example Request to retrieve statistics for a specific API block
+# Example Request to retrieve statistics for a specific block
 curl --location --request GET 'https://api.structuredlabs.io/v1/blocks/{blockId}/stats' \
 --header 'Authorization: Bearer <api_key>'
 ```

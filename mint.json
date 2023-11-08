@@ -38,7 +38,7 @@
     {
       "name": "Community",
       "icon": "slack",
-      "url": "https://structured-users.slack.com/"
+      "url": "https://join.slack.com/t/structured-users/shared_invite/zt-265ong01f-UHP6BP3FzvOmMQDIKty_JQ"
     },
     {
       "name": "Blog",
@@ -52,8 +52,8 @@
       "pages": ["introduction", "quickstart", "development"]
     },
     {
-      "group": "Essentials",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings"]
+      "group": "Features",
+      "pages": ["features/markdown", "features/code", "features/images", "features/settings"]
     },
     {
       "group": "API Documentation",

@@ -1,29 +1,29 @@
 ---
-title: "Undeploy API Block"
+title: "Undeploy Block"
 api: "POST https://api.structuredlabs.io/v1/blocks/{blockId}/undeploy"
-description: "This endpoint takes down a live API block, making it inactive."
+description: "This endpoint takes down a live block, making it inactive."
 ---
 
 ### Path Parameters
 
 <ParamField path="blockId" type="string">
-  The unique identifier of the API block you want to undeploy.
+  The unique identifier of the block you want to undeploy.
 </ParamField>
 
 ### Response
 
 <ResponseField name="success" type="boolean">
-  Indicates whether the API block undeployment was successful. Returns `true` if successful, `false` if not.
+  Indicates whether the block undeployment was successful. Returns `true` if successful, `false` if not.
 </ResponseField>
 <ResponseField name="block" type="object">
-The details of the API block that was undeployed.
+The details of the block that was undeployed.
 
 <Expandable title="Toggle object">
 <ResponseField name="id" type="string">
-  The unique identifier of the API block.
+  The unique identifier of the block.
 </ResponseField>
 <ResponseField name="status" type="string">
-  The new status of the API block, updated to 'inactive' after a successful undeployment.
+  The new status of the block, updated to 'inactive' after a successful undeployment.
 </ResponseField>
 </Expandable>
 </ResponseField>
@@ -31,7 +31,7 @@ The details of the API block that was undeployed.
 <RequestExample>
 
 ```bash Example Request
-# Example Request to undeploy an API block
+# Example Request to undeploy an block
 curl --location --request POST 'https://api.structuredlabs.io/v1/blocks/{blockId}/undeploy' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <api_key>'

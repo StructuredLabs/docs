@@ -1,32 +1,32 @@
 ---
-title: "Deploy API Block"
+title: "Deploy Block"
 api: "POST https://api.structuredlabs.io/v1/blocks/{blockId}/deploy"
-description: "This endpoint deploys a specific API block, making it live and ready to use."
+description: "This endpoint deploys a specific block, making it live and ready to use."
 ---
 
 ### Path Parameters
 
 <ParamField path="blockId" type="string">
-  The unique identifier of the API block you want to deploy.
+  The unique identifier of the block you want to deploy.
 </ParamField>
 
 ### Response
 
 <ResponseField name="success" type="boolean">
-  Indicates whether the API block deployment was successful. Returns `true` if successful, `false` if not.
+  Indicates whether the block deployment was successful. Returns `true` if successful, `false` if not.
 </ResponseField>
 <ResponseField name="block" type="object">
-The details of the deployed API block.
+The details of the deployed block.
 
 <Expandable title="Toggle object">
 <ResponseField name="id" type="string">
-  The unique identifier of the API block.
+  The unique identifier of the block.
 </ResponseField>
 <ResponseField name="endpoint" type="string">
-  The URL endpoint where the API block is now accessible.
+  The URL endpoint where the block is now accessible.
 </ResponseField>
 <ResponseField name="status" type="string">
-  The current status of the API block, updated to 'deployed' after a successful operation.
+  The current status of the block, updated to 'deployed' after a successful operation.
 </ResponseField>
 </Expandable>
 </ResponseField>

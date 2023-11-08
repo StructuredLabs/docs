@@ -1,5 +1,5 @@
 ---
-title: "Delete API Block"
+title: "Delete Block"
 api: "DELETE https://api.structuredlabs.io/v1/blocks/{blockId}"
 description: "This endpoint deletes an existing API block."
 ---
@@ -7,12 +7,12 @@ description: "This endpoint deletes an existing API block."
 ### Body
 
 <ParamField body="blockId" type="string">
-  The unique identifier of the API block you want to delete.
+  The unique identifier of the block you want to delete.
 </ParamField>
 
 <ParamField body="apiKey" type="string">
   The API key associated with your account, required to authenticate the request
-  to delete the API block.
+  to delete the block.
 </ParamField>
 
 ### Response
@@ -25,7 +25,7 @@ description: "This endpoint deletes an existing API block."
 <RequestExample>
 
 ```bash Example Request
-# Example Request to delete an API block
+# Example Request to delete an block
 curl --location --request DELETE 'https://api.structuredlabs.io/v1/blocks/{blockId}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {apiKey}' \
