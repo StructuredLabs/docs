@@ -1,67 +1,69 @@
 ---
-title: "Create User"
-api: "POST https://api.mintlify.com/api/user"
-description: "This endpoint creates a new user"
+title: "Create API Block"
+api: "POST https://api.structuredlabs.io/v1/blocks"
+description: "This endpoint creates a new API block from a natural language description."
 ---
 
 ### Body
 
-<ParamField body="current_token" type="string">
-  This is the current user group token you have for the user group that you want
-  to rotate.
+<ParamField body="prompt" type="string">
+  The natural language description of the API functionality you want to create.
+</ParamField>
+<ParamField body="preConditions" type="object" optional="true">
+  Any preconditions for the API functionality, such as required input ranges or
+  authentication.
+</ParamField>
+<ParamField body="postConditions" type="object" optional="true">
+  Post-conditions for the API functionality, including the expected format of
+  the output.
+</ParamField>
+<ParamField body="rateLimit" type="number" optional="true">
+  The number of requests allowed per time frame for this API block.
 </ParamField>
 
 ### Response
 
-<ResponseField name="success" type="number">
-  Indicates whether the call was successful. 1 if successful, 0 if not.
+<ResponseField name="success" type="boolean">
+  Indicates whether the API block creation was successful. Returns `true` if successful, `false` if not.
 </ResponseField>
-
-<ResponseField name="user_group" type="object">
-
-The contents of the user group
+<ResponseField name="block" type="object">
+The details of the newly created API block.
 
 <Expandable title="Toggle object">
-
-<ResponseField name="team_id" type="number">
-  This is the internal ID for this user group. You don't need to record this
-  information, since you will not need to use it.
+<ResponseField name="id" type="string">
+  The unique identifier of the API block.
 </ResponseField>
-
-<ResponseField name="token" type="string">
-  This is the user group token (userGroupToken or USER_GROUP_TOKEN) that will be
-  used to identify which user group is viewing the dashboard. You should save
-  this on your end to use when rendering an embedded dashboard.
+<ResponseField name="endpoint" type="string">
+  The URL endpoint at which the new API block can be accessed.
 </ResponseField>
-
-<ResponseField name="name" type="string">
-  This is the name of the user group provided in the request body.
+<ResponseField name="apiKey" type="string">
+  The API key required for authorized access to the API block.
 </ResponseField>
-
-<ResponseField name="provided_id" type="string">
-  This is the user_group_id provided in the request body.
+<ResponseField name="rateLimit" type="number">
+  The rate limit configuration for the API block, reflecting the number of allowed requests per time frame.
 </ResponseField>
-
-<ResponseField name="api_environment_tag" type="JSON or null">
-  This is the environment tag of the user group. Possible values are 'Customer'
-  and 'Testing'. User group id's must be unique to each environment, so you can
-  not create multiple user groups with with same id. If you have a production
-  customer and a test user group with the same id, you will be required to label
-  one as 'Customer' and another as 'Testing'
+<ResponseField name="status" type="string">
+  The current status of the API block, such as 'pending', 'deployed', or 'failed'.
 </ResponseField>
-
 </Expandable>
-
 </ResponseField>
 
 <RequestExample>
 
 ```bash Example Request
-curl --location --request POST 'https://api.mintlify.com/api/user' \
+curl --location --request POST 'https://api.structuredlabs.io/v1/blocks' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Token <token>' \
 --data-raw '{
-    "current_token": ""
+    "prompt": "Calculate compound interest",
+    "preConditions": {
+        "principalRange": "[1000, 5000]",
+        "rateRange": "[1, 10]",
+        "timeRange": "[1, 5]"
+    },
+    "postConditions": {
+        "resultFormat": "currency"
+    },
+    "rateLimit": 100
 }'
 ```
 
@@ -71,12 +73,13 @@ curl --location --request POST 'https://api.mintlify.com/api/user' \
 
 ```json Response
 {
-  "success": 1,
-  "user_group": {
-    "team_id": 3,
-    "token": "<user_group_token_to_auth_dashboard>",
-    "name": "Example 1",
-    "provided_id": "example_1"
+  "success": true,
+  "block": {
+    "id": "blk_123456",
+    "endpoint": "https://api.structuredlabs.io/v1/blocks/blk_123456",
+    "apiKey": "api_key_xyz123",
+    "rateLimit": 100,
+    "status": "deployed"
   }
 }
 ```
