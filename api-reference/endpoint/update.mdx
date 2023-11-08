@@ -1,67 +1,69 @@
 ---
-title: "Update User"
-api: "PUT https://api.mintlify.com/api/user"
-description: "This endpoint updates an existing user."
+title: "Update API Block"
+api: "PUT https://api.structuredlabs.io/v1/blocks/{blockId}"
+description: "This endpoint updates an existing API block with new configurations or modifications."
 ---
+
+### Path Parameters
+
+<ParamField path="blockId" type="string">
+  The unique identifier of the API block to update.
+</ParamField>
 
 ### Body
 
-<ParamField body="name" type="string">
-  This is the name of the user group.
+<ParamField body="prompt" type="string">
+  An updated natural language description of the API functionality, if changes
+  are needed.
 </ParamField>
 
-<ParamField body="user_group_id" type="string">
-  This is the ID you use to identify this user group in your database.
+<ParamField body="preConditions" type="object" optional="true">
+  Updated preconditions for the API functionality.
 </ParamField>
 
-<ParamField body="mapping" type="object">
-  This is a JSON mapping of schema id to either the data source that this user
-  group should be associated with or id of the datasource you provided when
-  creating it.
+<ParamField body="postConditions" type="object" optional="true">
+  Updated post-conditions for the API functionality.
 </ParamField>
 
-<ParamField body="properties" type="object">
-  This is a JSON object for properties assigned to this user group. These will
-  be accessible through variables in the dashboards and SQL editor
+<ParamField body="rateLimit" type="number" optional="true">
+  The new rate limit configuration for the API block, if changes are needed.
 </ParamField>
 
 ### Response
 
-<ResponseField name="success" type="number">
-  Indicates whether the call was successful. 1 if successful, 0 if not.
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. Returns `true` if successful,
+  `false` if not.
 </ResponseField>
 
-<ResponseField name="user_group" type="object">
+<ResponseField name="block" type="object">
 
-The contents of the user group
+The updated contents of the API block.
 
 <Expandable title="Toggle object">
 
-<ResponseField name="team_id" type="number">
-  Indicates whether a new user group was created.
+<ResponseField name="id" type="string">
+  The unique identifier of the API block.
 </ResponseField>
 
-<ResponseField name="token" type="string">
-  This is the user group token (userGroupToken or USER_GROUP_TOKEN) that will be
-  used to identify which user group is viewing the dashboard. You should save
-  this on your end to use when rendering an embedded dashboard.
+<ResponseField name="prompt" type="string">
+  The updated natural language prompt defining the API's functionality.
 </ResponseField>
 
-<ResponseField name="name" type="string">
-  This is the name of the user group provided in the request body.
+<ResponseField name="preConditions" type="object">
+  The updated preconditions set for the API block.
 </ResponseField>
 
-<ResponseField name="provided_id" type="string">
-  This is the user_group_id provided in the request body.
+<ResponseField name="postConditions" type="object">
+  The updated post-conditions set for the API block.
 </ResponseField>
 
-<ResponseField name="properties" type="JSON | Null">
-  This is the properties object if it was provided in the request body
+<ResponseField name="rateLimit" type="number">
+  The updated rate limit for the API block.
 </ResponseField>
 
-<ResponseField name="api_environment_tag" type="JSON or null">
-  This is the environment tag of the user group. Possible values are 'Customer'
-  and 'Testing'
+<ResponseField name="status" type="string">
+  The current status of the API block after the update.
 </ResponseField>
 
 </Expandable>
@@ -71,14 +73,21 @@ The contents of the user group
 <RequestExample>
 
 ```bash Example Request
-curl --location --request PUT 'https://api.mintlify.com/api/user' \
+# Example Request to update an API block
+curl --location --request PUT 'https://api.structuredlabs.io/v1/blocks/{blockId}' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Token <token>' \
+--header 'Authorization: Bearer <api_key>' \
 --data-raw '{
-    "user_group_id": "example_1",
-    "name": "Example 1",
-    "mapping": {"40": "213", "134": "386"},
-    "properties": {"filterValue": "value"}
+    "prompt": "Updated prompt for calculating compound interest",
+    "preConditions": {
+        "principalRange": "[500, 5000]",
+        "rateRange": "[1, 15]",
+        "timeRange": "[1, 10]"
+    },
+    "postConditions": {
+        "resultFormat": "currency"
+    },
+    "rateLimit": 50
 }'
 ```
 
@@ -88,12 +97,20 @@ curl --location --request PUT 'https://api.mintlify.com/api/user' \
 
 ```json Response
 {
-  "success": 1,
-  "user_group": {
-    "team_id": 113,
-    "token": "<user_group_token_to_auth_dashboard>",
-    "name": "ok",
-    "provided_id": "6"
+  "success": true,
+  "block": {
+    "id": "blk_123456",
+    "prompt": "Updated prompt for calculating compound interest",
+    "preConditions": {
+      "principalRange": "[500, 5000]",
+      "rateRange": "[1, 15]",
+      "timeRange": "[1, 10]"
+    },
+    "postConditions": {
+      "resultFormat": "currency"
+    },
+    "rateLimit": 50,
+    "status": "updated"
   }
 }
 ```
