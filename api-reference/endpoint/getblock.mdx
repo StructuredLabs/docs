@@ -1,0 +1,79 @@
+---
+title: "Get API Block Details"
+api: "GET https://api.structuredlabs.io/v1/blocks/{blockId}"
+description: "This endpoint retrieves the details of a specific API block."
+---
+
+### Body
+
+<ParamField path="blockId" type="string">
+  The unique identifier of the API block to retrieve.
+</ParamField>
+
+### Response
+
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. Returns `true` if successful,
+  `false` if not.
+</ResponseField>
+
+<ResponseField name="block" type="object">
+
+The detailed information of the API block.
+
+<Expandable title="Toggle object">
+
+<ResponseField name="id" type="string">
+  The unique identifier of the API block.
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  The name given to the API block.
+</ResponseField>
+
+<ResponseField name="endpoint" type="string">
+  The URL endpoint where the API block is accessible.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  The current status of the API block, such as 'active', 'inactive', or
+  'deploying'.
+</ResponseField>
+
+<ResponseField name="rateLimit" type="number" optional="true">
+  The rate limit that has been set for the API block, if any.
+</ResponseField>
+
+</Expandable>
+
+</ResponseField>
+
+<RequestExample>
+
+```bash Example Request
+# Example Request to get details of a specific API block
+curl --location --request GET 'https://api.structuredlabs.io/v1/blocks/{blockId}' \
+--header 'Authorization: Bearer <api_key>'
+--data-raw '{
+    "blockId": "xyz",
+}'
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json Response
+{
+  "success": true,
+  "block": {
+    "id": "blk_123456",
+    "name": "Interest Calculation Service",
+    "endpoint": "https://api.structuredlabs.io/v1/blocks/blk_123456",
+    "status": "active",
+    "rateLimit": 100
+  }
+}
+```
+
+</ResponseExample>

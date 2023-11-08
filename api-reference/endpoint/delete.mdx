@@ -1,36 +1,37 @@
 ---
-title: "Delete User"
-api: "DELETE https://api.mintlify.com/api/user"
-description: "This endpoint deletes an existing user."
+title: "Delete API Block"
+api: "DELETE https://api.structuredlabs.io/v1/blocks/{blockId}"
+description: "This endpoint deletes an existing API block."
 ---
 
 ### Body
 
-<ParamField body="data_source_provided_id" type="string">
-  The data source ID provided in the data tab may be used to identify the data
-  source for the user group
+<ParamField body="blockId" type="string">
+  The unique identifier of the API block you want to delete.
 </ParamField>
 
-<ParamField body="current_token" type="string">
-  This is the current user group token you have for the user group you want to
-  delete
+<ParamField body="apiKey" type="string">
+  The API key associated with your account, required to authenticate the request
+  to delete the API block.
 </ParamField>
 
 ### Response
 
-<ResponseField name="success" type="number">
-  Indicates whether the call was successful. 1 if successful, 0 if not.
+<ResponseField name="success" type="boolean">
+  Indicates whether the call was successful. Returns `true` if successful,
+  `false` if not.
 </ResponseField>
 
 <RequestExample>
 
 ```bash Example Request
-curl --location --request DELETE 'https://api.mintlify.com/api/user' \
+# Example Request to delete an API block
+curl --location --request DELETE 'https://api.structuredlabs.io/v1/blocks/{blockId}' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Token <token>' \
+--header 'Authorization: Bearer {apiKey}' \
 --data-raw '{
-		"user_group_id": "example_1"
-		"current_token": "abcdef"
+    "blockId": "blk_123456",
+    "apiKey": "api_key_789abc"
 }'
 ```
 
@@ -40,7 +41,7 @@ curl --location --request DELETE 'https://api.mintlify.com/api/user' \
 
 ```json Response
 {
-  "success": 1
+  "success": true
 }
 ```
 
