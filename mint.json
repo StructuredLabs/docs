@@ -38,7 +38,7 @@
     {
       "name": "Community",
       "icon": "slack",
-      "url": "https://join.slack.com/t/structured-users/shared_invite/zt-265ong01f-UHP6BP3FzvOmMQDIKty_JQ"
+      "url": " https://join.slack.com/t/structured-users/signup"
     },
     {
       "name": "Blog",
@@ -68,7 +68,6 @@
         "api-reference/endpoint/update",
         "api-reference/endpoint/delete",
         "api-reference/endpoint/deploy",
-        "api-reference/endpoint/undeploy",
         "api-reference/endpoint/stats"
       ]
     }
