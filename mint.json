@@ -5,17 +5,17 @@
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
   },
+  "modeToggle": {
+  "default": "light",
+  "isHidden": false
+  },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#0970af",
-    "light": "#8cadd3",
-    "dark": "#141518",
+    "primary": "#1074ac",
+    "light": "#0970af",
+    "dark": "#1074ac",
     "background": {
       "dark": "#141518"
-    },
-    "anchors": {
-      "from": "#8cadd3",
-      "to": "#8cadd3"
     }
   },
   "topbarLinks": [
