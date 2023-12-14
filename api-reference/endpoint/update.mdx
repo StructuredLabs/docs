@@ -1,32 +1,17 @@
 ---
 title: "Update Block"
-api: "PUT https://api.structuredlabs.io/v1/blocks/{blockId}"
+api: "PUT https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/cli-update-service"
 description: "This endpoint updates an existing block with new configurations or modifications."
 ---
 
-### Path Parameters
-
-<ParamField path="blockId" type="string">
-  The unique identifier of the block to update.
-</ParamField>
-
 ### Body
 
-<ParamField body="prompt" type="string">
-  An updated natural language description of the API functionality, if changes
-  are needed.
+<ParamField query="apiToken" type="string" optional="false">
+  The API token for authentication.
 </ParamField>
 
-<ParamField body="preConditions" type="object" optional="true">
-  Updated preconditions for the API functionality.
-</ParamField>
-
-<ParamField body="postConditions" type="object" optional="true">
-  Updated post-conditions for the API functionality.
-</ParamField>
-
-<ParamField body="rateLimit" type="number" optional="true">
-  The new rate limit configuration for the block, if changes are needed.
+<ParamField query="updatedService" type="object" optional="false">
+  The data for the updated service.
 </ParamField>
 
 ### Response
@@ -74,7 +59,7 @@ The updated contents of the block.
 
 ```bash Example Request
 # Example Request to update an block
-curl --location --request PUT 'https://api.structuredlabs.io/v1/blocks/{blockId}' \
+curl --location --request PUT 'https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/cli-update-service' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <api_key>' \
 --data-raw '{

@@ -1,6 +1,6 @@
 ---
 title: "Get Block Details"
-api: "GET https://api.structuredlabs.io/v1/blocks/{blockId}"
+api: "GET https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/blocks/{blockId}"
 description: "This endpoint retrieves the details of a specific block."
 ---
 
@@ -51,7 +51,7 @@ The detailed information of the block.
 
 ```bash Example Request
 # Example Request to get details of a specific block
-curl --location --request GET 'https://api.structuredlabs.io/v1/blocks/{blockId}' \
+curl --location --request GET 'https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/blocks/{blockId}' \
 --header 'Authorization: Bearer <api_key>'
 --data-raw '{
     "blockId": "xyz",
@@ -68,7 +68,7 @@ curl --location --request GET 'https://api.structuredlabs.io/v1/blocks/{blockId}
   "block": {
     "id": "blk_123456",
     "name": "Interest Calculation Service",
-    "endpoint": "https://api.structuredlabs.io/v1/blocks/blk_123456",
+    "endpoint": "https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/blocks/blk_123456",
     "status": "live",
     "rateLimit": 100
   }

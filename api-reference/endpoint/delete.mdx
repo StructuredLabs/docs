@@ -1,18 +1,17 @@
 ---
 title: "Delete Block"
-api: "DELETE https://api.structuredlabs.io/v1/blocks/{blockId}"
+api: "DELETE https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/cli-delete-service"
 description: "This endpoint deletes an existing API block."
 ---
 
 ### Body
 
-<ParamField body="blockId" type="string">
-  The unique identifier of the block you want to delete.
+<ParamField query="apiToken" type="string" optional="false">
+  The API token for authentication.
 </ParamField>
 
-<ParamField body="apiKey" type="string">
-  The API key associated with your account, required to authenticate the request
-  to delete the block.
+<ParamField query="serviceId" type="string" optional="false">
+  The identifier for the service.
 </ParamField>
 
 ### Response
@@ -26,7 +25,7 @@ description: "This endpoint deletes an existing API block."
 
 ```bash Example Request
 # Example Request to delete an block
-curl --location --request DELETE 'https://api.structuredlabs.io/v1/blocks/{blockId}' \
+curl --location --request DELETE 'https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/cli-delete-service' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {apiKey}' \
 --data-raw '{

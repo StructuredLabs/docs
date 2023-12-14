@@ -1,13 +1,29 @@
 ---
 title: "Deploy Block"
-api: "POST https://api.structuredlabs.io/v1/blocks/{blockId}/deploy"
+api: "POST https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/cli-deploy-service"
 description: "This endpoint deploys a specific block, making it live and ready to use."
 ---
 
-### Path Parameters
+### Body
 
-<ParamField path="blockId" type="string">
-  The unique identifier of the block you want to deploy.
+<ParamField query="apiToken" type="string" optional="false">
+  The API token for authentication.
+</ParamField>
+
+<ParamField query="endpointInfo" type="object" optional="false">
+  Information about the service endpoint.
+</ParamField>
+
+<ParamField query="flaskCode" type="string" optional="false">
+  The Flask code associated with the service.
+</ParamField>
+
+<ParamField query="id" type="string" optional="false">
+  The identifier for the service.
+</ParamField>
+
+<ParamField query="serviceName" type="string" optional="false">
+  The name of the service.
 </ParamField>
 
 ### Response
@@ -34,7 +50,7 @@ The details of the deployed block.
 <RequestExample>
 
 ```bash Example Request
-curl --location --request POST 'https://api.structuredlabs.io/v1/blocks/{blockId}/deploy' \
+curl --location --request POST 'https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/cli-deploy-service' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <api_key>'
 ```
@@ -48,7 +64,7 @@ curl --location --request POST 'https://api.structuredlabs.io/v1/blocks/{blockId
   "success": true,
   "block": {
     "id": "blk_123456",
-    "endpoint": "https://api.structuredlabs.io/v1/blocks/blk_123456/deploy",
+    "endpoint": "https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/blocks/blk_123456/deploy",
     "status": "deployed"
   }
 }
