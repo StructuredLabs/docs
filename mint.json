@@ -63,6 +63,7 @@
       "group": "Endpoint Examples",
       "pages": [
         "api-reference/endpoint/getall",
+        "api-reference/endpoint/getblock",
         "api-reference/endpoint/create",
         "api-reference/endpoint/update",
         "api-reference/endpoint/delete",

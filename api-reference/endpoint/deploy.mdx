@@ -1,6 +1,6 @@
 ---
 title: "Deploy Block"
-api: "POST https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/cli-deploy-service"
+api: "POST https://api.structuredlabs.io/cli-deploy-service"
 description: "This endpoint deploys a specific block, making it live and ready to use."
 ---
 
@@ -50,7 +50,7 @@ The details of the deployed block.
 <RequestExample>
 
 ```bash Example Request
-curl --location --request POST 'https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/cli-deploy-service' \
+curl --location --request POST 'https://api.structuredlabs.io/cli-deploy-service' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <api_key>'
 ```
@@ -64,7 +64,7 @@ curl --location --request POST 'https://structured-autoapibuilder-server-qvsinzp
   "success": true,
   "block": {
     "id": "blk_123456",
-    "endpoint": "https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/blocks/blk_123456/deploy",
+    "endpoint": "https://api.structuredlabs.io/blocks/blk_123456/deploy",
     "status": "deployed"
   }
 }

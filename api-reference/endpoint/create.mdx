@@ -1,6 +1,6 @@
 ---
 title: "Create Block"
-api: "POST https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/cli-create-service"
+api: "POST https://api.structuredlabs.io/cli-create-service"
 description: "This endpoint creates a new block from a natural language description."
 ---
 
@@ -60,7 +60,7 @@ The details of the newly created block.
 <RequestExample>
 
 ```bash Example Request
-curl --location --request POST 'https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/cli-create-service' \
+curl --location --request POST 'https://api.structuredlabs.io/cli-create-service' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "prompt": "Calculate compound interest",
@@ -85,7 +85,7 @@ curl --location --request POST 'https://structured-autoapibuilder-server-qvsinzp
   "success": true,
   "block": {
     "id": "blk_123456",
-    "endpoint": "https://structured-autoapibuilder-server-qvsinzpxvq-ue.a.run.app/cli-create-service/blk_123456",
+    "endpoint": "https://api.structuredlabs.io/cli-create-service/blk_123456",
     "apiKey": "api_key_xyz123",
     "rateLimit": 100,
     "status": "deployed"
