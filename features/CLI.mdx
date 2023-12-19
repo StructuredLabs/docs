@@ -1,0 +1,52 @@
+---
+title: "CLI"
+description: "Streamlining Development with Command-Line Efficiency"
+icon: "terminal"
+---
+
+## Introduction
+
+StructBlk CLI transforms the way developers interact with APIs by providing a powerful command-line interface. It simplifies tasks from API management to deployment, all via intuitive commands.
+
+## Getting Started with StructBlk CLI
+
+Install StructBlk globally to ensure that the CLI commands are accessible from any directory in your shell environment. This is essential for seamless interaction with the StructBlk suite across your projects.
+
+```bash
+npm install -g structblk
+```
+
+Global installation (`-g` flag) ensures that the CLI commands are available system-wide, making it convenient to execute commands from any location in your terminal.
+
+## CLI Commands
+
+### `set-api-key`
+
+**Description**: Sets or updates the Structured API Token. Prompts for the API token and saves it globally.
+
+### `block-build`
+
+**Description**: Builds a new block. Requests block name and description, then creates the block via the backend service using the API token.
+
+### `block-deploy`
+
+**Description**: Deploys the last built block. Shows a list of undeployed blocks for the user to choose and deploy using the API token.
+
+### `list-all`
+
+**Description**: Lists all blocks linked to the user's account. Requires the Structured API Token for accessing block information.
+
+### `block-delete`
+
+**Description**: Deletes a selected block. Fetches blocks from the backend for the user to choose and delete. Requires the Structured API Token.
+
+### `block-update`
+
+**Description**: Updates an existing block. Allows selecting and modifying a block's details like name, description, and deployment status. Needs the Structured API Token.
+
+## User Benefits
+
+- **Efficiency**: Accelerate routine tasks from API creation to deployment.
+- **Convenience**: Manage APIs directly from the command line.
+- **Flexibility**: Access CLI functionalities from any project directory.
+- **Control**: Direct interaction with the backend for precise API management.

@@ -53,7 +53,12 @@
     },
     {
       "group": "Features",
-      "pages": ["features/blocks", "features/links", "features/logs"]
+      "pages": [
+        "features/blocks",
+        "features/links",
+        "features/logs",
+        "features/CLI"
+      ]
     },
     {
       "group": "API Documentation",
