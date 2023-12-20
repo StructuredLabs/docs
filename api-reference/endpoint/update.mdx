@@ -10,8 +10,8 @@ description: "This endpoint updates an existing block with new configurations or
   The API token for authentication.
 </ParamField>
 
-<ParamField query="updatedService" type="object" optional="false">
-  The data for the updated service.
+<ParamField query="updatedBlock" type="object" optional="false">
+  The data for the updated block.
 </ParamField>
 
 ### Response
@@ -59,21 +59,8 @@ The updated contents of the block.
 
 ```bash Example Request
 # Example Request to update an block
-curl --location --request PUT 'https://api.structuredlabs.io/update-block' \
+curl --location --request POST 'https://api.structuredlabs.io/update-block?apiToken={apiToken}&updatedBlock={updatedBlock}' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Bearer <api_key>' \
---data-raw '{
-    "prompt": "Updated prompt for calculating compound interest",
-    "preConditions": {
-        "principalRange": "[500, 5000]",
-        "rateRange": "[1, 15]",
-        "timeRange": "[1, 10]"
-    },
-    "postConditions": {
-        "resultFormat": "currency"
-    },
-    "rateLimit": 50
-}'
 ```
 
 </RequestExample>

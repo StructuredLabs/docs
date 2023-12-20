@@ -1,6 +1,6 @@
 ---
 title: "Get Block Details"
-api: "GET https://api.structuredlabs.io/get-block/{blockName}"
+api: "GET https://api.structuredlabs.io/get-block"
 description: "This endpoint retrieves the details of a specific block."
 ---
 
@@ -8,6 +8,10 @@ description: "This endpoint retrieves the details of a specific block."
 
 <ParamField query="apiToken" type="string" optional="false">
   The API key for authentication.
+</ParamField>
+
+<ParamField query="blockName" type="string" optional="false">
+  The name of the block.
 </ParamField>
 
 ### Response
@@ -48,16 +52,12 @@ The detailed information of the block.
 </ResponseField>
 
 <RequestExample>
+```bash
+# Example Request to list all blocks using API token as a query parameter and including blockName
+curl --location --request GET 'https://api.structuredlabs.io/get-block?apiToken={apiToken}&blockName={blockName}' \
+--header 'Content-Type: application/json'
 
-```bash Example Request
-# Example Request to get details of a specific block
-curl --location --request GET 'https://api.structuredlabs.io/get-block/{blockName}' \
---header 'Authorization: Bearer <api_key>'
---data-raw '{
-    "blockId": "xyz",
-}'
-```
-
+````
 </RequestExample>
 
 <ResponseExample>
@@ -73,6 +73,6 @@ curl --location --request GET 'https://api.structuredlabs.io/get-block/{blockNam
     "rateLimit": 100
   }
 }
-```
+````
 
 </ResponseExample>

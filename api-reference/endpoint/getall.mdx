@@ -24,10 +24,9 @@ description: "This endpoint retrieves a list of all blocks created by the user."
 <RequestExample>
 
 ```bash Example Request
-# Example Request to list all blocks
-curl --location --request GET 'https://api.structuredlabs.io/get-user-blocks' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer <api_key>'
+# Example Request to list all blocks using API token as a query parameter
+curl --location --request GET 'https://api.structuredlabs.io/get-user-blocks?apiToken={apiToken}' \
+--header 'Content-Type: application/json'
 ```
 
 </RequestExample>

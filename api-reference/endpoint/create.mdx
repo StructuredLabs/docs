@@ -22,12 +22,16 @@ description: "This endpoint creates a new block from a natural language descript
   The identifier for the service.
 </ParamField>
 
-<ParamField query="isAuthorized" type="boolean" optional="true">
+<ParamField query="isAuthorized" type="boolean" optional="false">
   Indicates if the user is authorized.
 </ParamField>
 
-<ParamField query="rateLimit" type="number" optional="true">
+<ParamField query="rateLimit" type="string" optional="false">
   The number of requests allowed per time frame for this API block.
+</ParamField>
+
+<ParamField query="serviceLink" type="string" optional="false">
+  Link for the block.
 </ParamField>
 
 ### Response
@@ -60,20 +64,8 @@ The details of the newly created block.
 <RequestExample>
 
 ```bash Example Request
-curl --location --request POST 'https://api.structuredlabs.io/create-block' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "prompt": "Calculate compound interest",
-    "preConditions": {
-        "principalRange": "[1000, 5000]",
-        "rateRange": "[1, 10]",
-        "timeRange": "[1, 5]"
-    },
-    "postConditions": {
-        "resultFormat": "currency"
-    },
-    "rateLimit": 100
-}'
+curl --location --request POST 'https://api.structuredlabs.io/create-block?apiToken={apiToken}&prompt={prompt}&serviceName={serviceName}&serviceId={serviceId}&isAuthorized={isAuthorized}&rateLimit={rateLimit}&serviceLink={serviceLink}' \
+--header 'Content-Type: application/json'
 ```
 
 </RequestExample>

@@ -10,20 +10,8 @@ description: "This endpoint deploys a specific block, making it live and ready t
   The API token for authentication.
 </ParamField>
 
-<ParamField query="endpointInfo" type="object" optional="false">
-  Information about the service endpoint.
-</ParamField>
-
-<ParamField query="flaskCode" type="string" optional="false">
-  The Flask code associated with the service.
-</ParamField>
-
-<ParamField query="id" type="string" optional="false">
-  The identifier for the service.
-</ParamField>
-
-<ParamField query="serviceName" type="string" optional="false">
-  The name of the service.
+<ParamField query="blockData" type="object" optional="false">
+  Block object to be deployed.
 </ParamField>
 
 ### Response
@@ -50,9 +38,8 @@ The details of the deployed block.
 <RequestExample>
 
 ```bash Example Request
-curl --location --request POST 'https://api.structuredlabs.io/deploy-block' \
+curl --location --request POST 'https://api.structuredlabs.io/deploy-block?apiToken={apiToken}&blockData={blockData}' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Bearer <api_key>'
 ```
 
 </RequestExample>

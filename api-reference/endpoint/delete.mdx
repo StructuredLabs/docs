@@ -1,6 +1,6 @@
 ---
 title: "Delete Block"
-api: "DELETE https://api.structuredlabs.io/delete-block"
+api: "POST https://api.structuredlabs.io/delete-block"
 description: "This endpoint deletes an existing API block."
 ---
 
@@ -10,8 +10,8 @@ description: "This endpoint deletes an existing API block."
   The API token for authentication.
 </ParamField>
 
-<ParamField query="serviceId" type="string" optional="false">
-  The identifier for the service.
+<ParamField query="blockId" type="string" optional="false">
+  The identifier for the block.
 </ParamField>
 
 ### Response
@@ -25,13 +25,8 @@ description: "This endpoint deletes an existing API block."
 
 ```bash Example Request
 # Example Request to delete an block
-curl --location --request DELETE 'https://api.structuredlabs.io/delete-block' \
+curl --location --request POST 'https://api.structuredlabs.io/delete-block?apiToken={apiToken}&blockId={blockId}' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Bearer {apiKey}' \
---data-raw '{
-    "blockId": "blk_123456",
-    "apiKey": "api_key_789abc"
-}'
 ```
 
 </RequestExample>
