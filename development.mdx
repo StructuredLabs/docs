@@ -1,6 +1,7 @@
 ---
-title: "Development"
-description: "Learn how to preview and test your APIs locally"
+title: "CLI"
+description: "Learn how to preview, test and deploy your blocks"
+icon: "terminal"
 ---
 
 <Info>
@@ -13,37 +14,27 @@ description: "Learn how to preview and test your APIs locally"
 <CodeGroup>
 
 ```bash npm
-npm i -g structured
-```
-
-```bash yarn
-yarn global add structured
+npm install -g structblk
 ```
 
 </CodeGroup>
 
-## Step 2. Initialize your API project:
+## Step 2. Initialize your API Key:
 
-Navigate to the directory where your autoapi.json configuration file is located and run the following command:
+Navigate to the Structured Dashboard > Settings > API Token. Generate an API token, as outlined in the [Authentication](https://docs.structuredlabs.io/api-reference/authentication) page and run the following command:
 
 ```bash
-structured dev
+structblk set-api-key <your_personal_access_token>
 ```
 
 This will bootstrap a local server for your API project, making it accessible at http://localhost:3000.
 
-### Custom Ports
+### Common Errors
 
-Structured uses port 3000 by default. You can use the `--port` flag to customize the port Structured runs on. For example, use this command to run in port 3333:
-
-```bash
-structured dev --port 3333
-```
-
-You will see an error like this if you try to run Structured in a port that's already taken:
+You will see an error like this if you try to run Structured without running `set-api-key`.
 
 ```md
-Error: listen EADDRINUSE: address already in use :::3000
+{"message":"Invalid API key","status":"error"}
 ```
 
 ## Structured Versions
@@ -53,48 +44,62 @@ To ensure compatibility, each version of the Structured CLI is tied to a release
 <CodeGroup>
 
 ```bash npm
-npm i -g structured@latest
-```
-
-```bash yarn
-yarn global upgrade structured
+npm i -g structblk@latest
 ```
 
 </CodeGroup>
 
+## CLI Commands
+
+- ### `set-api-key`
+
+  - **Description**: Sets or updates the Structured API Token. Prompts for the API token and saves it globally.
+
+- ### `block-build`
+
+  - **Description**: Builds a new block. Requests block name and description, then creates the block via the backend service using the API token.
+
+- ### `block-deploy`
+
+  - **Description**: Deploys the last built block. Shows a list of undeployed blocks for the user to choose and deploy using the API token.
+
+- ### `list-all`
+
+  - **Description**: Lists all blocks linked to the user's account. Requires the Structured API Token for accessing block information.
+
+- ### `block-delete`
+
+  - **Description**: Deletes a selected block. Fetches blocks from the backend for the user to choose and delete. Requires the Structured API Token.
+
+- ### `block-update`
+
+  - **Description**: Updates an existing block. Allows selecting and modifying a block's details like name, description, and deployment status. Needs the Structured API Token.
+
 ## Deployment
 
+You should see the following if the block deploy successfully went through:
+
+<Frame>
+  <img src="/images/deployed.png" style={{ borderRadius: "0.5rem" }} />
+</Frame>
+
 <Tip>
-  Gain access to unlimited API deployments with the [Pro
+  Gain access to unlimited block deployments with the [Pro
   Plan](https://app.structuredlabs.io/settings/userBilling/billing)
 </Tip>
 
-You should see the following if the deploy successfully went through:
-
-<Frame>
-  <img src="/images/checks-passed.png" style={{ borderRadius: "0.5rem" }} />
-</Frame>
-
 ## Troubleshooting
 
-Here's how to solve some common problems when working with the CLI.
+Here's how to solve some common problems when working with the Structured CLI.
 
 <AccordionGroup>
-  <Accordion title="Structured is not loading">
-    Update to Node v18. Run `structured install` and try again.
+  <Accordion title="Keep Node.js up to date">
+    Update to Node v18. Run `npm install` and try again.
   </Accordion>
-  <Accordion title="No such file or directory on Windows">
-Go to the `C:/Users/Username/.structured/` directory and remove the `struct`
-folder. Then Open the Git Bash in this location and run `git clone
-https://github.com/structured/struct.git`.
-
-Repeat step 3.
-
-  </Accordion>
-  <Accordion title="Getting an unknown error">
-    Try navigating to the root of your device and delete the ~/.structured folder.
-    Then run `structured dev` again.
+  <Accordion title="Managing Structured CLI Versions">
+    To align with the latest Structured service releases, regularly update your
+    CLI: Run `npm install -g structblk@latest`.
   </Accordion>
 </AccordionGroup>
 
-Curious about what changed in a CLI version? [Check out the CLI changelog.](/changelog/command-line)
+Curious about what changed in a CLI version? [Check out the CLI changelog.](https://www.npmjs.com/package/structblk)
