@@ -55,8 +55,8 @@
       "group": "Features",
       "pages": [
         "features/blocks",
-        "features/links",
-        "features/logs"
+        "features/queries",
+        "features/links"
       ]
     },
     {
