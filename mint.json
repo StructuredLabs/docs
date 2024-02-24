@@ -28,17 +28,12 @@
     "name": "Dashboard",
     "url": "https://app.structuredlabs.io/login"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
+  "tabs": [],
   "anchors": [
     {
       "name": "Community",
       "icon": "slack",
-      "url": " https://join.slack.com/t/structured-users/signup"
+      "url": " https://join.slack.com/t/structured-users/shared_invite/zt-265ong01f-UHP6BP3FzvOmMQDIKty_JQ"
     },
     {
       "name": "Blog",
@@ -49,38 +44,37 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "development"]
+      "pages": ["introduction"]
+    },
+     {
+      "group": "Examples",
+      "pages": ["examples"]
     },
     {
       "group": "Features",
       "pages": [
-        "features/blocks",
-        "features/queries",
-        "features/links"
+        "features/configure",
+        "features/view",
+        "features/analyze"
       ]
     },
-    {
-      "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
-    },
-    {
-      "group": "Endpoint Examples",
+     {
+      "group": "Integrations",
       "pages": [
-        "api-reference/endpoint/getall",
-        "api-reference/endpoint/getblock",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete",
-        "api-reference/endpoint/deploy"
+        "integrations/data",
+        "integrations/warehouse",
+        "integrations/sales",
+        "integrations/customersuccess",
+        "integrations/etl"
       ]
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/StructuredLabs",
-    "github": "https://github.com/StructuredLabs",
     "linkedin": "https://www.linkedin.com/company/structuredlabs/",
+    "twitter": "https://twitter.com/StructuredLabs",
     "website": "https://www.structuredlabs.io",
     "email": "mailto:contact@structuredlabs.io",
-    "slack": "https://structured-users.slack.com/"
+    "slack": "https://structured-users.slack.com/",
+    "github": "https://github.com/StructuredLabs"
   }
 }
