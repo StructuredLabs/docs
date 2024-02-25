@@ -1,11 +1,52 @@
 ---
 title: "ETL"
 description: "Making Data Processing and Computation Tasks Easy with Blocks"
-icon: "block-brick"
+icon: "timeline"
 ---
 
-## Introduction
+# Structured: ETL Tools Integration Guide
 
-- Data upload
-- Connections
-- Associations
+Integrate popular ETL tools like Fivetran and Airflow with Structured to automate and streamline your data extraction, transformation, and loading processes. This documentation provides specifics on connecting these ETL tools, focusing on setup procedures, data selection, and access control.
+
+---
+
+## Fivetran Integration
+
+### Setting Up Fivetran Integration
+
+1. **Navigate to Integrations:** In Structured, access the "Integrations" section and select "Fivetran."
+2. **Authenticate Your Account:** Click "Connect to Fivetran." You'll be redirected to a Fivetran login page. Authenticate by logging in to your Fivetran account.
+   - You may need to enter your Fivetran API Key and API Secret, found under the Fivetran dashboard's settings or account section.
+3. **Select Connectors:** After authentication, choose which Fivetran connectors (data sources) you wish to sync with Structured. Fivetran's UI will list available connectors you've set up.
+4. **Configure Sync Settings:** Define the frequency of data synchronization and select specific tables or schemas you want to import.
+
+### Access Control
+
+- **Fivetran Permissions:** Ensure you have the necessary permissions in Fivetran to create or manage connectors and access API keys.
+- **Structured Permissions:** In Structured, determine who can view or manage the imported data from Fivetran, adhering to your data governance policies.
+
+---
+
+## Airflow Integration
+
+Integrating Airflow with Structured involves leveraging Airflow's capabilities to programmatically author, schedule, and monitor workflows.
+
+### Setting Up Airflow Integration
+
+1. **Access Airflow DAGs:** The integration primarily involves setting up Directed Acyclic Graphs (DAGs) in Airflow that interact with Structured's API.
+2. **Authenticate:** Use Structured's API keys for authentication in your Airflow scripts. Securely store these keys in Airflow's connections or secrets manager.
+   - Example: Utilize the `HttpHook` or similar Airflow components for API authentication.
+3. **Script Your Data Pipeline:** Write Airflow scripts (DAGs) that define your ETL process. This can include extracting data from sources, transforming it as needed, and loading it into Structured.
+   - Use Airflow operators to interact with Structured's API, ensuring data is pushed or pulled based on your workflow requirements.
+4. **Schedule and Monitor:** With Airflow's scheduler, set how often your ETL processes run. Monitor execution and logs through Airflow's UI to ensure data flows as expected into Structured.
+
+### Access Control
+
+- **Airflow Permissions:** You'll need appropriate access to your Airflow instance to create and manage DAGs.
+- **Structured API Access:** Manage who in your team has access to Structured's API keys, essential for scripting ETL processes in Airflow.
+
+---
+
+## Conclusion
+
+Integrating Fivetran and Airflow with Structured enhances your data infrastructure by automating the ETL process, ensuring efficient data synchronization, and maintaining a centralized source of truth. Paying close attention to authentication, data selection, and access control is critical for a successful integration setup. For advanced configurations or troubleshooting, refer to the respective ETL tool's documentation or reach out to Structured's support team.

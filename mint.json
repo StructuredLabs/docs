@@ -7,7 +7,7 @@
   },
   "modeToggle": {
     "default": "light",
-    "isHidden": false
+    "isHidden": true
   },
   "favicon": "/favicon.png",
   "colors": {
@@ -25,7 +25,7 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
+    "name": "App",
     "url": "https://app.structuredlabs.io/login"
   },
   "tabs": [],
@@ -33,7 +33,7 @@
     {
       "name": "Community",
       "icon": "slack",
-      "url": " https://join.slack.com/t/structured-users/shared_invite/zt-265ong01f-UHP6BP3FzvOmMQDIKty_JQ"
+      "url": "https://join.slack.com/t/structured-users/shared_invite/zt-265ong01f-UHP6BP3FzvOmMQDIKty_JQ"
     },
     {
       "name": "Blog",
@@ -46,10 +46,7 @@
       "group": "Get Started",
       "pages": ["introduction"]
     },
-     {
-      "group": "Examples",
-      "pages": ["examples"]
-    },
+    
     {
       "group": "Features",
       "pages": [
@@ -61,12 +58,15 @@
      {
       "group": "Integrations",
       "pages": [
-        "integrations/data",
-        "integrations/warehouse",
-        "integrations/sales",
-        "integrations/customersuccess",
+        "integrations/datastorage",
+        "integrations/salesmarketing",
+        "integrations/communication",
         "integrations/etl"
       ]
+    },
+     {
+      "group": "Examples",
+      "pages": ["examples", "study1", "study2", "study3", "study4", "study5"]
     }
   ],
   "footerSocials": {
