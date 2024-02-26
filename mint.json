@@ -44,15 +44,16 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "whystructured"]
+      "pages": ["why", "how"]
     },
     
     {
       "group": "Features",
       "pages": [
-        "features/configure",
-        "features/view",
-        "features/analyze"
+        "features/harbor",
+        "features/queries",
+        "features/reports",
+        "features/blocks"
       ]
     },
      {
@@ -60,7 +61,6 @@
       "pages": [
         "integrations/datastorage",
         "integrations/salesmarketing",
-        "integrations/communication",
         "integrations/etl"
       ]
     }
