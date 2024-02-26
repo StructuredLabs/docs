@@ -70,7 +70,7 @@
     },
      {
       "group": "Security Policies",
-      "pages": ["security"]
+      "pages": ["datapolicy", "privacypolicy", "termsofservice"]
     }
   ],
   "footerSocials": {
