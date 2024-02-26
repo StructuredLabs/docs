@@ -4,48 +4,66 @@ description: "🛠️ Connect, analyze, automate."
 icon: "lightbulb"
 ---
 
-Structured provides a common data model across all different revenue team-specific point solutions, such as Salesforce, HubSpot, etc. Structured is a data lake that encompasses all those streams of data, enabling analytics, report generation, answering questions, and identifying the most strategically relevant insights about business without the manual consolidation of data and schemas.
+# Data
 
-## Data
+<Card
+  title="Harbor"
+  icon="ship"
+  iconType="duotone"
+  color="#ca8b04"
+  href="/features/harbor"
+>
+  Structured provides a common data model across all different revenue
+  team-specific point solutions, such as Salesforce, HubSpot, etc. Structured is
+  a data lake that encompasses all those streams of data, enabling analytics,
+  report generation, answering questions, and identifying the most strategically
+  relevant insights about business without the manual consolidation of data and
+  schemas.
+</Card>
 
-- ### 🚢 Harbor
+# Workflows
 
-You come to our data Harbor to connect all relevant sources. We support many integration sources: Upload a CSV or Excel sheet directly, or connect to one of our homegrown integrations with Salesforce, HubSpot, Salesloft, Outreach, QuickBooks, etc. Alternatively, connect via webhook to stream data into Structured. Uploading the same data source twice or reconnecting the same table? Structured automatically maintains versioning of the data for you, ensuring changes or revisions are saved.
+<Card
+  title="Queries"
+  icon="magnifying-glass"
+  iconType="duotone"
+  color="#ca8b04"
+  href="/features/queries"
+>
+  After Structured’s central data plane is configured, go to the Query
+  interface, ask a question in natural language. Structured uses the underlying
+  data model configured to give the most up-to-date answer. Our system uses AI,
+  RAG, and code-generation to understand context and relationships efficiently,
+  providing clean, up-to-date responses with beautifully generated charts.
+</Card>
 
-- ### 🔗 Connecting the Same Objects from Different Tables
+<Card
+  title="Reports"
+  icon="chart-column"
+  iconType="duotone"
+  color="#ca8b04"
+  href="/features/reports"
+>
+  Dynamic documents enable collaboration with Structured AI to build the reports
+  you need for effective data storytelling. Use the "I’m feeling lucky" button
+  to auto-generate a report with the most interesting insights. Edit titles,
+  prompts, contents, chart types to personalize. Start with a blank report or
+  use our templates for common workflows, sharing, editing, scheduling with
+  teammates.
+</Card>
 
-The same ‘type’ of data can exist in several different tables. For example, a Customer column can exist in both your CRM and QuickBooks. With Structured, you can set a mapping between these tables representing the same information for continuous sync. This means duplications or discrepancies across point solutions are easily identified and reconciled in one place.
-
-- ### 🔄 Associating Table Columns
-
-Harbor enables associating concepts in schemas across your entire revenue ecosystem. Link a Customer column in an Orders table directly to the Customer table connected in the Data Harbor. This association pulls insights by associating metadata from other tables easily, without messy and haphazard data joining.
-
-- ### ↔️ Bidirectional Sync
-
-Always pull the most up-to-date information from Structured back to all your point solutions, like a CRM or invoicing tool. With discrepancies resolved in Structured, you can trust you're pulling the most correct information at all times, syncing with the rest of your job functions.
-
-- ### 📊 Visualization and Insights
-
-All of Harbor is wrapped up with a visualization that lets you get an at-a-glance view of your incoming data sources and schemas. With zoom and filtering capabilities, easily understand all dependencies and representations of all inflowing data.
-
-<Frame>
-  <img height="200" width="200" noZoom src="/images/how.jpg" />
-</Frame>
-
-## Workflows
-
-- ### 🔍 Queries
-
-After Structured’s central data plane is configured, go to the Query interface, ask a question in natural language in our ChatGPT-like offering. Structured uses the underlying data model configured to give the most up-to-date answer. Our system uses AI, RAG, and code-generation to understand context and relationships efficiently, providing clean, up-to-date responses with beautifully generated charts.
-
-- ### 📝 Reports
-
-Dynamic documents enable collaboration with Structured AI to build the reports you need for effective data storytelling. Use the "I’m feeling lucky" button to auto-generate a report with the most interesting insights. Edit titles, prompts, contents, chart types to personalize. Start with a blank report or use our templates for common workflows, sharing, editing, scheduling with teammates.
-
-- ### 🧊 Blocks
-
-Custom workflow builders for specifying automations between different fields in disparate systems with a high degree of trust. View Structured run history, track changes over time, identify failures, resolve issues, and share automations with ease.
-
-## Conclusion
+<Card
+  title="Blocks"
+  icon="cube"
+  iconType="duotone"
+  color="#ca8b04"
+  href="/features/blocks"
+>
+  Custom workflow builders let you specify automations between different fields
+  in disparate systems with a high degree of trust. View Structured Blocks run
+  history, track changes over time, identify failures, resolve issues. Share
+  these automations with your team -- so you never become a single point of
+  failure again.
+</Card>
 
 Structured combines the power of a unified data model with powerful data workflows, making your revenue operations more streamlined. Trust in your underlying data allows for confident analysis and automation, enhancing business efficiency and insight.

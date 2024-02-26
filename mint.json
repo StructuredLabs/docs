@@ -63,8 +63,8 @@
      {
       "group": "Integrations",
       "pages": [
-        "integrations/datastorage",
-        "integrations/salesmarketing",
+        "integrations/data",
+        "integrations/sales",
         "integrations/etl"
       ]
     },
