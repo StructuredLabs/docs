@@ -4,40 +4,44 @@ description: "Meet Structured"
 icon: "lightbulb"
 ---
 
-Structured is at the forefront of transforming how businesses access, manage, and leverage data to drive decision-making and optimize revenue processes. Our platform is designed with cutting-edge technology, is dedicated to empowering organizations with the tools they need to manage their data and revenue cycles efficiently and effectively.
+Structured provides a common data model across all different revenue team-specific point solutions, such as Salesforce, HubSpot, etc. Structured is a data lake that encompasses all those streams of data, enabling analytics, report generation, answering questions, and identifying the most strategically relevant insights about business without the manual consolidation of data and schemas.
 
-## Overview
+## Data
 
-Structured provides a comprehensive suite of solutions that streamline data discovery, documentation, governance, and the entire revenue management cycle. By integrating advanced AI capabilities and seamless workflows into a user-friendly platform, Structured ensures that organizations can harness the full potential of their data assets and optimize their revenue strategies.
+### Harbor:
 
-## Key Components of Structured
+You come to our data Harbor to connect all relevant sources. We support many integration sources: Upload a CSV or Excel sheet directly, or connect to one of our homegrown integrations with Salesforce, HubSpot, Salesloft, Outreach, QuickBooks, etc. Alternatively, connect via webhook to stream data into Structured. Uploading the same data source twice or reconnecting the same table? Structured automatically maintains versioning of the data for you, ensuring changes or revisions are saved.
 
-- **Data Glossary:** A centralized repository that simplifies the management, discovery, and governance of your data. It automates the ingestion of metadata from various data sources, enabling easy access and sharing of data knowledge across teams.
+### Connecting the Same Objects from Different Tables:
 
-- **Mapping:** Offers automated column and table level lineage to give teams clear insights into their data relationships. This feature enhances transparency, trust, and the effectiveness of data utilization within your organization.
+The same ‘type’ of data can exist in several different tables. For example, a Customer column can exist in both your CRM and QuickBooks. With Structured, you can set a mapping between these tables representing the same information for continuous sync. This means duplications or discrepancies across point solutions are easily identified and reconciled in one place.
 
-- **Queries and Reports:** Advanced query functionalities and reporting tools empower users to access business insights in real-time, facilitating data-driven decisions without the need for deep technical expertise.
+### Associating Table Columns:
 
-- **Revenue Platform:** A unified system purpose-built for the revenue process, integrating all revenue-critical technologies into a single platform. This consolidation simplifies the tech stack, reduces costs, and accelerates the achievement of revenue goals.
+Harbor enables associating concepts in schemas across your entire revenue ecosystem. Link a Customer column in an Orders table directly to the Customer table connected in the Data Harbor. This association pulls insights by associating metadata from other tables easily, without messy and haphazard data joining.
 
-## Getting Started
+### Bidirectional Sync:
 
-Structured is designed for ease of use, with a quick setup process that integrates seamlessly with your existing workflows and tech stack. Here’s how to begin transforming your data and revenue management with Structured:
+Always pull the most up-to-date information from Structured back to all your point solutions, like a CRM or invoicing tool. With discrepancies resolved in Structured, you can trust you're pulling the most correct information at all times, syncing with the rest of your job functions.
 
-1. **Integration:** Connect your data sources and CRM systems to Structured to start leveraging the power of our platform.
-2. **Data Glossary Setup:** Begin by populating your Data Glossary to centralize and streamline the access and governance of your data assets.
-3. **Mapping and Lineage:** Utilize our mapping features to visualize and understand the relationships within your data, enhancing transparency and collaboration.
-4. **Workflow Automation:** Implement queries, reports, and notifications within your workflows to ensure that insights are always actionable and accessible.
+### Visualization and Insights:
 
-## Why Structured?
+All of Harbor is wrapped up with a visualization that lets you get an at-a-glance view of your incoming data sources and schemas. With zoom and filtering capabilities, easily understand all dependencies and representations of all inflowing data.
 
-- **Simplicity:** A straightforward, intuitive interface that simplifies complex data and revenue management tasks.
-- **Flexibility:** Customizable features and integrations that cater to your organization's unique needs.
-- **Efficiency:** Automation and AI-driven tools that save time and reduce manual effort, allowing your team to focus on strategic initiatives.
-- **Accuracy:** Enhanced data governance and revenue management processes that improve decision-making and forecasting accuracy.
+## Workflows
 
-## Next Steps
+### Queries:
 
-Explore our comprehensive documentation to fully understand each component of Structured. Whether you’re looking to improve data governance with our Data Glossary, enhance data relationships through Mapping, streamline queries and reporting, or revolutionize your revenue cycle with our Revenue Platform, everything you need to get started is right here.
+After Structured’s central data plane is configured, go to the Query interface, ask a question in natural language in our ChatGPT-like offering. Structured uses the underlying data model configured to give the most up-to-date answer. Our system uses AI, RAG, and code-generation to understand context and relationships efficiently, providing clean, up-to-date responses with beautifully generated charts.
 
-Welcome to the future of data and revenue management with Structured. Let’s build something amazing together.
+### Reports:
+
+Dynamic documents enable collaboration with Structured AI to build the reports you need for effective data storytelling. Use the "I’m feeling lucky" button to auto-generate a report with the most interesting insights. Edit titles, prompts, contents, chart types to personalize. Start with a blank report or use our templates for common workflows, sharing, editing, scheduling with teammates.
+
+### Blocks:
+
+Custom workflow builders for specifying automations between different fields in disparate systems with a high degree of trust. View Structured run history, track changes over time, identify failures, resolve issues, and share automations with ease.
+
+## Conclusion
+
+Structured combines the power of a unified data model with powerful data workflows, making your revenue operations more streamlined. Trust in your underlying data allows for confident analysis and automation, enhancing business efficiency and insight.

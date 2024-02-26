@@ -44,7 +44,7 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction"]
+      "pages": ["introduction", "whystructured"]
     },
     
     {
@@ -63,10 +63,6 @@
         "integrations/communication",
         "integrations/etl"
       ]
-    },
-     {
-      "group": "Examples",
-      "pages": ["examples", "study1", "study2", "study3", "study4", "study5"]
     }
   ],
   "footerSocials": {
