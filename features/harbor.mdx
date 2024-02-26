@@ -8,49 +8,102 @@ Harbor is the foundation of Structured's data power, built specifically for the 
 
 ## Connect
 
-### 📂 Direct Data Uploads
+<Card
+  title="Upload Spreadsheets"
+  icon="folder"
+  iconType="duotone"
+  color="#808080"
+>
+  Import CSV and Excel files directly, streamlining the migration of historical
+  data into Structured for immediate analysis and integration.
+</Card>
 
-- **Functionality:** Import CSV and Excel files directly, streamlining the migration of historical data into Structured for immediate analysis and integration.
+<Card
+  title="Native Integrations"
+  icon="plug"
+  iconType="duotone"
+  color="#37608a"
+>
+  Connect to major platforms like Salesforce, HubSpot, Salesloft, Outreach, and
+  QuickBooks, designed for easy setup and seamless data flow. See [🔗
+  integrations](https://www.structuredlabs.io/integrations) for more details.
+</Card>
 
-### 🔌 Wide Array of Integrations
+<Card
+  title="Webhook Streaming"
+  icon="bars-staggered"
+  iconType="duotone"
+  color="#55a670"
+>
+  Provides real-time data streaming via webhook, enabling Structured to receive
+  updates instantly from external systems not covered by existing integrations.
+</Card>
 
-- **Scope:** Extensive native integrations with major platforms like Salesforce, HubSpot, Salesloft, Outreach, and QuickBooks, designed for easy setup and seamless data flow.
+<Tip>
+  **Bidirectional Sync:** You can enable updates within Structured to be
+  mirrored back to original data sources, maintaining consistency across
+  platforms and ensuring data accuracy.
+</Tip>
 
-### 🔗 Real-time Data Streaming via Webhook
+## Manage
 
-- **Capability:** Webhook support for real-time data streaming from any system outside the direct integrations, ensuring up-to-date data reflection in Structured.
+<AccordionGroup>
+  <Accordion title="🔄 Automated Data Versioning" defaultOpen>
+    Automatically monitors and logs any changes made to your data sources. It
+    saves previous versions of your data before updates are applied, creating a
+    detailed history of how your data has evolved over time. This is crucial for
+    tracking changes, understanding trends, and ensuring you can always access
+    historical data when needed.
+  </Accordion>
+  <Accordion title="📍 Unified Data Mapping" defaultOpen>
+    Simplifies the process of ensuring consistency across different data
+    systems. By setting up mappings, or connections, between similar data fields
+    in various systems, it ensures that information is synchronized. For
+    example, customer details from your CRM system can be automatically matched
+    and updated in your accounting software, keeping your records accurate and
+    up-to-date across platforms.
+  </Accordion>
+  <Accordion title="💡Associative Data Linking" defaultOpen>
+    Easily link related data points throughout your systems, by transforming a
+    basic field into a direct link to a different table's schema. Structured
+    automatically connects related information to make your data more useful for
+    deeper analysis. This means you can find important patterns and insights
+    without having to sort and link data manually, helping you make better
+    decisions and plan more effectively.
+  </Accordion>
+</AccordionGroup>
 
-## Intelligent Data Management
+## View
 
-### 🔄 Automated Data Versioning
-
-- **System:** Tracks and manages changes to data sources automatically, preserving historical data while integrating new updates, maintaining a comprehensive data evolution record.
-
-### 📍 Unified Data Mapping Across Platforms
-
-- **Utility:** Define mappings between similar data fields across different systems, ensuring a unified dataset view, such as matching customer info across CRM and accounting software.
-
-### 💡Associative Data Linking for Enhanced Insights
-
-- **Innovation:** Create dynamic associations between data points across the ecosystem, enriching datasets with deeper insights for complex analysis without cumbersome data manipulation.
-
-## ↔️ Bidirectional Synchronization for Data Accuracy
-
-- **Synchronization:** Updates within Structured are mirrored back to original data sources, maintaining consistency across platforms and ensuring data accuracy.
-
-## Data Model Visualization View
+<Frame type="glass" caption="Example table connection">
+  <img noZoom src="/images/graph.png" />
+</Frame>
 
 - Visualize all connected tables and their relationships in a single, intuitive interface.
 - Easily identify associations between different objects, improving understanding of data interconnections.
 - Navigate through the data model easily/interactively, allowing for deeper relationship exploration.
 - Customize the visualization to focus on specific nodes or relationships, providing flexibility in data model interpretation.
 
-## Detailed Workflow for Using Harbor
+## How to use Harbor
 
-1. **Initiating Data Integration:** Choose data sources from a wide range of integrations or set up webhooks for real-time streaming.
-2. **Mapping and Associating Data:** Use Harbor's interface to map and link data fields across sources for unified structures.
-3. **Engaging with Visualization Tools:** Use Harbor's visualization suite to explore data, customizing dashboards and using zoom/filtering for in-depth analysis.
-4. **Synchronizing Data:** Configure settings for bidirectional synchronization to keep all platforms updated with the latest insights from Structured.
+<Steps>
+  <Step title="Connect your tables">
+    Choose data sources from a wide range of integrations or set up webhooks for
+    real-time streaming.
+  </Step>
+  <Step title="Map and associate">
+    Use Harbor's UI to map and link data fields across connected table sources
+    for unified structures.
+  </Step>
+  <Step title="Use the graph view">
+    Use Harbor's visualization suite to explore data, customizing dashboards and
+    using zoom/filtering for in-depth analysis.
+  </Step>
+  <Step title="Set up Sync">
+    Configure settings for bidirectional synchronization to keep all platforms
+    updated with the latest insights from Structured.
+  </Step>
+</Steps>
 
 ## Conclusion
 
