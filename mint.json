@@ -19,6 +19,10 @@
     }
   },
   "topbarLinks": [
+     {
+      "name": "Website",
+      "url": "https://structuredlabs.io"
+    },
     {
       "name": "Support",
       "url": "mailto:contact@structuredlabs.io"
@@ -44,7 +48,7 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["why", "how"]
+      "pages": ["intro", "how"]
     },
     
     {
@@ -65,7 +69,7 @@
       ]
     },
      {
-      "group": "Examples",
+      "group": "Use Cases",
       "pages": ["study1", "study2", "study3", "study4", "study5"]
     },
      {
