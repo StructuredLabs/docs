@@ -67,6 +67,10 @@
      {
       "group": "Examples",
       "pages": ["study1", "study2", "study3", "study4", "study5"]
+    },
+     {
+      "group": "Security Policies",
+      "pages": ["security"]
     }
   ],
   "footerSocials": {
