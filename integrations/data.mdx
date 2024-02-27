@@ -3,6 +3,8 @@ title: "Data"
 icon: "database"
 ---
 
+Easily connect Structured with your favorite data sources. Here's how you can set up integrations with Sheets, Excel, AWS S3, PostgreSQL, MySQL, Redshift, BigQuery, Snowflake, and more.
+
 ---
 
 <CardGroup cols={4}>
@@ -18,124 +20,155 @@ icon: "database"
 
 ## Sheets Integration
 
-### Setting Up Sheets Integration
+### Setting Up
 
-1. **Access Integrations:** In Structured, go to the "Integrations" section and select "Sheets."
-2. **Authenticate:** Use your Google account to authenticate. You may be prompted to grant Structured permission to access your Google Sheets.
-3. **Select Sheets:** Choose the specific Sheets and the range of data to sync with Structured.
-4. **Configure Sync:** Set up how frequently Structured should pull data from Sheets.
+<Steps>
+  <Step title="Authenticate">
+    Go to “Integrations” > “Sheets” in Structured and sign in with your Google
+    account. Allow Structured to access your Google Sheets.
+  </Step>
+  <Step title="Select Sheets">
+    Choose the Sheets and data ranges you want to sync.
+  </Step>
+  <Step title="Sync Frequency">
+    Decide how often Structured should update data from Sheets.
+  </Step>
+</Steps>
 
 ### Access Control
 
-- Ensure your Google account has access to the Sheets you want to integrate.
-- In Structured, manage who can view or edit the imported Sheets data.
-
----
+Ensure your Google account can access the Sheets you want to integrate and manage permissions in Structured for viewing or editing data.
 
 ## Excel Integration
 
-### Setting Up Excel Integration
+### Setting Up
 
-1. **Upload Files:** Navigate to a designated section in Structured where you can upload Excel files.
-2. **File Selection:** Choose the Excel files from your device to be uploaded into Structured.
-3. **Data Mapping:** Map Excel columns to Structured data fields manually if automatic mapping isn't precise.
+<Steps>
+  <Step title="Upload Files">
+    Find the Excel section under “Integrations” to upload files.
+  </Step>
+  <Step title="Select and Map Data">
+    Choose files and adjust mappings between Excel columns and Structured fields
+    as needed.
+  </Step>
+</Steps>
 
-### Access Control
+### Access Permissions
 
-- Control who in Structured has the permissions to upload and manage Excel file data.
-
----
+Set who can upload and manage Excel data within Structured.
 
 ## S3 Integration
 
-### Setting Up S3 Integration
+### Setting Up
 
-1. **AWS Credentials:** Select "S3" in the Integrations section and enter your AWS Access Key ID and Secret Access Key.
-2. **Bucket Selection:** Choose the S3 bucket and the specific files or prefixes to sync.
-3. **Sync Configuration:** Set sync preferences, including frequency and file format handling (CSV, Parquet).
+<Steps>
+  <Step title="Enter AWS Credentials">
+    Input your AWS Access Key ID and Secret Access Key under “Integrations” >
+    “S3.”
+  </Step>
+  <Step title="Select Bucket">
+    Pick the S3 bucket and files you wish to sync.
+  </Step>
+  <Step title="Sync Preferences">
+    Configure your sync frequency and preferences for file formats.
+  </Step>
+</Steps>
 
 ### Access Control
 
-- The AWS credentials used must have permissions to read the S3 bucket and objects.
-- Manage access within Structured to the S3 imported data.
-
----
+Confirm AWS credentials have read access to the desired bucket and manage S3 data access within Structured.
 
 ## PostgreSQL Integration
 
-### Setting Up PostgreSQL Integration
+### Setting Up
 
-1. **Provide Credentials:** Enter your PostgreSQL database connection info in Structured's integration setup.
-2. **Choose Data:** Select the tables or views you want to import.
-3. **Sync Options:** Customize the synchronization settings, including frequency and data filtering.
+<Steps>
+  <Step title="Database Info">
+    Provide PostgreSQL connection details within the integration setup.
+  </Step>
+  <Step title="Choose Data">Select the tables or views you aim to import.</Step>
+  <Step title="Sync Settings">
+    Tailor synchronization settings, including frequency and data filters.
+  </Step>
+</Steps>
 
-### Access Control
+### Access Management
 
-- The PostgreSQL user provided should have read access to selected data.
-- Control data access within Structured as needed.
-
----
+Ensure the PostgreSQL user has read access and manage who can view or edit this data in Structured.
 
 ## MySQL Integration
 
-### Setting Up MySQL Integration
+### Setting Up
 
-1. **Database Credentials:** In Structured's "Integrations" section, select "MySQL" and provide the database credentials (hostname, port, username, password).
-2. **Select Tables:** Choose which tables or views you wish to import from MySQL into Structured.
-3. **Configure Sync:** Decide the sync frequency and if any specific queries should be used for data extraction.
+<Steps>
+  <Step title="Database Credentials">
+    Select “MySQL” under “Integrations” and enter your database details.
+  </Step>
+  <Step title="Data Selection">Pick the tables or views to import.</Step>
+  <Step title="Configure Sync">
+    Decide on the sync frequency and any specific data extraction queries.
+  </Step>
+</Steps>
 
-### Access Control
+### Access Permissions
 
-- Ensure the provided MySQL user has the necessary permissions for data Structured needs to access.
-- Within Structured, set who can access the MySQL data.
-
----
+Manage MySQL data access within Structured, ensuring the MySQL user has necessary permissions.
 
 ## Redshift Integration
 
-### Setting Up Redshift Integration
+### Setting Up
 
-1. **Database Connection:** Provide Redshift connection details (endpoint, database name, user, password) in Structured.
-2. **Data Selection:** Select schemas, tables, or specific queries for syncing.
-3. **Sync Setup:** Define how often Structured should update data from Redshift.
+<Steps>
+  <Step title="Connection Details">
+    Enter Redshift connection info in Structured.
+  </Step>
+  <Step title="Data Selection">
+    Choose schemas, tables, or queries for syncing.
+  </Step>
+  <Step title="Sync Setup">
+    Define how often data updates from Redshift should occur.
+  </Step>
+</Steps>
 
 ### Access Control
 
-- Use a Redshift user role with read access to the necessary schemas and tables.
-- Set permissions in Structured for who can view or edit Redshift data.
-
----
+Use a Redshift role with the required read access and manage data permissions within Structured.
 
 ## BigQuery Integration
 
-### Setting Up BigQuery Integration
+### Setting Up
 
-1. **Google Cloud Authentication:** Use your Google Cloud credentials in Structured to connect to BigQuery.
-2. **Select Datasets:** Choose which BigQuery datasets and tables to sync.
-3. **Configure Sync:** Set up the data sync frequency and any specific query transformations.
+<Steps>
+  <Step title="Google Cloud Authentication">
+    Connect using Google Cloud credentials in Structured for BigQuery access.
+  </Step>
+  <Step title="Select Datasets">Pick the datasets and tables to sync.</Step>
+  <Step title="Configure Sync">
+    Set the frequency of data synchronization and any specific query
+    transformations.
+  </Step>
+</Steps>
 
-### Access Control
+### Access Management
 
-- Ensure your Google Cloud account has permissions for the BigQuery datasets.
-- Manage who in Structured has access to the BigQuery data.
-
----
+Ensure your Google Cloud account has the necessary permissions and set access controls within Structured.
 
 ## Snowflake Integration
 
-### Setting Up Snowflake Integration
+### Setting Up
 
-1. **Connection Details:** Input your Snowflake account details (account ID, user, password, warehouse) in Structured.
-2. **Select Data:** Pick the Snowflake databases and tables for integration.
-3. **Sync Settings:** Determine how frequently data should be synchronized and any data transformations.
+<Steps>
+  <Step title="Connection Details">
+    Provide your Snowflake account details in Structured.
+  </Step>
+  <Step title="Select Data">
+    Choose the databases and tables for integration.
+  </Step>
+  <Step title="Sync Settings">
+    Determine sync frequency and any required data transformations.
+  </Step>
+</Steps>
 
-### Access Control
+### Access Permissions
 
-- The Snowflake user credentials used must have access to the selected databases and tables.
-- In Structured, assign data access permissions to your team members appropriately.
-
----
-
-## Conclusion
-
-Integrating these data sources with Structured simplifies data management by centralizing your data into a single source of truth. Follow the specific steps for each platform to ensure a successful integration, keeping in mind authentication requirements, data selection, and access control policies. For further assistance, [reach out to Structured's support team](mailto:support@structuredlabs.io).
+Ensure the Snowflake user has access to the selected data and assign appropriate permissions within Structured.
