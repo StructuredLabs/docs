@@ -57,7 +57,8 @@
         "features/harbor",
         "features/queries",
         "features/reports",
-        "features/blocks"
+        "features/blocks",
+        "features/alerts"
       ]
     },
      {
@@ -65,7 +66,7 @@
       "pages": [
         "integrations/data",
         "integrations/sales",
-        "integrations/etl"
+        "integrations/comms"
       ]
     },
      {
