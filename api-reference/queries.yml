@@ -1,0 +1,146 @@
+openapi: 3.0.0
+info:
+  title: Queries API
+  version: 1.0.0
+paths:
+  /queries:
+    post:
+      summary: Create a new query thread.
+      responses:
+        '200':
+          description: Successfully created a new query thread.
+  /queries/{thread_id}/execute:
+    post:
+      summary: Execute a query within a thread.
+      parameters:
+        - name: thread_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully executed the query within the thread.
+  /queries/{thread_id}/suggestions:
+    get:
+      summary: Get suggested queries.
+      parameters:
+        - name: thread_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved suggested queries.
+  /queries/summaries/{source_id}:
+    get:
+      summary: Get a dataset summary.
+      parameters:
+        - name: source_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved dataset summary.
+  /queries/{thread_id}/export:
+    get:
+      summary: Export query results.
+      parameters:
+        - name: thread_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully exported query results.
+  /queries/{thread_id}:
+    delete:
+      summary: Delete a query thread.
+      parameters:
+        - name: thread_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted the query thread.
+  /queries/{thread_id}/{query_id}:
+    delete:
+      summary: Remove a specific query from a thread.
+      parameters:
+        - name: thread_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: query_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully removed the specific query from the thread.
+  /queries/{thread_id}/metadata:
+    get:
+      summary: Get metadata about a query thread.
+      parameters:
+        - name: thread_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved metadata about the query thread.
+  /queries/{thread_id}/{query_id}/metadata:
+    get:
+      summary: Get metadata for an individual query.
+      parameters:
+        - name: thread_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: query_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved metadata for the individual query.
+  /queries/{thread_id}/queries:
+    get:
+      summary: List all queries in a thread.
+      parameters:
+        - name: thread_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully listed all queries in the thread.
+  /queries/{thread_id}/{query_id}/bookmark:
+    get:
+      summary: Bookmark an individual query.
+      parameters:
+        - name: thread_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: query_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully bookmarked the individual query.

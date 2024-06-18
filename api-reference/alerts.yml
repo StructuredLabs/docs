@@ -1,0 +1,70 @@
+openapi: 3.0.0
+info:
+  title: Alerts API
+  version: 1.0.0
+paths:
+  /alerts:
+    post:
+      summary: Create an alert.
+      responses:
+        '200':
+          description: Successfully created an alert.
+  /alerts/type/{type}:
+    delete:
+      summary: Delete all alerts of a specified type.
+      parameters:
+        - name: type
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted all alerts of the specified type.
+  /alerts/{alert_id}:
+    delete:
+      summary: Delete an alert.
+      parameters:
+        - name: alert_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted the alert.
+  /alerts/history:
+    get:
+      summary: View alert history.
+      responses:
+        '200':
+          description: Successfully retrieved alert history.
+    delete:
+      summary: Clear all alert history.
+      responses:
+        '200':
+          description: Successfully cleared all alert history.
+  /alerts/history/{run_id}:
+    delete:
+      summary: Delete a single alert run history entry.
+      parameters:
+        - name: run_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted the alert run history entry.
+  /alerts/{alert_id}/configure_delivery:
+    post:
+      summary: Configure alert delivery.
+      parameters:
+        - name: alert_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully configured alert delivery.

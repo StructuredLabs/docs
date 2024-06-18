@@ -1,0 +1,122 @@
+openapi: 3.0.0
+info:
+  title: Blocks API
+  version: 1.0.0
+paths:
+  /metrics/compute:
+    post:
+      summary: Compute a metric.
+      responses:
+        '200':
+          description: Successfully computed the metric.
+  /metrics:
+    post:
+      summary: Create a custom metric.
+      responses:
+        '200':
+          description: Successfully created a custom metric.
+  /metrics/{metric_id}:
+    put:
+      summary: Edit a metric.
+      parameters:
+        - name: metric_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully edited the metric.
+  /metrics/custom/{metric_id}:
+    delete:
+      summary: Delete a custom metric.
+      parameters:
+        - name: metric_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted the custom metric.
+  /metrics/{metric_id}/export:
+    get:
+      summary: Export metric data.
+      parameters:
+        - name: metric_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully exported metric data.
+  /metrics/{metric_id}/share:
+    post:
+      summary: Share a metric.
+      parameters:
+        - name: metric_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully shared the metric.
+  /metrics/{metric_id}/embed:
+    get:
+      summary: Embed a metric.
+      parameters:
+        - name: metric_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully embedded the metric.
+  /segments:
+    post:
+      summary: Create a new segment.
+      responses:
+        '200':
+          description: Successfully created a new segment.
+    get:
+      summary: List all segments.
+      responses:
+        '200':
+          description: Successfully listed all segments.
+  /segments/{segment_id}:
+    get:
+      summary: Retrieve a specific segment.
+      parameters:
+        - name: segment_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the segment.
+    put:
+      summary: Edit a segment.
+      parameters:
+        - name: segment_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully edited the segment.
+    delete:
+      summary: Delete a segment.
+      parameters:
+        - name: segment_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted the segment.

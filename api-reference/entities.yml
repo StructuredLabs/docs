@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  title: Entities API
+  version: 1.0.0
+paths:
+  /entities/relationships:
+    get:
+      summary: Get visualization of entity relationships.
+      responses:
+        '200':
+          description: Successfully retrieved entity relationships visualization.
+  /entities/{entity_id}/units:
+    get:
+      summary: List all instances of an entity type.
+      parameters:
+        - name: entity_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully listed all instances of the entity type.
+  /entities/{entity_id}/schema:
+    get:
+      summary: Get schema for an entity instance.
+      parameters:
+        - name: entity_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved schema for the entity instance.
+  /entities/{entity_type_id}/schema:
+    get:
+      summary: Get schema for an entity type.
+      parameters:
+        - name: entity_type_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved schema for the entity type.
+  /entities/{entity_type_id}:
+    get:
+      summary: View information about an entity type.
+      parameters:
+        - name: entity_type_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved information about the entity type.
+  /entities/{entity_type_id}/units/{unit_id}/audit_log:
+    get:
+      summary: Get audit log for an entity unit.
+      parameters:
+        - name: entity_type_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: unit_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved audit log for the entity unit.

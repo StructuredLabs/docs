@@ -1,0 +1,120 @@
+openapi: 3.0.0
+info:
+  title: Notes API
+  version: 1.0.0
+paths:
+  /notes:
+    post:
+      summary: Create a new note.
+      responses:
+        '200':
+          description: Successfully created a new note.
+    get:
+      summary: View all notes.
+      responses:
+        '200':
+          description: Successfully retrieved all notes.
+    delete:
+      summary: Delete all notes.
+      responses:
+        '200':
+          description: Successfully deleted all notes.
+  /notes/{note_id}:
+    put:
+      summary: Edit a note.
+      parameters:
+        - name: note_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully edited the note.
+    delete:
+      summary: Delete a specific note.
+      parameters:
+        - name: note_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted the note.
+  /notes/{note_id}/export:
+    get:
+      summary: Export a note to PDF.
+      parameters:
+        - name: note_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully exported the note to PDF.
+  /notes/{note_id}/share:
+    post:
+      summary: Share a note.
+      parameters:
+        - name: note_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully shared the note.
+  /notes/{note_id}/comments:
+    post:
+      summary: Add a comment to a note.
+      parameters:
+        - name: note_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully added a comment to the note.
+    get:
+      summary: Retrieve all comments for a specific note.
+      parameters:
+        - name: note_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved all comments for the note.
+  /notes/{note_id}/comments/{comment_id}:
+    delete:
+      summary: Delete a specific comment from a note.
+      parameters:
+        - name: note_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: comment_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted the comment from the note.
+  /notes/{note_id}/metadata:
+    get:
+      summary: Retrieve detailed metadata about a specific note.
+      parameters:
+        - name: note_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved detailed metadata about the note.

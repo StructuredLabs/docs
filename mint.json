@@ -222,6 +222,14 @@
     "slack": "https://structured-users.slack.com/",
     "github": "https://github.com/StructuredLabs"
   },
-  "openapi": ["api-reference/openapi.yml", "api-reference/connections.yml"]
+  "openapi": [
+    "api-reference/connections.yml", 
+    "api-reference/entities.yml", 
+    "api-reference/queries.yml", 
+    "api-reference/blocks.yml", 
+    "api-reference/notes.yml", 
+    "api-reference/dashboards.yml", 
+    "api-reference/alerts.yml"
+  ]
 
 }

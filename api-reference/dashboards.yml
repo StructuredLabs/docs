@@ -1,0 +1,115 @@
+openapi: 3.0.0
+info:
+  title: Dashboards API
+  version: 1.0.0
+paths:
+  /dashboards:
+    post:
+      summary: Create a new dashboard.
+      responses:
+        '200':
+          description: Successfully created a new dashboard.
+    get:
+      summary: Retrieve all dashboards.
+      responses:
+        '200':
+          description: Successfully retrieved all dashboards.
+  /dashboards/{dashboard_id}:
+    put:
+      summary: Edit a dashboard.
+      parameters:
+        - name: dashboard_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully edited the dashboard.
+    delete:
+      summary: Delete a specific dashboard.
+      parameters:
+        - name: dashboard_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted the dashboard.
+  /dashboards/{dashboard_id}/refresh:
+    post:
+      summary: Refresh dashboard data.
+      parameters:
+        - name: dashboard_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully refreshed dashboard data.
+  /dashboards/{dashboard_id}/embed:
+    get:
+      summary: Get embed code for a dashboard.
+      parameters:
+        - name: dashboard_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved embed code for the dashboard.
+  /dashboards/{dashboard_id}/comments:
+    post:
+      summary: Add a comment to a dashboard.
+      parameters:
+        - name: dashboard_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully added a comment to the dashboard.
+    get:
+      summary: Retrieve all comments for a specific dashboard.
+      parameters:
+        - name: dashboard_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved all comments for the dashboard.
+  /dashboards/{dashboard_id}/comments/{comment_id}:
+    delete:
+      summary: Delete a specific comment from a dashboard.
+      parameters:
+        - name: dashboard_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: comment_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted the comment from the dashboard.
+  /dashboards/{dashboard_id}/metadata:
+    get:
+      summary: Retrieve detailed metadata about a specific dashboard.
+      parameters:
+        - name: dashboard_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved detailed metadata about the dashboard.
