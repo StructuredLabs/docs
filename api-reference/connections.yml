@@ -467,35 +467,120 @@ paths:
 
   /connections/metadata:
     get:
-      summary: Get metadata for all connections.
+      summary: 'Get metadata for all connections.'
+      description: "Provides metadata for all connections within the harbor, including details about each connection's status, type, and last sync."
+      operationId: 'getAllConnectionsMetadata'
       responses:
         '200':
-          description: Successfully retrieved metadata for all connections hii.
+          description: 'Successfully retrieved metadata for all connections.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connections:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        connection_id:
+                          type: string
+                          description: 'The unique identifier for the connection.'
+                        created_by:
+                          type: string
+                          description: 'Username of the user who created the connection.'
+                        connected_at:
+                          type: string
+                          format: date-time
+                          description: 'Timestamp of when the connection was established.'
+                        last_synced:
+                          type: string
+                          format: date-time
+                          description: 'Timestamp of the last successful synchronization with the connection.'
+                        connection_type:
+                          type: string
+                          description: "The type of the connection, such as 'csv', 'google_sheets', etc."
+                        status:
+                          type: string
+                          description: "Current status of the connection, can be 'active' or 'inactive'."
+
           
-  '/connections/{connection_id}/usage':
+  /connections/{connection_id}/usage:
     get:
-      summary: View usage details of a connection.
+      summary: 'View usage details of a connection.'
+      description: 'Provides usage statistics and performance metrics for a specific connection, helpful for monitoring and optimizing data flows.'
+      operationId: 'getConnectionUsage'
       parameters:
         - name: connection_id
           in: path
           required: true
+          description: 'The unique identifier for the connection.'
           schema:
             type: string
       responses:
         '200':
-          description: Successfully retrieved usage details of the connection.
-  '/connections/{connection_id}/test':
+          description: 'Successfully retrieved usage details of the connection.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connection_id:
+                    type: string
+                    description: 'The unique identifier for the connection.'
+                  data_usage:
+                    type: object
+                    properties:
+                      last_month:
+                        type: string
+                        description: 'Data amount used in the last month in GB.'
+                      current_month:
+                        type: string
+                        description: 'Data amount used in the current month in GB.'
+                  query_performance:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        query_id:
+                          type: string
+                          description: 'Unique identifier for the query.'
+                        execution_time:
+                          type: string
+                          description: 'The time taken to execute the query in milliseconds.'
+                        status:
+                          type: string
+                          description: "The status of the query execution, can be either 'completed' or 'failed'."
+
+
+  /connections/{connection_id}/test:
     post:
-      summary: Test a data connection.
+      summary: 'Test a data connection.'
+      description: 'Tests if a specific data connection is successful, ensuring that the system can communicate effectively with the connection source.'
+      operationId: 'testDataConnection'
       parameters:
         - name: connection_id
           in: path
           required: true
+          description: 'The unique identifier for the connection to be tested.'
           schema:
             type: string
       responses:
         '200':
-          description: Successfully tested the data connection.
+          description: 'Successfully tested the data connection.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: "Result of the connection test, typically 'success' or 'failure'."
+                  details:
+                    type: string
+                    description: 'Detailed message explaining the test result or any issues encountered.'
+
+
 components:
   schemas:
     Error:
