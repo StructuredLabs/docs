@@ -1,22 +1,115 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
   title: Connections API
+  description: API to manage data source connections
+  license:
+    name: MIT
   version: 1.0.0
+servers:
+  - url: 'http://api.structuredlabs.com'
+security:
+  - bearerAuth: []
 paths:
   /connections:
     post:
-      summary: Connect to a data source.
+      summary: Connect to a data source
+      description: Connects to a specified live data source.
+      requestBody:
+        description: The details required to connect to the data source.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The type of data source.
+                  example: csv|google_sheets|salesforce|hubspot|...
+                credentials:
+                  type: object
+                  description: The credentials required for authentication.
+                  properties:
+                    username:
+                      type: string
+                      description: The username for authentication.
+                      example: user123
+                    password:
+                      type: string
+                      description: The password for authentication.
+                      example: pass123
+                    api_key:
+                      type: string
+                      description: The API key for authentication.
+                      example: key123
+                    other_params:
+                      type: object
+                      description: Additional parameters for authentication.
+                      additionalProperties: true
+                      example: {}
+                settings:
+                  type: object
+                  description: Configuration settings for the connection.
+                  properties:
+                    sync_period:
+                      type: string
+                      description: The synchronization period.
+                      example: 30 minutes|hourly|daily
       responses:
         '200':
           description: Successfully connected to the data source.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connection_id:
+                    type: string
+                    description: The unique identifier for the established connection.
+                    example: abc123
+                  status:
+                    type: string
+                    description: The status of the connection.
+                    example: connected
+                  message:
+                    type: string
+                    description: Additional information about the connection status.
+                    example: Successfully connected to the data source.
+        '400':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     delete:
       summary: Delete all data connections.
+      description: >-
+        Deletes all data connections. This action is irreversible and should be
+        used with caution to avoid unintentional data loss.
       responses:
         '200':
           description: Successfully deleted all data connections.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - deleted
+                      - error
+                    description: Status of the operation indicating success or error.
+                  message:
+                    type: string
+                    description: >-
+                      Detailed message about the outcome. Either a success
+                      message or an error description.
+
   /connections/{connection_id}/refresh:
     post:
-      summary: Refresh a data connection.
+      summary: Refresh a Data Connection
+      description: Refreshes an existing data connection to ensure data is up-to-date.
       parameters:
         - name: connection_id
           in: path
@@ -25,8 +118,25 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully refreshed the data connection.
-  /connections/{connection_id}/configure_sync:
+          description: Data connection refresh response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connection_id:
+                    type: string
+                    description: The unique identifier of the refreshed data connection.
+                  status:
+                    type: string
+                    enum:
+                      - refreshed
+                      - error
+                    description: Status of the refresh operation.
+                  message:
+                    type: string
+                    description: A message detailing the outcome of the refresh operation.
+  '/connections/{connection_id}/configure_sync':
     post:
       summary: Configure synchronization settings for a connection.
       parameters:
@@ -38,7 +148,7 @@ paths:
       responses:
         '200':
           description: Successfully configured synchronization settings.
-  /connections/{connection_id}:
+  '/connections/{connection_id}':
     put:
       summary: Update connection details.
       parameters:
@@ -61,7 +171,7 @@ paths:
       responses:
         '200':
           description: Successfully deleted the data connection.
-  /connections/{connection_id}/data:
+  '/connections/{connection_id}/data':
     get:
       summary: View data from a connection.
       parameters:
@@ -73,7 +183,7 @@ paths:
       responses:
         '200':
           description: Successfully retrieved data from the connection.
-  /connections/{connection_id}/schema:
+  '/connections/{connection_id}/schema':
     get:
       summary: Get schema details of a connection.
       parameters:
@@ -85,7 +195,7 @@ paths:
       responses:
         '200':
           description: Successfully retrieved schema details of the connection.
-  /connections/{connection_id}/download:
+  '/connections/{connection_id}/download':
     get:
       summary: Download data from a connection.
       parameters:
@@ -97,7 +207,7 @@ paths:
       responses:
         '200':
           description: Successfully downloaded data from the connection.
-  /connections/{connection_id}/metadata:
+  '/connections/{connection_id}/metadata':
     get:
       summary: Retrieve metadata about a connection.
       parameters:
@@ -115,7 +225,7 @@ paths:
       responses:
         '200':
           description: Successfully retrieved metadata for all connections.
-  /connections/{connection_id}/usage:
+  '/connections/{connection_id}/usage':
     get:
       summary: View usage details of a connection.
       parameters:
@@ -127,7 +237,7 @@ paths:
       responses:
         '200':
           description: Successfully retrieved usage details of the connection.
-  /connections/{connection_id}/test:
+  '/connections/{connection_id}/test':
     post:
       summary: Test a data connection.
       parameters:
@@ -139,3 +249,20 @@ paths:
       responses:
         '200':
           description: Successfully tested the data connection.
+components:
+  schemas:
+    Error:
+      required:
+        - error
+        - message
+      type: object
+      properties:
+        error:
+          type: integer
+          format: int32
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
