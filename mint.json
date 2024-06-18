@@ -32,7 +32,12 @@
     "name": "App",
     "url": "https://app.structuredlabs.io"
   },
-  "tabs": [],
+  "tabs": [
+    {
+        "name": "API Reference",
+        "url": "api-reference"
+    }
+  ],
   "anchors": [
     {
       "name": "Community",
@@ -72,6 +77,117 @@
      {
       "group": "Security Policies",
       "pages": ["datapolicy", "privacypolicy", "termsofservice"]
+    },
+    {
+      "group": "API Documentation",
+      "pages": [
+        "api-reference/introduction"
+      ]
+    },
+    {
+      "group": "Connections API",
+      "pages": [
+        "api-reference/connections/connect-data-source",
+        "api-reference/connections/refresh-data-connection",
+        "api-reference/connections/configure-sync-settings",
+        "api-reference/connections/update-connection-details",
+        "api-reference/connections/delete-specific-connection",
+        "api-reference/connections/delete-all-connections",
+        "api-reference/connections/view-connection-data",
+        "api-reference/connections/get-connection-schema",
+        "api-reference/connections/download-connection-data",
+        "api-reference/connections/retrieve-connection-metadata",
+        "api-reference/connections/get-all-connections-metadata",
+        "api-reference/connections/view-connection-usage",
+        "api-reference/connections/test-data-connection"
+      ]
+    },
+    {
+      "group": "Entities API",
+      "pages": [
+        "api-reference/entities/get-entity-relationships",
+        "api-reference/entities/list-entity-instances",
+        "api-reference/entities/get-entity-instance-schema",
+        "api-reference/entities/get-entity-type-schema",
+        "api-reference/entities/view-entity-type-info",
+        "api-reference/entities/get-entity-unit-audit-log"
+      ]
+    },
+    {
+      "group": "Queries API",
+      "pages": [
+        "api-reference/queries/create-query-thread",
+        "api-reference/queries/execute-query",
+        "api-reference/queries/get-suggested-queries",
+        "api-reference/queries/get-dataset-summary",
+        "api-reference/queries/export-query-results",
+        "api-reference/queries/delete-query-thread",
+        "api-reference/queries/remove-specific-query",
+        "api-reference/queries/query-thread-metadata",
+        "api-reference/queries/query-metadata",
+        "api-reference/queries/list-thread-queries",
+        "api-reference/queries/bookmark-query"
+      ]
+    },
+    {
+      "group": "Blocks API",
+      "pages": [
+        "api-reference/blocks/compute-metric",
+        "api-reference/blocks/create-custom-metric",
+        "api-reference/blocks/edit-metric",
+        "api-reference/blocks/delete-custom-metric",
+        "api-reference/blocks/export-metric-data",
+        "api-reference/blocks/share-metric",
+        "api-reference/blocks/embed-metric",
+        "api-reference/blocks/create-segment",
+        "api-reference/blocks/retrieve-segment",
+        "api-reference/blocks/edit-segment",
+        "api-reference/blocks/delete-segment",
+        "api-reference/blocks/list-all-segments"
+      ]
+    },
+    {
+      "group": "Notes API",
+      "pages": [
+        "api-reference/notes/create-note",
+        "api-reference/notes/view-all-notes",
+        "api-reference/notes/edit-note",
+        "api-reference/notes/delete-specific-note",
+        "api-reference/notes/delete-all-notes",
+        "api-reference/notes/export-note",
+        "api-reference/notes/share-note",
+        "api-reference/notes/add-note-comment",
+        "api-reference/notes/retrieve-note-comments",
+        "api-reference/notes/delete-note-comment",
+        "api-reference/notes/note-metadata"
+      ]
+    },
+    {
+      "group": "Dashboards API",
+      "pages": [
+        "api-reference/dashboards/create-dashboard",
+        "api-reference/dashboards/retrieve-dashboards",
+        "api-reference/dashboards/edit-dashboard",
+        "api-reference/dashboards/delete-dashboard",
+        "api-reference/dashboards/refresh-dashboard",
+        "api-reference/dashboards/embed-dashboard",
+        "api-reference/dashboards/add-dashboard-comment",
+        "api-reference/dashboards/retrieve-dashboard-comments",
+        "api-reference/dashboards/delete-dashboard-comment",
+        "api-reference/dashboards/dashboard-metadata"
+      ]
+    },
+    {
+      "group": "Alerts API",
+      "pages": [
+        "api-reference/alerts/create-alert",
+        "api-reference/alerts/delete-alerts-by-type",
+        "api-reference/alerts/delete-alert",
+        "api-reference/alerts/view-alert-history",
+        "api-reference/alerts/delete-single-alert-history-entry",
+        "api-reference/alerts/clear-all-alert-history",
+        "api-reference/alerts/configure-alert-delivery"
+      ]
     }
   ],
   "footerSocials": {
@@ -81,5 +197,7 @@
     "email": "mailto:contact@structuredlabs.io",
     "slack": "https://structured-users.slack.com/",
     "github": "https://github.com/StructuredLabs"
-  }
+  },
+  "openapi": ["api-reference/openapi.yml"]
+
 }
