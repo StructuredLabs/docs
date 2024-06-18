@@ -7,35 +7,181 @@ servers:
   - url: 'http://api.structuredlabs.com'
 security:
   - bearerAuth: []
-
 paths:
   /metrics/compute:
     post:
-      summary: Compute a metric.
+      summary: 'Compute a Metric'
+      description: 'Computes a predefined or custom metric using data from the entire Harbor.'
+      operationId: 'computeMetric'
+      requestBody:
+        description: 'Details required to compute the metric.'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                metric_id:
+                  type: string
+                parameters:
+                  type: object
+                  properties:
+                    date_range:
+                      type: string
+                    segments:
+                      type: array
+                      items:
+                        type: string
+                    filters:
+                      type: object
+                      additionalProperties: true
+                prerequisites:
+                  type: array
+                  items:
+                    type: string
+                chart:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum: [line, bar, pie]
+                    color_scheme:
+                      type: string
+                      enum: [default, monochrome, pastel]
       responses:
         '200':
-          description: Successfully computed the metric.
+          description: 'Successfully computed the metric.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metric_id:
+                    type: string
+                  value:
+                    type: string
+                  chart_url:
+                    type: string
+                  raw_data:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+                  status:
+                    type: string
+                    enum: [computed, failed]
+                  message:
+                    type: string
+
   /metrics:
     post:
-      summary: Create a custom metric.
+      summary: 'Create a Custom Metric'
+      description: 'Allows users to define and create custom metrics using the entire Harbor as the data source.'
+      operationId: 'createCustomMetric'
+      requestBody:
+        description: 'Details required to create a custom metric.'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                formula:
+                  type: string
+                prerequisites:
+                  type: array
+                  items:
+                    type: string
+                creator:
+                  type: string
+                created_at:
+                  type: string
+                chart:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum: [line, bar, pie]
+                    color_scheme:
+                      type: string
+                      enum: [default, monochrome, pastel]
       responses:
         '200':
-          description: Successfully created a custom metric.
+          description: 'Successfully created a custom metric.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metric_id:
+                    type: string
+                  status:
+                    type: string
+                    enum: [created]
+                  message:
+                    type: string
+
   /metrics/{metric_id}:
     put:
-      summary: Edit a metric.
+      summary: 'Edit a Metric'
+      description: 'Edits details or formulas of an existing metric, updating chart settings and other metadata.'
+      operationId: 'editMetric'
       parameters:
         - name: metric_id
           in: path
           required: true
           schema:
             type: string
+      requestBody:
+        description: 'Details required to edit the metric.'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                formula:
+                  type: string
+                chart:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum: [line, bar, pie]
+                    color_scheme:
+                      type: string
+                      enum: [default, monochrome, pastel]
+                last_modified_by:
+                  type: string
+                last_modified_at:
+                  type: string
       responses:
         '200':
-          description: Successfully edited the metric.
+          description: 'Successfully edited the metric.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [updated]
+                  message:
+                    type: string
+
   /metrics/custom/{metric_id}:
     delete:
-      summary: Delete a custom metric.
+      summary: 'Delete a Custom Metric'
+      description: 'Deletes a custom metric.'
+      operationId: 'deleteCustomMetric'
       parameters:
         - name: metric_id
           in: path
@@ -44,34 +190,106 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully deleted the custom metric.
+          description: 'Successfully deleted the custom metric.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [deleted]
+                  message:
+                    type: string
+
   /metrics/{metric_id}/export:
     get:
-      summary: Export metric data.
+      summary: 'Export Metric Data'
+      description: 'Exports the metric data to the specified format along with the chart image.'
+      operationId: 'exportMetric'
       parameters:
         - name: metric_id
           in: path
           required: true
           schema:
             type: string
+        - name: format
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [pdf, csv, image]
+        - name: include_chart
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [yes, no]
       responses:
         '200':
-          description: Successfully exported metric data.
+          description: 'Successfully exported metric data.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  download_url:
+                    type: string
+                  status:
+                    type: string
+                    enum: [success]
+                  message:
+                    type: string
+
   /metrics/{metric_id}/share:
     post:
-      summary: Share a metric.
+      summary: 'Share a Metric'
+      description: 'Creates a shareable link for a metric.'
+      operationId: 'shareMetric'
       parameters:
         - name: metric_id
           in: path
           required: true
           schema:
             type: string
+      requestBody:
+        description: 'Details for sharing the metric.'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                medium:
+                  type: string
+                  enum: [email, slack]
+                recipients:
+                  type: array
+                  items:
+                    type: string
+                message:
+                  type: string
       responses:
         '200':
-          description: Successfully shared the metric.
+          description: 'Successfully shared the metric.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  link:
+                    type: string
+                  status:
+                    type: string
+                    enum: [shared]
+                  message:
+                    type: string
+
   /metrics/{metric_id}/embed:
     get:
-      summary: Embed a metric.
+      summary: 'Embed a Metric'
+      description: 'Provides an embed code to integrate the metric into other platforms, including customized charts.'
+      operationId: 'embedMetric'
       parameters:
         - name: metric_id
           in: path
@@ -80,21 +298,83 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully embedded the metric.
+          description: 'Successfully embedded the metric.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  embed_code:
+                    type: string
+                  status:
+                    type: string
+                    enum: [success]
+
   /segments:
     post:
-      summary: Create a new segment.
+      summary: 'Create a New Segment'
+      description: 'Creates a new segment.'
+      operationId: 'createSegment'
+      requestBody:
+        description: 'Details required to create a new segment.'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                filters:
+                  type: object
+                  additionalProperties: true
       responses:
         '200':
-          description: Successfully created a new segment.
+          description: 'Successfully created a new segment.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  segment_id:
+                    type: string
+                  status:
+                    type: string
+                    enum: [created]
+                  message:
+                    type: string
+
     get:
-      summary: List all segments.
+      summary: 'List All Segments'
+      description: 'Lists all segments.'
+      operationId: 'listSegments'
       responses:
         '200':
-          description: Successfully listed all segments.
+          description: 'Successfully listed all segments.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  segments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        segment_id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+
   /segments/{segment_id}:
     get:
-      summary: Retrieve a specific segment.
+      summary: 'Retrieve a Specific Segment'
+      description: 'Retrieves a specific segment.'
+      operationId: 'getSegment'
       parameters:
         - name: segment_id
           in: path
@@ -103,20 +383,65 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully retrieved the segment.
+          description: 'Successfully retrieved the segment.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  segment_id:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  filters:
+                    type: object
+                    additionalProperties: true
+
     put:
-      summary: Edit a segment.
+      summary: 'Edit a Segment'
+      description: 'Edits a specific segment.'
+      operationId: 'editSegment'
       parameters:
         - name: segment_id
           in: path
           required: true
           schema:
             type: string
+      requestBody:
+        description: 'Details required to edit the segment.'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                filters:
+                  type: object
+                  additionalProperties: true
       responses:
         '200':
-          description: Successfully edited the segment.
+          description: 'Successfully edited the segment.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [updated]
+                  message:
+                    type: string
+
     delete:
-      summary: Delete a segment.
+      summary: 'Delete a Segment'
+      description: 'Deletes a specific segment.'
+      operationId: 'deleteSegment'
       parameters:
         - name: segment_id
           in: path
@@ -125,7 +450,17 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully deleted the segment.
+          description: 'Successfully deleted the segment.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [deleted]
+                  message:
+                    type: string
 
 components:
   schemas:
