@@ -7,34 +7,160 @@ servers:
   - url: 'http://api.structuredlabs.com'
 security:
   - bearerAuth: []
-
-
 paths:
   /dashboards:
     post:
-      summary: Create a new dashboard.
+      summary: 'Create a New Dashboard'
+      description: 'Creates a new dashboard with metadata about the creator and the creation time.'
+      operationId: 'createDashboard'
+      requestBody:
+        description: 'Details required to create a new dashboard.'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                widgets:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      widget_id:
+                        type: string
+                      type:
+                        type: string
+                        enum: [chart, table, text]
+                      position:
+                        type: object
+                        properties:
+                          x:
+                            type: integer
+                          y:
+                            type: integer
+                      size:
+                        type: object
+                        properties:
+                          width:
+                            type: integer
+                          height:
+                            type: integer
+                creator:
+                  type: string
       responses:
         '200':
-          description: Successfully created a new dashboard.
+          description: 'Successfully created a new dashboard.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dashboard_id:
+                    type: string
+                  status:
+                    type: string
+                    enum: [created]
+                  message:
+                    type: string
+                  created_at:
+                    type: string
     get:
-      summary: Retrieve all dashboards.
+      summary: 'Retrieve All Dashboards'
+      description: 'Retrieves all dashboards created by the user, including metadata.'
+      operationId: 'viewAllDashboards'
       responses:
         '200':
-          description: Successfully retrieved all dashboards.
+          description: 'Successfully retrieved all dashboards.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dashboards:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        dashboard_id:
+                          type: string
+                        title:
+                          type: string
+                        created_at:
+                          type: string
+                        last_modified:
+                          type: string
+                        creator:
+                          type: string
+                        collaborators:
+                          type: array
+                          items:
+                            type: string
+
   /dashboards/{dashboard_id}:
     put:
-      summary: Edit a dashboard.
+      summary: 'Edit a Dashboard'
+      description: 'Edits an existing dashboard, including the ability to add or remove collaborators.'
+      operationId: 'editDashboard'
       parameters:
         - name: dashboard_id
           in: path
           required: true
           schema:
             type: string
+      requestBody:
+        description: 'Details required to edit the dashboard.'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                widgets:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      widget_id:
+                        type: string
+                      position:
+                        type: object
+                        properties:
+                          x:
+                            type: integer
+                          y:
+                            type: integer
+                      size:
+                        type: object
+                        properties:
+                          width:
+                            type: integer
+                          height:
+                            type: integer
+                collaborators:
+                  type: array
+                  items:
+                    type: string
       responses:
         '200':
-          description: Successfully edited the dashboard.
+          description: 'Successfully edited the dashboard.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [updated]
+                  message:
+                    type: string
     delete:
-      summary: Delete a specific dashboard.
+      summary: 'Delete a Specific Dashboard'
+      description: 'Deletes a specific dashboard. Provides a confirmation of who deleted the dashboard.'
+      operationId: 'deleteDashboard'
       parameters:
         - name: dashboard_id
           in: path
@@ -43,10 +169,25 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully deleted the dashboard.
+          description: 'Successfully deleted the dashboard.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [deleted]
+                  message:
+                    type: string
+                  deleted_by:
+                    type: string
+
   /dashboards/{dashboard_id}/refresh:
     post:
-      summary: Refresh dashboard data.
+      summary: 'Refresh Dashboard Data'
+      description: 'Manually refreshes the data in a dashboard.'
+      operationId: 'refreshDashboard'
       parameters:
         - name: dashboard_id
           in: path
@@ -55,10 +196,23 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully refreshed dashboard data.
+          description: 'Successfully refreshed dashboard data.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [refreshed]
+                  message:
+                    type: string
+
   /dashboards/{dashboard_id}/embed:
     get:
-      summary: Get embed code for a dashboard.
+      summary: 'Get Embed Code for a Dashboard'
+      description: 'Provides an embed code for a dashboard to be used in other applications.'
+      operationId: 'embedDashboard'
       parameters:
         - name: dashboard_id
           in: path
@@ -67,21 +221,59 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully retrieved embed code for the dashboard.
+          description: 'Successfully retrieved embed code for the dashboard.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  embed_code:
+                    type: string
+                  status:
+                    type: string
+                    enum: [success]
+
   /dashboards/{dashboard_id}/comments:
     post:
-      summary: Add a comment to a dashboard.
+      summary: 'Add a Comment to a Dashboard'
+      description: 'Adds a comment to a specific dashboard.'
+      operationId: 'addCommentToDashboard'
       parameters:
         - name: dashboard_id
           in: path
           required: true
           schema:
             type: string
+      requestBody:
+        description: 'Details of the comment to add.'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+                author:
+                  type: string
       responses:
         '200':
-          description: Successfully added a comment to the dashboard.
+          description: 'Successfully added a comment to the dashboard.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [added]
+                  message:
+                    type: string
+
     get:
-      summary: Retrieve all comments for a specific dashboard.
+      summary: 'Retrieve All Comments for a Specific Dashboard'
+      description: 'Retrieves all comments for a specific dashboard.'
+      operationId: 'getCommentsForDashboard'
       parameters:
         - name: dashboard_id
           in: path
@@ -90,10 +282,31 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully retrieved all comments for the dashboard.
+          description: 'Successfully retrieved all comments for the dashboard.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        comment_id:
+                          type: string
+                        comment:
+                          type: string
+                        author:
+                          type: string
+                        created_at:
+                          type: string
+
   /dashboards/{dashboard_id}/comments/{comment_id}:
     delete:
-      summary: Delete a specific comment from a dashboard.
+      summary: 'Delete a Specific Comment from a Dashboard'
+      description: 'Deletes a specific comment from a dashboard.'
+      operationId: 'deleteCommentFromDashboard'
       parameters:
         - name: dashboard_id
           in: path
@@ -107,10 +320,23 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully deleted the comment from the dashboard.
+          description: 'Successfully deleted the comment from the dashboard.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [deleted]
+                  message:
+                    type: string
+
   /dashboards/{dashboard_id}/metadata:
     get:
-      summary: Retrieve detailed metadata about a specific dashboard.
+      summary: 'Retrieve Detailed Metadata about a Specific Dashboard'
+      description: 'Retrieves detailed metadata about a specific dashboard.'
+      operationId: 'getDashboardMetadata'
       parameters:
         - name: dashboard_id
           in: path
@@ -119,7 +345,50 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully retrieved detailed metadata about the dashboard.
+          description: 'Successfully retrieved detailed metadata about the dashboard.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dashboard_id:
+                    type: string
+                  title:
+                    type: string
+                  created_at:
+                    type: string
+                  last_modified:
+                    type: string
+                  creator:
+                    type: string
+                  collaborators:
+                    type: array
+                    items:
+                      type: string
+                  widgets:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        widget_id:
+                          type: string
+                        type:
+                          type: string
+                          enum: [chart, table, text]
+                        position:
+                          type: object
+                          properties:
+                            x:
+                              type: integer
+                            y:
+                              type: integer
+                        size:
+                          type: object
+                          properties:
+                            width:
+                              type: integer
+                            height:
+                              type: integer
 
 components:
   schemas:

@@ -1,7 +1,14 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
-  title: Alerts API
-  version: 1.0.0
+  title: 'Alerts API'
+  description: 'API for managing alerts.'
+  version: '1.0.0'
+servers:
+  - url: 'http://api.structuredlabs.com'
+security:
+  - bearerAuth: []
+
+
 paths:
   /alerts:
     post:
@@ -68,3 +75,21 @@ paths:
       responses:
         '200':
           description: Successfully configured alert delivery.
+
+components:
+  schemas:
+    Error:
+      required:
+        - error
+        - message
+      type: object
+      properties:
+        error:
+          type: integer
+          format: int32
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
