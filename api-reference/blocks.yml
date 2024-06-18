@@ -1,7 +1,13 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
-  title: Blocks API
-  version: 1.0.0
+  title: 'Blocks API'
+  description: 'API for managing metrics and segments'
+  version: '1.0.0'
+servers:
+  - url: 'http://api.structuredlabs.com'
+security:
+  - bearerAuth: []
+
 paths:
   /metrics/compute:
     post:
@@ -120,3 +126,21 @@ paths:
       responses:
         '200':
           description: Successfully deleted the segment.
+
+components:
+  schemas:
+    Error:
+      required:
+        - error
+        - message
+      type: object
+      properties:
+        error:
+          type: integer
+          format: int32
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

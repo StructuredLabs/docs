@@ -149,8 +149,7 @@
         "api-reference/queries/remove-specific-query",
         "api-reference/queries/query-thread-metadata",
         "api-reference/queries/query-metadata",
-        "api-reference/queries/list-thread-queries",
-        "api-reference/queries/bookmark-query"
+        "api-reference/queries/list-thread-queries"
       ]
     },
     {

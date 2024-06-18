@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: 'Entities API Documentation'
-  description: 'API for managing entity data and relationships within a system.'
+  title: 'Entities API'
+  description: 'API for managing entity data and relationships'
   version: '1.0.0'
 servers:
   - url: 'http://api.structuredlabs.com'
