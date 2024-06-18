@@ -34,8 +34,32 @@
   },
   "tabs": [
     {
-        "name": "API Reference",
-        "url": "api-reference"
+        "name": "Connections API",
+        "url": "api-reference/connections"
+    },
+    {
+        "name": "Entities API",
+        "url": "api-reference/entities"
+    },
+    {
+        "name": "Queries API",
+        "url": "api-reference/queries"
+    },
+    {
+        "name": "Blocks API",
+        "url": "api-reference/blocks"
+    },
+    {
+        "name": "Notes API",
+        "url": "api-reference/notes"
+    },
+    {
+        "name": "Dashboards API",
+        "url": "api-reference/dashboards"
+    },
+    {
+        "name": "Alerts API",
+        "url": "api-reference/alerts"
     }
   ],
   "anchors": [
@@ -198,6 +222,6 @@
     "slack": "https://structured-users.slack.com/",
     "github": "https://github.com/StructuredLabs"
   },
-  "openapi": ["api-reference/openapi.yml"]
+  "openapi": ["api-reference/openapi.yml", "api-reference/connections.yml"]
 
 }

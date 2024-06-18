@@ -1,0 +1,141 @@
+openapi: 3.0.0
+info:
+  title: Connections API
+  version: 1.0.0
+paths:
+  /connections:
+    post:
+      summary: Connect to a data source.
+      responses:
+        '200':
+          description: Successfully connected to the data source.
+    delete:
+      summary: Delete all data connections.
+      responses:
+        '200':
+          description: Successfully deleted all data connections.
+  /connections/{connection_id}/refresh:
+    post:
+      summary: Refresh a data connection.
+      parameters:
+        - name: connection_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully refreshed the data connection.
+  /connections/{connection_id}/configure_sync:
+    post:
+      summary: Configure synchronization settings for a connection.
+      parameters:
+        - name: connection_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully configured synchronization settings.
+  /connections/{connection_id}:
+    put:
+      summary: Update connection details.
+      parameters:
+        - name: connection_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully updated connection details.
+    delete:
+      summary: Delete a specific data connection.
+      parameters:
+        - name: connection_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted the data connection.
+  /connections/{connection_id}/data:
+    get:
+      summary: View data from a connection.
+      parameters:
+        - name: connection_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved data from the connection.
+  /connections/{connection_id}/schema:
+    get:
+      summary: Get schema details of a connection.
+      parameters:
+        - name: connection_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved schema details of the connection.
+  /connections/{connection_id}/download:
+    get:
+      summary: Download data from a connection.
+      parameters:
+        - name: connection_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully downloaded data from the connection.
+  /connections/{connection_id}/metadata:
+    get:
+      summary: Retrieve metadata about a connection.
+      parameters:
+        - name: connection_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved metadata about the connection.
+  /connections/metadata:
+    get:
+      summary: Get metadata for all connections.
+      responses:
+        '200':
+          description: Successfully retrieved metadata for all connections.
+  /connections/{connection_id}/usage:
+    get:
+      summary: View usage details of a connection.
+      parameters:
+        - name: connection_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved usage details of the connection.
+  /connections/{connection_id}/test:
+    post:
+      summary: Test a data connection.
+      parameters:
+        - name: connection_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully tested the data connection.
