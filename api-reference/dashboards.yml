@@ -1,7 +1,14 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
-  title: Dashboards API
-  version: 1.0.0
+  title: 'Dashboards API'
+  description: 'API for managing dashboards.'
+  version: '1.0.0'
+servers:
+  - url: 'http://api.structuredlabs.com'
+security:
+  - bearerAuth: []
+
+
 paths:
   /dashboards:
     post:
@@ -113,3 +120,21 @@ paths:
       responses:
         '200':
           description: Successfully retrieved detailed metadata about the dashboard.
+
+components:
+  schemas:
+    Error:
+      required:
+        - error
+        - message
+      type: object
+      properties:
+        error:
+          type: integer
+          format: int32
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

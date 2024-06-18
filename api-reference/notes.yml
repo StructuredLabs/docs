@@ -7,38 +7,144 @@ servers:
   - url: 'http://api.structuredlabs.com'
 security:
   - bearerAuth: []
-
 paths:
   /notes:
     post:
-      summary: Create a new note.
+      summary: 'Create a New Note'
+      description: 'Creates a new note with rich text content and embedded images.'
+      operationId: 'createNote'
+      requestBody:
+        description: 'Details required to create a new note.'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+                mentions:
+                  type: array
+                  items:
+                    type: string
+                images:
+                  type: array
+                  items:
+                    type: string
       responses:
         '200':
-          description: Successfully created a new note.
+          description: 'Successfully created a new note.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  note_id:
+                    type: string
+                  status:
+                    type: string
+                    enum: [created]
+                  message:
+                    type: string
     get:
-      summary: View all notes.
+      summary: 'View All Notes'
+      description: 'Retrieves all notes created by the user, including metadata about each note.'
+      operationId: 'viewAllNotes'
       responses:
         '200':
-          description: Successfully retrieved all notes.
+          description: 'Successfully retrieved all notes.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  notes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        note_id:
+                          type: string
+                        title:
+                          type: string
+                        creation_date:
+                          type: string
+                        last_edited:
+                          type: string
+                        creator:
+                          type: string
+                        collaborators:
+                          type: array
+                          items:
+                            type: string
     delete:
-      summary: Delete all notes.
+      summary: 'Delete All Notes'
+      description: 'Deletes all notes for a user. This action requires confirmation to prevent accidental data loss.'
+      operationId: 'deleteAllNotes'
       responses:
         '200':
-          description: Successfully deleted all notes.
+          description: 'Successfully deleted all notes.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [deleted]
+                  message:
+                    type: string
+
   /notes/{note_id}:
     put:
-      summary: Edit a note.
+      summary: 'Edit a Note'
+      description: 'Edits an existing note. Supports updating content and managing embedded images.'
+      operationId: 'editNote'
       parameters:
         - name: note_id
           in: path
           required: true
           schema:
             type: string
+      requestBody:
+        description: 'Details required to edit the note.'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+                mentions:
+                  type: array
+                  items:
+                    type: string
+                images:
+                  type: array
+                  items:
+                    type: string
       responses:
         '200':
-          description: Successfully edited the note.
+          description: 'Successfully edited the note.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [updated]
+                  message:
+                    type: string
     delete:
-      summary: Delete a specific note.
+      summary: 'Delete a Specific Note'
+      description: 'Deletes a specific note.'
+      operationId: 'deleteNote'
       parameters:
         - name: note_id
           in: path
@@ -47,10 +153,23 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully deleted the note.
+          description: 'Successfully deleted the note.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [deleted]
+                  message:
+                    type: string
+
   /notes/{note_id}/export:
     get:
-      summary: Export a note to PDF.
+      summary: 'Export a Note to PDF'
+      description: 'Exports a note to PDF, preserving formatting and images.'
+      operationId: 'exportNoteToPDF'
       parameters:
         - name: note_id
           in: path
@@ -59,33 +178,99 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully exported the note to PDF.
+          description: 'Successfully exported the note to PDF.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  download_url:
+                    type: string
+                  status:
+                    type: string
+                    enum: [success]
+
   /notes/{note_id}/share:
     post:
-      summary: Share a note.
+      summary: 'Share a Note'
+      description: 'Shares a note via Slack or Email.'
+      operationId: 'shareNote'
       parameters:
         - name: note_id
           in: path
           required: true
           schema:
             type: string
+      requestBody:
+        description: 'Details required to share the note.'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                share_method:
+                  type: string
+                  enum: [slack, email]
+                recipients:
+                  type: array
+                  items:
+                    type: string
       responses:
         '200':
-          description: Successfully shared the note.
+          description: 'Successfully shared the note.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [shared]
+                  message:
+                    type: string
+
   /notes/{note_id}/comments:
     post:
-      summary: Add a comment to a note.
+      summary: 'Add a Comment to a Note'
+      description: 'Adds a comment to a specific note.'
+      operationId: 'addComment'
       parameters:
         - name: note_id
           in: path
           required: true
           schema:
             type: string
+      requestBody:
+        description: 'Details of the comment to add.'
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+                author:
+                  type: string
       responses:
         '200':
-          description: Successfully added a comment to the note.
+          description: 'Successfully added a comment to the note.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [added]
+                  message:
+                    type: string
+
     get:
-      summary: Retrieve all comments for a specific note.
+      summary: 'Retrieve All Comments for a Specific Note'
+      description: 'Retrieves all comments for a specific note.'
+      operationId: 'getComments'
       parameters:
         - name: note_id
           in: path
@@ -94,10 +279,31 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully retrieved all comments for the note.
+          description: 'Successfully retrieved all comments for the note.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        comment_id:
+                          type: string
+                        comment:
+                          type: string
+                        author:
+                          type: string
+                        created_at:
+                          type: string
+
   /notes/{note_id}/comments/{comment_id}:
     delete:
-      summary: Delete a specific comment from a note.
+      summary: 'Delete a Specific Comment from a Note'
+      description: 'Deletes a specific comment from a note.'
+      operationId: 'deleteComment'
       parameters:
         - name: note_id
           in: path
@@ -111,10 +317,23 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully deleted the comment from the note.
+          description: 'Successfully deleted the comment from the note.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [deleted]
+                  message:
+                    type: string
+
   /notes/{note_id}/metadata:
     get:
-      summary: Retrieve detailed metadata about a specific note.
+      summary: 'Retrieve Detailed Metadata about a Specific Note'
+      description: 'Retrieves detailed metadata about a specific note.'
+      operationId: 'getNoteMetadata'
       parameters:
         - name: note_id
           in: path
@@ -123,7 +342,34 @@ paths:
             type: string
       responses:
         '200':
-          description: Successfully retrieved detailed metadata about the note.
+          description: 'Successfully retrieved detailed metadata about the note.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  note_id:
+                    type: string
+                  title:
+                    type: string
+                  creation_date:
+                    type: string
+                  last_edited:
+                    type: string
+                  creator:
+                    type: string
+                  collaborators:
+                    type: array
+                    items:
+                      type: string
+                  mentions:
+                    type: array
+                    items:
+                      type: string
+                  images:
+                    type: array
+                    items:
+                      type: string
 
 components:
   schemas:
