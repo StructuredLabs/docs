@@ -8,14 +8,84 @@ servers:
 security:
   - bearerAuth: []
 
-
 paths:
   /alerts:
     post:
       summary: Create an alert.
+      requestBody:
+        description: Alert configuration details.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: [query, dashboard, metric]
+                target_id:
+                  type: string
+                content:
+                  type: object
+                  properties:
+                    include_images:
+                      type: boolean
+                    custom_message:
+                      type: string
+                threshold:
+                  type: string
+                  enum: [critical, medium, low, info]
+                severity:
+                  type: string
+                  enum: [high, medium, low]
+                schedule:
+                  type: object
+                  properties:
+                    timezone:
+                      type: string
+                    date:
+                      type: string
+                      format: date
+                    time:
+                      type: string
+                      format: time
+                    frequency:
+                      type: string
+                      enum: [daily, weekly, hourly]
+                delivery:
+                  type: object
+                  properties:
+                    method:
+                      type: string
+                      enum: [slack, email]
+                    recipients:
+                      type: array
+                      items:
+                        type: string
+                        format: email
+                points_of_contact:
+                  type: array
+                  items:
+                    type: string
+                creator:
+                  type: string
+                created_at:
+                  type: string
+                  format: date-time
       responses:
         '200':
           description: Successfully created an alert.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alert_id:
+                    type: string
+                  status:
+                    type: string
+                  message:
+                    type: string
   /alerts/type/{type}:
     delete:
       summary: Delete all alerts of a specified type.
@@ -28,6 +98,15 @@ paths:
       responses:
         '200':
           description: Successfully deleted all alerts of the specified type.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
   /alerts/{alert_id}:
     delete:
       summary: Delete an alert.
@@ -40,17 +119,76 @@ paths:
       responses:
         '200':
           description: Successfully deleted the alert.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
   /alerts/history:
     get:
       summary: View alert history.
       responses:
         '200':
           description: Successfully retrieved alert history.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alerts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        alert_id:
+                          type: string
+                        type:
+                          type: string
+                          enum: [query, dashboard, metric]
+                        created_by:
+                          type: string
+                        creation_date:
+                          type: string
+                          format: date
+                        run_history:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              run_id:
+                                type: string
+                              run_time:
+                                type: string
+                                format: date-time
+                              outcome:
+                                type: string
+                                enum: [success, failure]
+                              triggered_threshold:
+                                type: string
+                                enum: [info, low, medium, high]
+                        recipients:
+                          type: array
+                          items:
+                            type: string
+                            format: email
     delete:
       summary: Clear all alert history.
       responses:
         '200':
           description: Successfully cleared all alert history.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
   /alerts/history/{run_id}:
     delete:
       summary: Delete a single alert run history entry.
@@ -63,6 +201,15 @@ paths:
       responses:
         '200':
           description: Successfully deleted the alert run history entry.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
   /alerts/{alert_id}/configure_delivery:
     post:
       summary: Configure alert delivery.
@@ -72,9 +219,34 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        description: Delivery configuration details.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                method:
+                  type: string
+                  enum: [slack, email]
+                recipients:
+                  type: array
+                  items:
+                    type: string
+                    format: email
       responses:
         '200':
           description: Successfully configured alert delivery.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
 
 components:
   schemas:
