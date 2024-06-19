@@ -1,8 +1,8 @@
 openapi: 3.0.1
 info:
-  title: 'Blocks API'
-  description: 'API for managing metrics and segments'
-  version: '1.0.0'
+  title: Metrics API
+  description: API for managing metrics and segments
+  version: 1.0.0
 servers:
   - url: 'http://api.structuredlabs.com'
 security:
@@ -10,11 +10,13 @@ security:
 paths:
   /metrics/compute:
     post:
-      summary: 'Compute a Metric'
-      description: 'Computes a predefined or custom metric using data from the entire Harbor.'
-      operationId: 'computeMetric'
+      summary: Compute a Metric
+      description: >-
+        Computes a predefined or custom metric using data from the entire
+        Harbor.
+      operationId: computeMetric
       requestBody:
-        description: 'Details required to compute the metric.'
+        description: Details required to compute the metric.
         required: true
         content:
           application/json:
@@ -23,34 +25,49 @@ paths:
               properties:
                 metric_id:
                   type: string
+                  description: The ID of the metric to compute.
                 parameters:
                   type: object
+                  description: Parameters for the metric computation.
                   properties:
                     date_range:
                       type: string
+                      description: The date range for the metric computation.
                     segments:
                       type: array
                       items:
                         type: string
+                      description: Segments to include in the computation.
                     filters:
                       type: object
+                      description: Filters to apply to the data.
                       additionalProperties: true
                 prerequisites:
                   type: array
                   items:
                     type: string
+                  description: Prerequisites for the metric computation.
                 chart:
                   type: object
+                  description: Chart configuration for the metric result.
                   properties:
                     type:
                       type: string
-                      enum: [line, bar, pie]
+                      enum:
+                        - line
+                        - bar
+                        - pie
+                      description: Type of the chart.
                     color_scheme:
                       type: string
-                      enum: [default, monochrome, pastel]
+                      enum:
+                        - default
+                        - monochrome
+                        - pastel
+                      description: Color scheme for the chart.
       responses:
         '200':
-          description: 'Successfully computed the metric.'
+          description: Successfully computed the metric.
           content:
             application/json:
               schema:
@@ -69,17 +86,20 @@ paths:
                       additionalProperties: true
                   status:
                     type: string
-                    enum: [computed, failed]
+                    enum:
+                      - computed
+                      - failed
                   message:
                     type: string
-
   /metrics:
     post:
-      summary: 'Create a Custom Metric'
-      description: 'Allows users to define and create custom metrics using the entire Harbor as the data source.'
-      operationId: 'createCustomMetric'
+      summary: Create a Custom Metric
+      description: >-
+        Allows users to define and create custom metrics using the entire Harbor
+        as the data source.
+      operationId: createCustomMetric
       requestBody:
-        description: 'Details required to create a custom metric.'
+        description: Details required to create a custom metric.
         required: true
         content:
           application/json:
@@ -88,30 +108,46 @@ paths:
               properties:
                 name:
                   type: string
+                  description: Name of the custom metric.
                 description:
                   type: string
+                  description: Description of the custom metric.
                 formula:
                   type: string
+                  description: Formula for the custom metric.
                 prerequisites:
                   type: array
                   items:
                     type: string
+                  description: Prerequisites for the custom metric.
                 creator:
                   type: string
+                  description: Creator of the custom metric.
                 created_at:
                   type: string
+                  format: date-time
+                  description: Creation timestamp of the custom metric.
                 chart:
                   type: object
+                  description: Chart configuration for the custom metric.
                   properties:
                     type:
                       type: string
-                      enum: [line, bar, pie]
+                      enum:
+                        - line
+                        - bar
+                        - pie
+                      description: Type of the chart.
                     color_scheme:
                       type: string
-                      enum: [default, monochrome, pastel]
+                      enum:
+                        - default
+                        - monochrome
+                        - pastel
+                      description: Color scheme for the chart.
       responses:
         '200':
-          description: 'Successfully created a custom metric.'
+          description: Successfully created a custom metric.
           content:
             application/json:
               schema:
@@ -121,23 +157,25 @@ paths:
                     type: string
                   status:
                     type: string
-                    enum: [created]
+                    enum:
+                      - created
                   message:
                     type: string
-
-  /metrics/{metric_id}:
     put:
-      summary: 'Edit a Metric'
-      description: 'Edits details or formulas of an existing metric, updating chart settings and other metadata.'
-      operationId: 'editMetric'
+      summary: Edit a Metric
+      description: >-
+        Edits details or formulas of an existing metric, updating chart settings
+        and other metadata.
+      operationId: editMetric
       parameters:
         - name: metric_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
+            description: The ID of the metric to edit.
       requestBody:
-        description: 'Details required to edit the metric.'
+        description: Details required to edit the metric.
         required: true
         content:
           application/json:
@@ -146,26 +184,41 @@ paths:
               properties:
                 name:
                   type: string
+                  description: Updated name of the metric.
                 description:
                   type: string
+                  description: Updated description of the metric.
                 formula:
                   type: string
+                  description: Updated formula for the metric.
                 chart:
                   type: object
+                  description: Updated chart configuration for the metric.
                   properties:
                     type:
                       type: string
-                      enum: [line, bar, pie]
+                      enum:
+                        - line
+                        - bar
+                        - pie
+                      description: Type of the chart.
                     color_scheme:
                       type: string
-                      enum: [default, monochrome, pastel]
+                      enum:
+                        - default
+                        - monochrome
+                        - pastel
+                      description: Color scheme for the chart.
                 last_modified_by:
                   type: string
+                  description: User who last modified the metric.
                 last_modified_at:
                   type: string
+                  format: date-time
+                  description: Timestamp of the last modification.
       responses:
         '200':
-          description: 'Successfully edited the metric.'
+          description: Successfully edited the metric.
           content:
             application/json:
               schema:
@@ -173,24 +226,25 @@ paths:
                 properties:
                   status:
                     type: string
-                    enum: [updated]
+                    enum:
+                      - updated
                   message:
                     type: string
-
-  /metrics/custom/{metric_id}:
+  /metrics/custom:
     delete:
-      summary: 'Delete a Custom Metric'
-      description: 'Deletes a custom metric.'
-      operationId: 'deleteCustomMetric'
+      summary: Delete a Custom Metric
+      description: Deletes a custom metric.
+      operationId: deleteCustomMetric
       parameters:
         - name: metric_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
+            description: The ID of the custom metric to delete.
       responses:
         '200':
-          description: 'Successfully deleted the custom metric.'
+          description: Successfully deleted the custom metric.
           content:
             application/json:
               schema:
@@ -198,36 +252,46 @@ paths:
                 properties:
                   status:
                     type: string
-                    enum: [deleted]
+                    enum:
+                      - deleted
                   message:
                     type: string
-
-  /metrics/{metric_id}/export:
+  /metrics/export:
     get:
-      summary: 'Export Metric Data'
-      description: 'Exports the metric data to the specified format along with the chart image.'
-      operationId: 'exportMetric'
+      summary: Export Metric Data
+      description: >-
+        Exports the metric data to the specified format along with the chart
+        image.
+      operationId: exportMetric
       parameters:
         - name: metric_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
+            description: The ID of the metric to export.
         - name: format
           in: query
           required: true
           schema:
             type: string
-            enum: [pdf, csv, image]
+            enum:
+              - pdf
+              - csv
+              - image
+            description: The format to export the data in.
         - name: include_chart
           in: query
           required: true
           schema:
             type: string
-            enum: [yes, no]
+            enum:
+              - 'yes'
+              - 'no'
+            description: Whether to include the chart image in the export.
       responses:
         '200':
-          description: 'Successfully exported metric data.'
+          description: Successfully exported metric data.
           content:
             application/json:
               schema:
@@ -235,25 +299,27 @@ paths:
                 properties:
                   download_url:
                     type: string
+                    description: URL to download the exported data.
                   status:
                     type: string
-                    enum: [success]
+                    enum:
+                      - success
                   message:
                     type: string
-
-  /metrics/{metric_id}/share:
+  /metrics/share:
     post:
-      summary: 'Share a Metric'
-      description: 'Creates a shareable link for a metric.'
-      operationId: 'shareMetric'
+      summary: Share a Metric
+      description: Creates a shareable link for a metric.
+      operationId: shareMetric
       parameters:
         - name: metric_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
+            description: The ID of the metric to share.
       requestBody:
-        description: 'Details for sharing the metric.'
+        description: Details for sharing the metric.
         required: true
         content:
           application/json:
@@ -262,16 +328,21 @@ paths:
               properties:
                 medium:
                   type: string
-                  enum: [email, slack]
+                  enum:
+                    - email
+                    - slack
+                  description: Medium to share the metric.
                 recipients:
                   type: array
                   items:
                     type: string
+                  description: List of recipients.
                 message:
                   type: string
+                  description: Optional message to include with the shared metric.
       responses:
         '200':
-          description: 'Successfully shared the metric.'
+          description: Successfully shared the metric.
           content:
             application/json:
               schema:
@@ -281,24 +352,27 @@ paths:
                     type: string
                   status:
                     type: string
-                    enum: [shared]
+                    enum:
+                      - shared
                   message:
                     type: string
-
-  /metrics/{metric_id}/embed:
+  /metrics/embed:
     get:
-      summary: 'Embed a Metric'
-      description: 'Provides an embed code to integrate the metric into other platforms, including customized charts.'
-      operationId: 'embedMetric'
+      summary: Embed a Metric
+      description: >-
+        Provides an embed code to integrate the metric into other platforms,
+        including customized charts.
+      operationId: embedMetric
       parameters:
         - name: metric_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
+            description: The ID of the metric to embed.
       responses:
         '200':
-          description: 'Successfully embedded the metric.'
+          description: Successfully embedded the metric.
           content:
             application/json:
               schema:
@@ -308,15 +382,15 @@ paths:
                     type: string
                   status:
                     type: string
-                    enum: [success]
-
-  /segments:
+                    enum:
+                      - success
+  /metrics/segments:
     post:
-      summary: 'Create a New Segment'
-      description: 'Creates a new segment.'
-      operationId: 'createSegment'
+      summary: Create a New Segment
+      description: Creates a new segment.
+      operationId: createSegment
       requestBody:
-        description: 'Details required to create a new segment.'
+        description: Details required to create a new segment.
         required: true
         content:
           application/json:
@@ -325,14 +399,17 @@ paths:
               properties:
                 name:
                   type: string
+                  description: Name of the segment.
                 description:
                   type: string
+                  description: Description of the segment.
                 filters:
                   type: object
+                  description: Filters for the segment.
                   additionalProperties: true
       responses:
         '200':
-          description: 'Successfully created a new segment.'
+          description: Successfully created a new segment.
           content:
             application/json:
               schema:
@@ -342,75 +419,67 @@ paths:
                     type: string
                   status:
                     type: string
-                    enum: [created]
+                    enum:
+                      - created
                   message:
                     type: string
-
     get:
-      summary: 'List All Segments'
-      description: 'Lists all segments.'
-      operationId: 'listSegments'
-      responses:
-        '200':
-          description: 'Successfully listed all segments.'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  segments:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        segment_id:
-                          type: string
-                        name:
-                          type: string
-                        description:
-                          type: string
-
-  /segments/{segment_id}:
-    get:
-      summary: 'Retrieve a Specific Segment'
-      description: 'Retrieves a specific segment.'
-      operationId: 'getSegment'
+      summary: List or Retrieve Segments
+      description: >-
+        Lists all segments or retrieves a specific segment based on the presence
+        of a segment_id parameter.
+      operationId: listOrGetSegment
       parameters:
         - name: segment_id
-          in: path
-          required: true
+          in: query
+          required: false
           schema:
             type: string
+            description: The ID of the segment to retrieve.
       responses:
         '200':
-          description: 'Successfully retrieved the segment.'
+          description: Successfully listed all segments or retrieved the specified segment.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  segment_id:
-                    type: string
-                  name:
-                    type: string
-                  description:
-                    type: string
-                  filters:
-                    type: object
-                    additionalProperties: true
-
+                oneOf:
+                  - type: object
+                    properties:
+                      segments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            segment_id:
+                              type: string
+                            name:
+                              type: string
+                            description:
+                              type: string
+                  - type: object
+                    properties:
+                      segment_id:
+                        type: string
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      filters:
+                        type: object
+                        additionalProperties: true
     put:
-      summary: 'Edit a Segment'
-      description: 'Edits a specific segment.'
-      operationId: 'editSegment'
+      summary: Edit a Segment
+      description: Edits a specific segment.
+      operationId: editSegment
       parameters:
         - name: segment_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
+            description: The ID of the segment to edit.
       requestBody:
-        description: 'Details required to edit the segment.'
+        description: Details required to edit the segment.
         required: true
         content:
           application/json:
@@ -419,14 +488,17 @@ paths:
               properties:
                 name:
                   type: string
+                  description: Updated name of the segment.
                 description:
                   type: string
+                  description: Updated description of the segment.
                 filters:
                   type: object
+                  description: Updated filters for the segment.
                   additionalProperties: true
       responses:
         '200':
-          description: 'Successfully edited the segment.'
+          description: Successfully edited the segment.
           content:
             application/json:
               schema:
@@ -434,23 +506,24 @@ paths:
                 properties:
                   status:
                     type: string
-                    enum: [updated]
+                    enum:
+                      - updated
                   message:
                     type: string
-
     delete:
-      summary: 'Delete a Segment'
-      description: 'Deletes a specific segment.'
-      operationId: 'deleteSegment'
+      summary: Delete a Segment
+      description: Deletes a specific segment.
+      operationId: deleteSegment
       parameters:
         - name: segment_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
+            description: The ID of the segment to delete.
       responses:
         '200':
-          description: 'Successfully deleted the segment.'
+          description: Successfully deleted the segment.
           content:
             application/json:
               schema:
@@ -458,10 +531,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    enum: [deleted]
+                    enum:
+                      - deleted
                   message:
                     type: string
-
 components:
   schemas:
     Error:

@@ -62,7 +62,7 @@
         "features/harbor",
         "features/queries",
         "features/reports",
-        "features/blocks",
+        "features/metrics",
         "features/alerts"
       ]
     },
@@ -124,20 +124,19 @@
       ]
     },
     {
-      "group": "Blocks API",
+      "group": "Metrics API",
       "pages": [
-        "api-reference/blocks/compute-metric",
-        "api-reference/blocks/create-custom-metric",
-        "api-reference/blocks/edit-metric",
-        "api-reference/blocks/delete-custom-metric",
-        "api-reference/blocks/export-metric-data",
-        "api-reference/blocks/share-metric",
-        "api-reference/blocks/embed-metric",
-        "api-reference/blocks/create-segment",
-        "api-reference/blocks/retrieve-segment",
-        "api-reference/blocks/edit-segment",
-        "api-reference/blocks/delete-segment",
-        "api-reference/blocks/list-all-segments"
+        "api-reference/metrics/compute-metric",
+        "api-reference/metrics/create-custom-metric",
+        "api-reference/metrics/edit-metric",
+        "api-reference/metrics/delete-custom-metric",
+        "api-reference/metrics/export-metric-data",
+        "api-reference/metrics/share-metric",
+        "api-reference/metrics/embed-metric",
+        "api-reference/metrics/get-segments",
+        "api-reference/metrics/create-segment",
+        "api-reference/metrics/edit-segment",
+        "api-reference/metrics/delete-segment"
       ]
     },
     {
@@ -196,7 +195,7 @@
     "api-reference/connections.yml", 
     "api-reference/entities.yml", 
     "api-reference/queries.yml", 
-    "api-reference/blocks.yml", 
+    "api-reference/metrics.yml", 
     "api-reference/notes.yml", 
     "api-reference/dashboards.yml", 
     "api-reference/alerts.yml"
