@@ -165,7 +165,6 @@
         "api-reference/dashboards/embed-dashboard",
         "api-reference/dashboards/add-dashboard-comment",
         "api-reference/dashboards/get-dashboard-comments",
-        "api-reference/dashboards/delete-dashboard-comment",
         "api-reference/dashboards/get-dashboard-metadata"
       ]
     },

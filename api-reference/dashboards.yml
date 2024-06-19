@@ -1,8 +1,8 @@
 openapi: 3.0.1
 info:
-  title: 'Dashboards API'
-  description: 'API for managing dashboards.'
-  version: '1.0.0'
+  title: Dashboards API
+  description: API for managing dashboards.
+  version: 1.0.0
 servers:
   - url: 'http://api.structuredlabs.com'
 security:
@@ -10,11 +10,13 @@ security:
 paths:
   /dashboards:
     post:
-      summary: 'Create a New Dashboard'
-      description: 'Creates a new dashboard with metadata about the creator and the creation time.'
-      operationId: 'createDashboard'
+      summary: Create a New Dashboard
+      description: >-
+        Creates a new dashboard with metadata about the creator and the creation
+        time.
+      operationId: createDashboard
       requestBody:
-        description: 'Details required to create a new dashboard.'
+        description: Details required to create a new dashboard.
         required: true
         content:
           application/json:
@@ -32,7 +34,10 @@ paths:
                         type: string
                       type:
                         type: string
-                        enum: [chart, table, text]
+                        enum:
+                          - chart
+                          - table
+                          - text
                       position:
                         type: object
                         properties:
@@ -51,7 +56,7 @@ paths:
                   type: string
       responses:
         '200':
-          description: 'Successfully created a new dashboard.'
+          description: Successfully created a new dashboard.
           content:
             application/json:
               schema:
@@ -61,18 +66,19 @@ paths:
                     type: string
                   status:
                     type: string
-                    enum: [created]
+                    enum:
+                      - created
                   message:
                     type: string
                   created_at:
                     type: string
     get:
-      summary: 'Retrieve All Dashboards'
+      summary: Retrieve All Dashboards
       description: 'Retrieves all dashboards created by the user, including metadata.'
-      operationId: 'viewAllDashboards'
+      operationId: viewAllDashboards
       responses:
         '200':
-          description: 'Successfully retrieved all dashboards.'
+          description: Successfully retrieved all dashboards.
           content:
             application/json:
               schema:
@@ -97,20 +103,20 @@ paths:
                           type: array
                           items:
                             type: string
-
-  /dashboards/{dashboard_id}:
     put:
-      summary: 'Edit a Dashboard'
-      description: 'Edits an existing dashboard, including the ability to add or remove collaborators.'
-      operationId: 'editDashboard'
+      summary: Edit a Dashboard
+      description: >-
+        Edits an existing dashboard, including the ability to add or remove
+        collaborators.
+      operationId: editDashboard
       parameters:
         - name: dashboard_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       requestBody:
-        description: 'Details required to edit the dashboard.'
+        description: Details required to edit the dashboard.
         required: true
         content:
           application/json:
@@ -146,7 +152,7 @@ paths:
                     type: string
       responses:
         '200':
-          description: 'Successfully edited the dashboard.'
+          description: Successfully edited the dashboard.
           content:
             application/json:
               schema:
@@ -154,22 +160,25 @@ paths:
                 properties:
                   status:
                     type: string
-                    enum: [updated]
+                    enum:
+                      - updated
                   message:
                     type: string
     delete:
-      summary: 'Delete a Specific Dashboard'
-      description: 'Deletes a specific dashboard. Provides a confirmation of who deleted the dashboard.'
-      operationId: 'deleteDashboard'
+      summary: Delete a Specific Dashboard
+      description: >-
+        Deletes a specific dashboard. Provides a confirmation of who deleted the
+        dashboard.
+      operationId: deleteDashboard
       parameters:
         - name: dashboard_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: 'Successfully deleted the dashboard.'
+          description: Successfully deleted the dashboard.
           content:
             application/json:
               schema:
@@ -177,26 +186,26 @@ paths:
                 properties:
                   status:
                     type: string
-                    enum: [deleted]
+                    enum:
+                      - deleted
                   message:
                     type: string
                   deleted_by:
                     type: string
-
-  /dashboards/{dashboard_id}/refresh:
+  /dashboards/refresh:
     post:
-      summary: 'Refresh Dashboard Data'
-      description: 'Manually refreshes the data in a dashboard.'
-      operationId: 'refreshDashboard'
+      summary: Refresh Dashboard Data
+      description: Manually refreshes the data in a dashboard.
+      operationId: refreshDashboard
       parameters:
         - name: dashboard_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: 'Successfully refreshed dashboard data.'
+          description: Successfully refreshed dashboard data.
           content:
             application/json:
               schema:
@@ -204,24 +213,24 @@ paths:
                 properties:
                   status:
                     type: string
-                    enum: [refreshed]
+                    enum:
+                      - refreshed
                   message:
                     type: string
-
-  /dashboards/{dashboard_id}/embed:
+  /dashboards/embed:
     get:
-      summary: 'Get Embed Code for a Dashboard'
-      description: 'Provides an embed code for a dashboard to be used in other applications.'
-      operationId: 'embedDashboard'
+      summary: Get Embed Code for a Dashboard
+      description: Provides an embed code for a dashboard to be used in other applications.
+      operationId: embedDashboard
       parameters:
         - name: dashboard_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: 'Successfully retrieved embed code for the dashboard.'
+          description: Successfully retrieved embed code for the dashboard.
           content:
             application/json:
               schema:
@@ -231,21 +240,21 @@ paths:
                     type: string
                   status:
                     type: string
-                    enum: [success]
-
-  /dashboards/{dashboard_id}/comments:
+                    enum:
+                      - success
+  /dashboards/comments:
     post:
-      summary: 'Add a Comment to a Dashboard'
-      description: 'Adds a comment to a specific dashboard.'
-      operationId: 'addCommentToDashboard'
+      summary: Add a Comment to a Dashboard
+      description: Adds a comment to a specific dashboard.
+      operationId: addCommentToDashboard
       parameters:
         - name: dashboard_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       requestBody:
-        description: 'Details of the comment to add.'
+        description: Details of the comment to add.
         required: true
         content:
           application/json:
@@ -258,7 +267,7 @@ paths:
                   type: string
       responses:
         '200':
-          description: 'Successfully added a comment to the dashboard.'
+          description: Successfully added a comment to the dashboard.
           content:
             application/json:
               schema:
@@ -266,23 +275,23 @@ paths:
                 properties:
                   status:
                     type: string
-                    enum: [added]
+                    enum:
+                      - added
                   message:
                     type: string
-
     get:
-      summary: 'Retrieve All Comments for a Specific Dashboard'
-      description: 'Retrieves all comments for a specific dashboard.'
-      operationId: 'getCommentsForDashboard'
+      summary: Retrieve All Comments for a Specific Dashboard
+      description: Retrieves all comments for a specific dashboard.
+      operationId: getCommentsForDashboard
       parameters:
         - name: dashboard_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: 'Successfully retrieved all comments for the dashboard.'
+          description: Successfully retrieved all comments for the dashboard.
           content:
             application/json:
               schema:
@@ -301,26 +310,25 @@ paths:
                           type: string
                         created_at:
                           type: string
-
-  /dashboards/{dashboard_id}/comments/{comment_id}:
+  /dashboards/comments/delete:
     delete:
-      summary: 'Delete a Specific Comment from a Dashboard'
-      description: 'Deletes a specific comment from a dashboard.'
-      operationId: 'deleteCommentFromDashboard'
+      summary: Delete a Comment from a Dashboard
+      description: Deletes a specific comment from a dashboard.
+      operationId: deleteCommentFromDashboard
       parameters:
         - name: dashboard_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
         - name: comment_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: 'Successfully deleted the comment from the dashboard.'
+          description: Successfully deleted the comment from the dashboard.
           content:
             application/json:
               schema:
@@ -328,24 +336,24 @@ paths:
                 properties:
                   status:
                     type: string
-                    enum: [deleted]
+                    enum:
+                      - deleted
                   message:
                     type: string
-
-  /dashboards/{dashboard_id}/metadata:
+  /dashboards/metadata:
     get:
-      summary: 'Retrieve Detailed Metadata about a Specific Dashboard'
-      description: 'Retrieves detailed metadata about a specific dashboard.'
-      operationId: 'getDashboardMetadata'
+      summary: Retrieve Detailed Metadata about a Specific Dashboard
+      description: Retrieves detailed metadata about a specific dashboard.
+      operationId: getDashboardMetadata
       parameters:
         - name: dashboard_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: 'Successfully retrieved detailed metadata about the dashboard.'
+          description: Successfully retrieved detailed metadata about the dashboard.
           content:
             application/json:
               schema:
@@ -374,7 +382,10 @@ paths:
                           type: string
                         type:
                           type: string
-                          enum: [chart, table, text]
+                          enum:
+                            - chart
+                            - table
+                            - text
                         position:
                           type: object
                           properties:
@@ -389,7 +400,6 @@ paths:
                               type: integer
                             height:
                               type: integer
-
 components:
   schemas:
     Error:
