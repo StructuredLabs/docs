@@ -113,16 +113,14 @@
       "pages": [
         "api-reference/connections/connect-data-source",
         "api-reference/connections/refresh-data-connection",
-        "api-reference/connections/configure-sync-settings",
+        "api-reference/connections/configure-connection-sync",
         "api-reference/connections/update-connection-details",
-        "api-reference/connections/delete-specific-connection",
-        "api-reference/connections/delete-all-connections",
-        "api-reference/connections/view-connection-data",
+        "api-reference/connections/delete-connection",
+        "api-reference/connections/get-connection-data",
         "api-reference/connections/get-connection-schema",
         "api-reference/connections/download-connection-data",
-        "api-reference/connections/retrieve-connection-metadata",
-        "api-reference/connections/get-all-connections-metadata",
-        "api-reference/connections/view-connection-usage",
+        "api-reference/connections/get-metadata",
+        "api-reference/connections/get-connection-usage",
         "api-reference/connections/test-data-connection"
       ]
     },

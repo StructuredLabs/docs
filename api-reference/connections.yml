@@ -81,14 +81,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+
     delete:
-      summary: Delete all data connections.
-      description: >-
-        Deletes all data connections. This action is irreversible and should be
+      summary: Delete data connections.
+      description: |
+        Deletes data connections. This action is irreversible and should be
         used with caution to avoid unintentional data loss.
+      parameters:
+        - name: connection_id
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'The unique identifier for the connection. If provided, the specific connection will be deleted. If not provided, all connections will be deleted.'
       responses:
         '200':
-          description: Successfully deleted all data connections.
+          description: Successfully deleted the data connection(s).'
           content:
             application/json:
               schema:
@@ -102,95 +110,15 @@ paths:
                     description: Status of the operation indicating success or error.
                   message:
                     type: string
-                    description: >-
-                      Detailed message about the outcome. Either a success
-                      message or an error description.
-
-  /connections/{connection_id}/refresh:
-    post:
-      summary: Refresh a Data Connection
-      description: Refreshes an existing data connection to ensure data is up-to-date.
-      parameters:
-        - name: connection_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Data connection refresh response.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  connection_id:
-                    type: string
-                    description: The unique identifier of the refreshed data connection.
-                  status:
-                    type: string
-                    enum:
-                      - refreshed
-                      - error
-                    description: Status of the refresh operation.
-                  message:
-                    type: string
-                    description: A message detailing the outcome of the refresh operation.
-
-  /connections/{connection_id}/configure_sync:
-    post:
-      summary: 'Configure Sync for a Connection'
-      description: 'Configures which columns to sync for a specific data connection.'
-      parameters:
-        - name: connection_id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                columns_to_sync:
-                  type: array
-                  description: 'Specifies which columns to sync.'
-                  items:
-                    type: object
-                    properties:
-                      column_name:
-                        type: string
-                        description: 'The name of the column to sync.'
-                      mapped_to:
-                        type: string
-                        description: 'How the column is mapped to an entity attribute.'
-      responses:
-        '200':
-          description: 'Successfully configured synchronization settings.'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    example: 'success'
-                    description: 'Indicates if the sync configuration was successful.'
-                  message:
-                    type: string
-                    example: 'Synchronization settings configured successfully.'
-                    description: 'A detailed message about the sync configuration status.'
+                    description: Detailed message about the outcome. Either a success message or an error description.
 
 
-  /connections/{connection_id}:
     put:
       summary: 'Update connection details.'
       description: 'Updates the details of a specific data connection.'
       parameters:
         - name: connection_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -237,18 +165,69 @@ paths:
                     example: 'Connection details updated successfully.'
                     description: 'A detailed message confirming the update.'
 
-    delete:
-      summary: 'Delete a specific data connection.'
-      description: 'Deletes a specified data connection. This action cannot be undone.'
+  /connections/refresh:
+    post:
+      summary: Refresh a Data Connection
+      description: Refreshes an existing data connection to ensure data is up-to-date.
       parameters:
         - name: connection_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: 'Successfully deleted the data connection.'
+          description: Data connection refresh response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connection_id:
+                    type: string
+                    description: The unique identifier of the refreshed data connection.
+                  status:
+                    type: string
+                    enum:
+                      - refreshed
+                      - error
+                    description: Status of the refresh operation.
+                  message:
+                    type: string
+                    description: A message detailing the outcome of the refresh operation.
+
+  /connections/configure_sync:
+    post:
+      summary: 'Configure Sync for a Connection'
+      description: 'Configures which columns to sync for a specific data connection.'
+      parameters:
+        - name: connection_id
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                columns_to_sync:
+                  type: array
+                  description: 'Specifies which columns to sync.'
+                  items:
+                    type: object
+                    properties:
+                      column_name:
+                        type: string
+                        description: 'The name of the column to sync.'
+                      mapped_to:
+                        type: string
+                        description: 'How the column is mapped to an entity attribute.'
+      responses:
+        '200':
+          description: 'Successfully configured synchronization settings.'
           content:
             application/json:
               schema:
@@ -256,22 +235,20 @@ paths:
                 properties:
                   status:
                     type: string
-                    enum:
-                      - 'deleted'
-                      - 'error'
-                    description: 'Status of the delete operation indicating success or error.'
+                    example: 'success'
+                    description: 'Indicates if the sync configuration was successful.'
                   message:
                     type: string
-                    description: 'A message detailing the outcome of the delete operation.'
+                    example: 'Synchronization settings configured successfully.'
+                    description: 'A detailed message about the sync configuration status.'
 
-
-  /connections/{connection_id}/data:
+  /connections/data:
     get:
       summary: 'View data from a connection.'
       description: 'Retrieves the data rows from a specified connection. This endpoint provides a snapshot of the current data within the connection based on the latest sync.'
       parameters:
         - name: connection_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -304,13 +281,13 @@ paths:
                     description: 'A message detailing the outcome of the operation. Provides details on success or describes the error if one occurred.'
 
 
-  /connections/{connection_id}/schema:
+  /connections/schema:
     get:
       summary: 'Get schema details of a connection.'
       description: 'Provides the schema details for a specific data connection, showing the structure of the data including column names, data types, and any other relevant metadata.'
       parameters:
         - name: connection_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -354,13 +331,13 @@ paths:
                     description: 'A message detailing the outcome of the operation, providing success details or error information.'
 
 
-  /connections/{connection_id}/download:
+  /connections/download:
     get:
       summary: 'Download data from a connection.'
       description: 'Allows users to download the data from a specified connection as a file. The endpoint supports various formats such as CSV, Excel, or other file types.'
       parameters:
         - name: connection_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -395,124 +372,114 @@ paths:
                     type: string
                     description: 'A message indicating that the download is ready or detailing any error that might have occurred.'
 
-
-  /connections/{connection_id}/metadata:
+  /connections/metadata:
     get:
-      summary: 'Retrieve metadata about a connection.'
-      description: 'Retrieves comprehensive metadata about a specific connection, including who created it, when it was connected, last sync time, and the connection schema.'
+      summary: 'Retrieve metadata about connections.'
+      description: |
+        Get connection metadata. This can either be metadata about a specific connection, including details such as who created it, when it was connected, last sync time, and the connection schema.
       parameters:
         - name: connection_id
-          in: path
-          required: true
+          in: query
+          required: false
           schema:
             type: string
+          description: 'The unique identifier for the connection. If provided, metadata for that specific connection will be retrieved. If not provided, metadata for all connections will be retrieved.'
       responses:
         '200':
-          description: 'Successfully retrieved metadata about the connection.'
+          description: 'Successfully retrieved metadata about the connection(s).'
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  connection_id:
-                    type: string
-                    description: 'The unique identifier for the connection.'
-                  created_by:
-                    type: string
-                    description: 'Username of the person who created the connection.'
-                  connected_at:
-                    type: string
-                    format: date-time
-                    description: 'Timestamp when the connection was established.'
-                  last_synced:
-                    type: string
-                    format: date-time
-                    description: 'Timestamp of the last synchronization.'
-                  connection_type:
-                    type: string
-                    enum:
-                      - csv
-                      - google_sheets
-                      - salesforce
-                      - hubspot
-                      - ...
-                    description: 'Type of the connection.'
-                  schema:
-                    type: object
+                oneOf:
+                  - type: object
                     properties:
-                      fields:
+                      connection_id:
+                        type: string
+                        description: 'The unique identifier for the connection.'
+                      created_by:
+                        type: string
+                        description: 'Username of the person who created the connection.'
+                      connected_at:
+                        type: string
+                        format: date-time
+                        description: 'Timestamp when the connection was established.'
+                      last_synced:
+                        type: string
+                        format: date-time
+                        description: 'Timestamp of the last synchronization.'
+                      connection_type:
+                        type: string
+                        enum:
+                          - csv
+                          - google_sheets
+                          - salesforce
+                          - hubspot
+                          - ...
+                        description: 'Type of the connection.'
+                      schema:
+                        type: object
+                        properties:
+                          fields:
+                            type: array
+                            description: 'List of fields describing the schema of the connection.'
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                  description: 'Name of the column.'
+                                type:
+                                  type: string
+                                  description: 'Data type of the column.'
+                                source:
+                                  type: string
+                                  description: 'Source of the data if applicable.'
+                      status:
+                        type: string
+                        enum:
+                          - 'active'
+                          - 'inactive'
+                        description: 'Current status of the connection.'
+                      error:
+                        type: string
+                        description: 'Error details if applicable.'
+                  - type: object
+                    properties:
+                      connections:
                         type: array
-                        description: 'List of fields describing the schema of the connection.'
                         items:
                           type: object
                           properties:
-                            name:
+                            connection_id:
                               type: string
-                              description: 'Name of the column.'
-                            type:
+                              description: 'The unique identifier for the connection.'
+                            created_by:
                               type: string
-                              description: 'Data type of the column.'
-                            source:
+                              description: 'Username of the user who created the connection.'
+                            connected_at:
                               type: string
-                              description: 'Source of the data if applicable.'
-                  status:
-                    type: string
-                    enum:
-                      - 'active'
-                      - 'inactive'
-                    description: 'Current status of the connection.'
-                  error:
-                    type: string
-                    description: 'Error details if applicable.'
-
-  /connections/metadata:
-    get:
-      summary: 'Get metadata for all connections.'
-      description: "Provides metadata for all connections within the harbor, including details about each connection's status, type, and last sync."
-      operationId: 'getAllConnectionsMetadata'
-      responses:
-        '200':
-          description: 'Successfully retrieved metadata for all connections.'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  connections:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        connection_id:
-                          type: string
-                          description: 'The unique identifier for the connection.'
-                        created_by:
-                          type: string
-                          description: 'Username of the user who created the connection.'
-                        connected_at:
-                          type: string
-                          format: date-time
-                          description: 'Timestamp of when the connection was established.'
-                        last_synced:
-                          type: string
-                          format: date-time
-                          description: 'Timestamp of the last successful synchronization with the connection.'
-                        connection_type:
-                          type: string
-                          description: "The type of the connection, such as 'csv', 'google_sheets', etc."
-                        status:
-                          type: string
-                          description: "Current status of the connection, can be 'active' or 'inactive'."
+                              format: date-time
+                              description: 'Timestamp of when the connection was established.'
+                            last_synced:
+                              type: string
+                              format: date-time
+                              description: 'Timestamp of the last successful synchronization with the connection.'
+                            connection_type:
+                              type: string
+                              description: "The type of the connection, such as 'csv', 'google_sheets', etc."
+                            status:
+                              type: string
+                              description: "Current status of the connection, can be 'active' or 'inactive'."
 
           
-  /connections/{connection_id}/usage:
+  /connections/usage:
     get:
       summary: 'View usage details of a connection.'
       description: 'Provides usage statistics and performance metrics for a specific connection, helpful for monitoring and optimizing data flows.'
       operationId: 'getConnectionUsage'
       parameters:
         - name: connection_id
-          in: path
+          in: query
           required: true
           description: 'The unique identifier for the connection.'
           schema:
@@ -553,14 +520,14 @@ paths:
                           description: "The status of the query execution, can be either 'completed' or 'failed'."
 
 
-  /connections/{connection_id}/test:
+  /connections/test:
     post:
       summary: 'Test a data connection.'
       description: 'Tests if a specific data connection is successful, ensuring that the system can communicate effectively with the connection source.'
       operationId: 'testDataConnection'
       parameters:
         - name: connection_id
-          in: path
+          in: query
           required: true
           description: 'The unique identifier for the connection to be tested.'
           schema:
