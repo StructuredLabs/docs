@@ -11,7 +11,7 @@ security:
 paths:
   /alerts:
     post:
-      summary: Create an alert.
+      summary: Create an alert
       requestBody:
         description: Alert configuration details.
         required: true
@@ -86,33 +86,11 @@ paths:
                     type: string
                   message:
                     type: string
-  /alerts/type/{type}:
     delete:
-      summary: Delete all alerts of a specified type.
-      parameters:
-        - name: type
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successfully deleted all alerts of the specified type.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  message:
-                    type: string
-  /alerts/{alert_id}:
-    delete:
-      summary: Delete an alert.
+      summary: Delete an alert
       parameters:
         - name: alert_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -128,9 +106,30 @@ paths:
                     type: string
                   message:
                     type: string
+  /alerts/type:
+    delete:
+      summary: Delete all alerts of a specified type
+      parameters:
+        - name: type
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted all alerts of the specified type.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
   /alerts/history:
     get:
-      summary: View alert history.
+      summary: View alert history
       responses:
         '200':
           description: Successfully retrieved alert history.
@@ -176,7 +175,7 @@ paths:
                             type: string
                             format: email
     delete:
-      summary: Clear all alert history.
+      summary: Clear all alert history
       responses:
         '200':
           description: Successfully cleared all alert history.
@@ -189,12 +188,12 @@ paths:
                     type: string
                   message:
                     type: string
-  /alerts/history/{run_id}:
+  /alerts/history/run:
     delete:
-      summary: Delete a single alert run history entry.
+      summary: Delete a single alert run history entry
       parameters:
         - name: run_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -210,12 +209,12 @@ paths:
                     type: string
                   message:
                     type: string
-  /alerts/{alert_id}/configure_delivery:
+  /alerts/configure_delivery:
     post:
-      summary: Configure alert delivery.
+      summary: Configure alert delivery
       parameters:
         - name: alert_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
