@@ -143,16 +143,15 @@
       "group": "Notes API",
       "pages": [
         "api-reference/notes/create-note",
-        "api-reference/notes/view-all-notes",
+        "api-reference/notes/get-notes",
         "api-reference/notes/edit-note",
-        "api-reference/notes/delete-specific-note",
-        "api-reference/notes/delete-all-notes",
+        "api-reference/notes/delete-note",
         "api-reference/notes/export-note",
         "api-reference/notes/share-note",
         "api-reference/notes/add-note-comment",
-        "api-reference/notes/retrieve-note-comments",
+        "api-reference/notes/get-note-comments",
         "api-reference/notes/delete-note-comment",
-        "api-reference/notes/note-metadata"
+        "api-reference/notes/get-note-metadata"
       ]
     },
     {

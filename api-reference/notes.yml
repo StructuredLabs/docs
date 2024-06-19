@@ -80,12 +80,24 @@ paths:
                           items:
                             type: string
     delete:
-      summary: 'Delete All Notes'
-      description: 'Deletes all notes for a user. This action requires confirmation to prevent accidental data loss.'
-      operationId: 'deleteAllNotes'
+      summary: 'Delete Notes'
+      description: >-
+        Deletes a specific note if note_id is provided, otherwise deletes all
+        notes for the user. This action requires confirmation to prevent
+        accidental data loss.
+      operationId: 'deleteNotes'
+      parameters:
+        - name: note_id
+          in: query
+          required: false
+          schema:
+            type: string
+            description: The ID of the note to delete.
       responses:
         '200':
-          description: 'Successfully deleted all notes.'
+          description: >-
+            Successfully deleted the note if note_id was provided, otherwise
+            deleted all notes.
           content:
             application/json:
               schema:
@@ -96,15 +108,13 @@ paths:
                     enum: [deleted]
                   message:
                     type: string
-
-  /notes/{note_id}:
     put:
       summary: 'Edit a Note'
       description: 'Edits an existing note. Supports updating content and managing embedded images.'
       operationId: 'editNote'
       parameters:
         - name: note_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -141,38 +151,14 @@ paths:
                     enum: [updated]
                   message:
                     type: string
-    delete:
-      summary: 'Delete a Specific Note'
-      description: 'Deletes a specific note.'
-      operationId: 'deleteNote'
-      parameters:
-        - name: note_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: 'Successfully deleted the note.'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    enum: [deleted]
-                  message:
-                    type: string
-
-  /notes/{note_id}/export:
+  /notes/export:
     get:
       summary: 'Export a Note to PDF'
       description: 'Exports a note to PDF, preserving formatting and images.'
       operationId: 'exportNoteToPDF'
       parameters:
         - name: note_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -189,15 +175,14 @@ paths:
                   status:
                     type: string
                     enum: [success]
-
-  /notes/{note_id}/share:
+  /notes/share:
     post:
       summary: 'Share a Note'
       description: 'Shares a note via Slack or Email.'
       operationId: 'shareNote'
       parameters:
         - name: note_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -229,15 +214,14 @@ paths:
                     enum: [shared]
                   message:
                     type: string
-
-  /notes/{note_id}/comments:
+  /notes/comments:
     post:
       summary: 'Add a Comment to a Note'
       description: 'Adds a comment to a specific note.'
       operationId: 'addComment'
       parameters:
         - name: note_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -266,14 +250,13 @@ paths:
                     enum: [added]
                   message:
                     type: string
-
     get:
       summary: 'Retrieve All Comments for a Specific Note'
       description: 'Retrieves all comments for a specific note.'
       operationId: 'getComments'
       parameters:
         - name: note_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -298,20 +281,18 @@ paths:
                           type: string
                         created_at:
                           type: string
-
-  /notes/{note_id}/comments/{comment_id}:
     delete:
       summary: 'Delete a Specific Comment from a Note'
       description: 'Deletes a specific comment from a note.'
       operationId: 'deleteComment'
       parameters:
         - name: note_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
         - name: comment_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -328,15 +309,14 @@ paths:
                     enum: [deleted]
                   message:
                     type: string
-
-  /notes/{note_id}/metadata:
+  /notes/metadata:
     get:
       summary: 'Retrieve Detailed Metadata about a Specific Note'
       description: 'Retrieves detailed metadata about a specific note.'
       operationId: 'getNoteMetadata'
       parameters:
         - name: note_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -370,7 +350,6 @@ paths:
                     type: array
                     items:
                       type: string
-
 components:
   schemas:
     Error:
