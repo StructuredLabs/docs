@@ -41,20 +41,20 @@ paths:
                                 type: string
                                 enum: [one_to_one, one_to_many, many_to_many]
 
-  /entities/{entity_id}/units:
+  /entities/units:
     get:
-      summary: 'List Entity Instances'
-      description: 'Lists all instances of a specific entity.'
-      operationId: 'listEntityInstances'
+      summary: 'Get Entity Units'
+      description: 'Lists all units of a specific entity type.'
+      operationId: 'listEntityUnits'
       parameters:
         - name: entity_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: 'Successfully listed all instances of the entity type.'
+          description: 'Successfully listed all units of the entity type.'
           content:
             application/json:
               schema:
@@ -62,7 +62,7 @@ paths:
                 properties:
                   entity_id:
                     type: string
-                  instances:
+                  units:
                     type: array
                     items:
                       type: object
@@ -72,20 +72,20 @@ paths:
                         data:
                           type: object
 
-  /entities/{entity_id}/schema:
+  /entities/schema:
     get:
       summary: 'Get Entity Schema'
       description: 'Provides the schema for a specific entity type.'
       operationId: 'getEntitySchema'
       parameters:
         - name: entity_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: 'Successfully retrieved schema for the entity instance.'
+          description: 'Successfully retrieved schema for the entity unit.'
           content:
             application/json:
               schema:
@@ -108,14 +108,14 @@ paths:
                             source:
                               type: string
 
-  /entities/{entity_type_id}/schema:
+  /entities/type-schema:
     get:
       summary: 'Get Entity Type Schema'
       description: 'Provides the schema for a specific entity type, detailing the structure and data types of its fields.'
       operationId: 'getEntityTypeSchema'
       parameters:
         - name: entity_type_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
@@ -149,59 +149,19 @@ paths:
                   message:
                     type: string
 
-  /entities/{entity_type_id}:
-    get:
-      summary: 'View Entity Type'
-      description: 'Retrieves detailed information about a specific entity type, including its schema and other relevant metadata.'
-      operationId: 'viewEntityType'
-      parameters:
-        - name: entity_type_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: 'Successfully retrieved information about the entity type.'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  entity_type_id:
-                    type: string
-                  entity_type_info:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      description:
-                        type: string
-                      created_by:
-                        type: string
-                      created_at:
-                        type: string
-                      last_updated_at:
-                        type: string
-                  status:
-                    type: string
-                    enum: [success, error]
-                  message:
-                    type: string
-
-  /entities/{entity_type_id}/units/{unit_id}/audit_log:
+  /entities/units/audit_log:
     get:
       summary: 'Entity Unit Audit Log'
       description: 'Retrieves an audit log of all state changes for a specific unit of an entity type, documenting each change along with timestamps and user details.'
       operationId: 'getUnitAuditLog'
       parameters:
         - name: entity_type_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
         - name: unit_id
-          in: path
+          in: query
           required: true
           schema:
             type: string

@@ -128,10 +128,9 @@
       "group": "Entities API",
       "pages": [
         "api-reference/entities/get-entity-relationships",
-        "api-reference/entities/list-entity-instances",
+        "api-reference/entities/get-entity-units",
         "api-reference/entities/get-entity-instance-schema",
-        "api-reference/entities/get-entity-type-schema",
-        "api-reference/entities/view-entity-type-info",
+        "api-reference/entities/get-entity-schema",
         "api-reference/entities/get-entity-unit-audit-log"
       ]
     },
