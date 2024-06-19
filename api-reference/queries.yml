@@ -1,8 +1,8 @@
 openapi: 3.0.1
 info:
-  title: 'Queries API'
-  description: 'API for managing queries and query threads.'
-  version: '1.0.0'
+  title: Queries API
+  description: API for managing queries and query threads.
+  version: 1.0.0
 servers:
   - url: 'http://api.structuredlabs.com'
 security:
@@ -10,11 +10,11 @@ security:
 paths:
   /queries:
     post:
-      summary: 'Create a New Query Thread'
-      description: 'Initiates a new query thread.'
-      operationId: 'createQueryThread'
+      summary: Create a New Query Thread
+      description: Initiates a new query thread.
+      operationId: createQueryThread
       requestBody:
-        description: 'Details of the query to initialize.'
+        description: Details of the query to initialize.
         required: true
         content:
           application/json:
@@ -23,14 +23,16 @@ paths:
               properties:
                 query:
                   type: string
-                  description: 'The text of the query to execute.'
+                  description: The text of the query to execute.
                 input_type:
                   type: string
-                  enum: [natural_language, sql]
-                  description: 'The type of the input, either natural language or SQL.'
+                  enum:
+                    - natural_language
+                    - sql
+                  description: The type of the input, either natural language or SQL.
       responses:
         '200':
-          description: 'Successfully created a new query thread.'
+          description: Successfully created a new query thread.
           content:
             application/json:
               schema:
@@ -38,26 +40,72 @@ paths:
                 properties:
                   thread_id:
                     type: string
-                    description: 'The unique identifier for the new query thread.'
+                    description: The unique identifier for the new query thread.
                   status:
                     type: string
-                    enum: [created, error]
+                    enum:
+                      - created
+                      - error
                   message:
                     type: string
+    delete:
+      summary: Delete Query Thread or Individual Query
+      description: >
+        Deletes data connections. This action is irreversible and should be used
+        with caution to avoid unintentional data loss.
 
-  /queries/{thread_id}/execute:
-    post:
-      summary: 'Execute a Query within a Thread'
-      description: 'Executes a specified query within the context of a query thread.'
-      operationId: 'executeQuery'
+        - If `thread_id` and `query_id` are not provided, all query threads will be
+        deleted.
+
+        - If `thread_id` is provided and `query_id` is not provided, the entire
+        thread will be deleted.
+
+        - If both `thread_id` and `query_id` are provided, only the specified query
+        within the thread will be deleted.
+      operationId: deleteQuery
       parameters:
         - name: thread_id
-          in: path
+          in: query
+          required: false
+          schema:
+            type: string
+          description: The unique identifier for the thread. If provided, the specific thread will be deleted.
+        - name: query_id
+          in: query
+          required: false
+          schema:
+            type: string
+          description: The unique identifier for the query. If provided along with thread_id, the specific query within the thread will be deleted.
+      responses:
+        '200':
+          description: Successfully deleted the query thread or individual query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - deleted
+                      - error
+                    description: Status of the operation indicating success or error.
+                  message:
+                    type: string
+                    description: Detailed message about the outcome. Either a success message or an error description.
+  /queries/run:
+    post:
+      summary: Run Query
+      description: Runs a specified query within the context of a query thread.
+      operationId: runQuery
+      parameters:
+        - name: thread_id
+          in: query
           required: true
           schema:
             type: string
       requestBody:
-        description: 'The query details to execute.'
+        description: The query details to execute.
         required: true
         content:
           application/json:
@@ -66,18 +114,18 @@ paths:
               properties:
                 query:
                   type: string
-                  description: 'The text of the query to execute.'
+                  description: The text of the query to execute.
                 mentions:
                   type: array
                   items:
                     type: string
-                  description: 'Optional mentions of specific data sources or entities to focus the query.'
+                  description: Optional mentions of specific data sources or entities to focus the query.
                 bookmark:
                   type: boolean
-                  description: 'Whether to bookmark this query within the thread.'
+                  description: Whether to bookmark this query within the thread.
       responses:
         '200':
-          description: 'Successfully executed the query within the thread.'
+          description: Successfully executed the query within the thread.
           content:
             application/json:
               schema:
@@ -96,24 +144,25 @@ paths:
                         type: string
                   status:
                     type: string
-                    enum: [completed, error]
+                    enum:
+                      - completed
+                      - error
                   message:
                     type: string
-
-  /queries/{thread_id}/suggestions:
+  /queries/suggestions:
     get:
-      summary: 'Get Suggested Queries'
-      description: 'Retrieves suggested queries based on the context of the specified thread.'
-      operationId: 'getQuerySuggestions'
+      summary: Get Suggested Queries
+      description: Retrieves suggested queries based on the context of the specified thread.
+      operationId: getQuerySuggestions
       parameters:
         - name: thread_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: 'Successfully retrieved suggested queries.'
+          description: Successfully retrieved suggested queries.
           content:
             application/json:
               schema:
@@ -128,21 +177,20 @@ paths:
                           type: string
                         description:
                           type: string
-
-  /queries/summaries/{source_id}:
+  /queries/summaries:
     get:
-      summary: 'Get a Dataset Summary'
-      description: 'Provides a summary of the dataset associated with the specified source ID.'
-      operationId: 'getDatasetSummary'
+      summary: Get a Dataset Summary
+      description: Provides a summary of the dataset associated with the specified source ID.
+      operationId: getDatasetSummary
       parameters:
         - name: source_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: 'Successfully retrieved dataset summary.'
+          description: Successfully retrieved dataset summary.
           content:
             application/json:
               schema:
@@ -150,21 +198,20 @@ paths:
                 properties:
                   summary:
                     type: string
-
-  /queries/{thread_id}/export:
+  /queries/export:
     get:
-      summary: 'Export Query Results'
-      description: 'Exports the results of a query thread to various formats.'
-      operationId: 'exportQueryResults'
+      summary: Export Query Results
+      description: Exports the results of a query thread to various formats.
+      operationId: exportQueryResults
       parameters:
         - name: thread_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: 'Successfully exported query results.'
+          description: Successfully exported query results.
           content:
             application/json:
               schema:
@@ -174,165 +221,103 @@ paths:
                     type: string
                   embed_code:
                     type: string
-
-  /queries/{thread_id}:
-    delete:
-      summary: 'Delete a Query Thread'
-      description: 'Deletes the entire query thread identified by the thread ID.'
-      operationId: 'deleteQueryThread'
+  /queries/metadata:
+    get:
+      summary: Get Metadata about a Query Thread or an Individual Query
+      description: >
+        Retrieves metadata about a specific query thread or an individual query.
+        If a thread ID is provided, it returns metadata about the thread. If a
+        query ID is provided, it returns metadata about the individual query.
+      operationId: getMetadata
       parameters:
         - name: thread_id
-          in: path
-          required: true
+          in: query
           schema:
             type: string
-      responses:
-        '200':
-          description: 'Successfully deleted the query thread.'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    enum: [deleted, error]
-                  message:
-                    type: string
-
-  /queries/{thread_id}/{query_id}:
-    delete:
-      summary: 'Remove a Specific Query from a Thread'
-      description: 'Deletes a specific query identified by query ID within a given thread.'
-      operationId: 'deleteQueryFromThread'
-      parameters:
-        - name: thread_id
-          in: path
-          required: true
-          schema:
-            type: string
+          description: ID of the query thread
         - name: query_id
-          in: path
-          required: true
+          in: query
           schema:
             type: string
+          description: ID of the individual query
       responses:
         '200':
-          description: 'Successfully removed the specific query from the thread.'
+          description: Successfully retrieved metadata.
           content:
             application/json:
               schema:
                 type: object
-                properties:
-                  status:
-                    type: string
-                    enum: [deleted, error]
-                  message:
-                    type: string
-
-  /queries/{thread_id}/metadata:
+                oneOf:
+                  - properties:
+                      thread_id:
+                        type: string
+                      created_by:
+                        type: string
+                      created_at:
+                        type: string
+                      last_executed:
+                        type: string
+                      query_count:
+                        type: integer
+                      status:
+                        type: string
+                        enum:
+                          - active
+                          - completed
+                          - error
+                      queries:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            query_id:
+                              type: string
+                            status:
+                              type: string
+                              enum:
+                                - success
+                                - running
+                                - failed
+                            execution_time:
+                              type: integer
+                  - properties:
+                      query_id:
+                        type: string
+                      created_by:
+                        type: string
+                      executed_by:
+                        type: string
+                      created_at:
+                        type: string
+                      executed_at:
+                        type: string
+                      execution_time:
+                        type: integer
+                      result_count:
+                        type: integer
+                      status:
+                        type: string
+                        enum:
+                          - success
+                          - failed
+                      error_details:
+                        type: string
+        '400':
+          description: Invalid request. One of thread_id or query_id must be provided.
+  /queries/queries:
     get:
-      summary: 'Get Metadata about a Query Thread'
-      description: 'Retrieves metadata about a specific query thread, including details about its creation and associated queries.'
-      operationId: 'getQueryThreadMetadata'
+      summary: List All Queries in a Thread
+      description: Lists all queries associated with a specific thread, including brief metadata for each query.
+      operationId: listQueriesInThread
       parameters:
         - name: thread_id
-          in: path
+          in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: 'Successfully retrieved metadata about the query thread.'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  thread_id:
-                    type: string
-                  created_by:
-                    type: string
-                  created_at:
-                    type: string
-                  last_executed:
-                    type: string
-                  query_count:
-                    type: integer
-                  status:
-                    type: string
-                    enum: [active, completed, error]
-                  queries:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        query_id:
-                          type: string
-                        status:
-                          type: string
-                          enum: [success, running, failed]
-                        execution_time:
-                          type: integer
-
-  /queries/{thread_id}/{query_id}/metadata:
-    get:
-      summary: 'Get Metadata for an Individual Query'
-      description: 'Provides detailed metadata for a specific query within a thread, including execution details and timing.'
-      operationId: 'getQueryMetadata'
-      parameters:
-        - name: thread_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: query_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: 'Successfully retrieved metadata for the individual query.'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  query_id:
-                    type: string
-                  created_by:
-                    type: string
-                  executed_by:
-                    type: string
-                  created_at:
-                    type: string
-                  executed_at:
-                    type: string
-                  execution_time:
-                    type: integer
-                  result_count:
-                    type: integer
-                  status:
-                    type: string
-                    enum: [success, failed]
-                  error_details:
-                    type: string
-
-  /queries/{thread_id}/queries:
-    get:
-      summary: 'List All Queries in a Thread'
-      description: 'Lists all queries associated with a specific thread, including brief metadata for each query.'
-      operationId: 'listQueriesInThread'
-      parameters:
-        - name: thread_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: 'Successfully listed all queries in the thread.'
+          description: Successfully listed all queries in the thread.
           content:
             application/json:
               schema:
@@ -353,10 +338,12 @@ paths:
                           type: string
                         status:
                           type: string
-                          enum: [pending, success, failed]
+                          enum:
+                            - pending
+                            - success
+                            - failed
                         execution_time:
                           type: integer
-
 components:
   schemas:
     Error:

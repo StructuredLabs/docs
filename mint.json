@@ -34,32 +34,8 @@
   },
   "tabs": [
     {
-        "name": "Connections API",
-        "url": "api-reference/connections"
-    },
-    {
-        "name": "Entities API",
-        "url": "api-reference/entities"
-    },
-    {
-        "name": "Queries API",
-        "url": "api-reference/queries"
-    },
-    {
-        "name": "Blocks API",
-        "url": "api-reference/blocks"
-    },
-    {
-        "name": "Notes API",
-        "url": "api-reference/notes"
-    },
-    {
-        "name": "Dashboards API",
-        "url": "api-reference/dashboards"
-    },
-    {
-        "name": "Alerts API",
-        "url": "api-reference/alerts"
+      "name": "API Reference",
+      "url": "api-reference"
     }
   ],
   "anchors": [
@@ -138,14 +114,12 @@
       "group": "Queries API",
       "pages": [
         "api-reference/queries/create-query-thread",
-        "api-reference/queries/execute-query",
+        "api-reference/queries/run-query",
         "api-reference/queries/get-suggested-queries",
         "api-reference/queries/get-dataset-summary",
         "api-reference/queries/export-query-results",
-        "api-reference/queries/delete-query-thread",
-        "api-reference/queries/remove-specific-query",
-        "api-reference/queries/query-thread-metadata",
-        "api-reference/queries/query-metadata",
+        "api-reference/queries/delete-query",
+        "api-reference/queries/get-metadata",
         "api-reference/queries/list-thread-queries"
       ]
     },
