@@ -146,9 +146,6 @@
         "api-reference/notes/delete-note",
         "api-reference/notes/export-note",
         "api-reference/notes/share-note",
-        "api-reference/notes/add-note-comment",
-        "api-reference/notes/get-note-comments",
-        "api-reference/notes/delete-note-comment",
         "api-reference/notes/get-note-metadata"
       ]
     },
@@ -161,8 +158,6 @@
         "api-reference/dashboards/delete-dashboard",
         "api-reference/dashboards/refresh-dashboard",
         "api-reference/dashboards/embed-dashboard",
-        "api-reference/dashboards/add-dashboard-comment",
-        "api-reference/dashboards/get-dashboard-comments",
         "api-reference/dashboards/get-dashboard-metadata"
       ]
     },
@@ -170,11 +165,10 @@
       "group": "Alerts API",
       "pages": [
         "api-reference/alerts/create-alert",
-        "api-reference/alerts/delete-alerts-by-type",
+        "api-reference/alerts/trigger-alert",
         "api-reference/alerts/delete-alert",
         "api-reference/alerts/get-alert-history",
-        "api-reference/alerts/delete-alert-history",
-        "api-reference/alerts/configure-alert-delivery"
+        "api-reference/alerts/delete-alert-history"
       ]
     }
   ],

@@ -33,8 +33,9 @@ paths:
                     custom_message:
                       type: string
                 threshold:
-                  type: string
-                  enum: [critical, medium, low, info]
+                  type: number
+                  description: 'The threshold value for the metric (e.g., if CAC drops below 70%, the threshold is 70).'
+                  format: float
                 severity:
                   type: string
                   enum: [high, medium, low]
@@ -106,27 +107,84 @@ paths:
                     type: string
                   message:
                     type: string
-  /alerts/type:
-    delete:
-      summary: Delete all alerts of a specified type
+
+  /alerts/trigger:
+    post:
+      summary: Trigger an alert
       parameters:
-        - name: type
+        - name: alert_id
           in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: Successfully deleted all alerts of the specified type.
+          description: Successfully triggered the alert.
           content:
             application/json:
               schema:
                 type: object
                 properties:
+                  alert_id:
+                    type: string
                   status:
                     type: string
+                  alert_summary:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        enum: [query, dashboard, metric]
+                      content:
+                        type: object
+                        properties:
+                          include_images:
+                            type: boolean
+                          custom_message:
+                            type: string
+                      threshold:
+                        type: number
+                        format: float
+                      severity:
+                        type: string
+                        enum: [high, medium, low]
+                      schedule:
+                        type: object
+                        properties:
+                          timezone:
+                            type: string
+                          date:
+                            type: string
+                            format: date
+                          time:
+                            type: string
+                            format: time
+                          frequency:
+                            type: string
+                            enum: [daily, weekly, hourly]
+                      delivery:
+                        type: object
+                        properties:
+                          method:
+                            type: string
+                            enum: [slack, email]
+                          recipients:
+                            type: array
+                            items:
+                              type: string
+                              format: email
+                      points_of_contact:
+                        type: array
+                        items:
+                          type: string
+                      creator:
+                        type: string
+                      created_at:
+                        type: string
+                        format: date-time
                   message:
                     type: string
+
   /alerts/history:
     get:
       summary: View alert history
@@ -188,6 +246,7 @@ paths:
                     type: string
                   message:
                     type: string
+
   /alerts/history/run:
     delete:
       summary: Delete a single alert run history entry
@@ -200,43 +259,6 @@ paths:
       responses:
         '200':
           description: Successfully deleted the alert run history entry.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  message:
-                    type: string
-  /alerts/configure_delivery:
-    post:
-      summary: Configure alert delivery
-      parameters:
-        - name: alert_id
-          in: query
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: Delivery configuration details.
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                method:
-                  type: string
-                  enum: [slack, email]
-                recipients:
-                  type: array
-                  items:
-                    type: string
-                    format: email
-      responses:
-        '200':
-          description: Successfully configured alert delivery.
           content:
             application/json:
               schema:
