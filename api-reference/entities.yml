@@ -8,38 +8,56 @@ servers:
 security:
   - bearerAuth: []
 paths:
-  /entities/relationships:
-    get:
-      summary: 'Get Entity Relationships'
-      description: 'Retrieves a visualization of entity relationships.'
-      operationId: 'getEntityRelationships'
+  /entities/load:
+    post:
+      summary: 'Load and Transform Data'
+      description: 'Loads raw data from a data warehouse, transforms it into the structured entity format, and returns a summary.'
+      operationId: 'loadEntities'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                warehouseCredentials:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum: [bigquery, snowflake, redshift]
+                    projectId:
+                      type: string
+                    clientEmail:
+                      type: string
+                    privateKey:
+                      type: string
+                  required:
+                    - type
+                    - projectId
+                    - clientEmail
+                    - privateKey
       responses:
         '200':
-          description: 'Successfully retrieved entity relationships visualization.'
+          description: 'Successfully loaded and transformed data.'
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  entities:
+                  summary:
                     type: array
                     items:
                       type: object
                       properties:
-                        id:
+                        entity:
                           type: string
-                        name:
-                          type: string
-                        relationships:
+                        total:
+                          type: integer
+                        fields:
                           type: array
                           items:
-                            type: object
-                            properties:
-                              target_id:
-                                type: string
-                              type:
-                                type: string
-                                enum: [one_to_one, one_to_many, many_to_many]
+                            type: string
 
   /entities/units:
     get:
@@ -202,6 +220,45 @@ paths:
                     enum: [success, error]
                   message:
                     type: string
+
+  /entities/structure:
+    get:
+      summary: 'Get Structured Data Model'
+      description: 'Returns the nodes and edges for the Structured data model.'
+      operationId: 'getStructuredDataModel'
+      responses:
+        '200':
+          description: 'Successfully retrieved structured data model.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nodes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        label:
+                          type: string
+                        properties:
+                          type: object
+                          additionalProperties:
+                            type: string
+                  edges:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        source:
+                          type: string
+                        target:
+                          type: string
+                        type:
+                          type: string
+                          enum: [one_to_one, one_to_many, many_to_many]
 
 components:
   schemas:

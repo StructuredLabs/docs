@@ -103,7 +103,8 @@
     {
       "group": "Entities API",
       "pages": [
-        "api-reference/entities/get-entity-relationships",
+        "api-reference/entities/get-entity-structure",
+        "api-reference/entities/load-entity",
         "api-reference/entities/get-entity-units",
         "api-reference/entities/get-entity-instance-schema",
         "api-reference/entities/get-entity-schema",
