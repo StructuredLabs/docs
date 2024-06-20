@@ -42,29 +42,6 @@ paths:
                       type: object
                       description: Filters to apply to the data.
                       additionalProperties: true
-                prerequisites:
-                  type: array
-                  items:
-                    type: string
-                  description: Prerequisites for the metric computation.
-                chart:
-                  type: object
-                  description: Chart configuration for the metric result.
-                  properties:
-                    type:
-                      type: string
-                      enum:
-                        - line
-                        - bar
-                        - pie
-                      description: Type of the chart.
-                    color_scheme:
-                      type: string
-                      enum:
-                        - default
-                        - monochrome
-                        - pastel
-                      description: Color scheme for the chart.
       responses:
         '200':
           description: Successfully computed the metric.
@@ -76,8 +53,6 @@ paths:
                   metric_id:
                     type: string
                   value:
-                    type: string
-                  chart_url:
                     type: string
                   raw_data:
                     type: array

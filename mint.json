@@ -105,10 +105,7 @@
       "pages": [
         "api-reference/entities/get-entity-structure",
         "api-reference/entities/load-entity",
-        "api-reference/entities/get-entity-units",
-        "api-reference/entities/get-entity-instance-schema",
-        "api-reference/entities/get-entity-schema",
-        "api-reference/entities/get-entity-unit-audit-log"
+        "api-reference/entities/get-entity-units"
       ]
     },
     {

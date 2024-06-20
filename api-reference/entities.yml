@@ -62,7 +62,7 @@ paths:
   /entities/units:
     get:
       summary: 'Get Entity Units'
-      description: 'Lists all units of a specific entity type.'
+      description: 'Lists all units of a specific entity type along with their audit logs.'
       operationId: 'listEntityUnits'
       parameters:
         - name: entity_id
@@ -89,137 +89,26 @@ paths:
                           type: string
                         data:
                           type: object
-
-  /entities/schema:
-    get:
-      summary: 'Get Entity Schema'
-      description: 'Provides the schema for a specific entity type.'
-      operationId: 'getEntitySchema'
-      parameters:
-        - name: entity_id
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: 'Successfully retrieved schema for the entity unit.'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  entity_id:
-                    type: string
-                  schema:
-                    type: object
-                    properties:
-                      fields:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                            type:
-                              type: string
-                            source:
-                              type: string
-
-  /entities/type-schema:
-    get:
-      summary: 'Get Entity Type Schema'
-      description: 'Provides the schema for a specific entity type, detailing the structure and data types of its fields.'
-      operationId: 'getEntityTypeSchema'
-      parameters:
-        - name: entity_type_id
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: 'Successfully retrieved schema for the entity type.'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  entity_type_id:
-                    type: string
-                  schema:
-                    type: object
-                    properties:
-                      fields:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                            type:
-                              type: string
-                            source:
-                              type: string
-                  status:
-                    type: string
-                    enum: [success, error]
-                  message:
-                    type: string
-
-  /entities/units/audit_log:
-    get:
-      summary: 'Entity Unit Audit Log'
-      description: 'Retrieves an audit log of all state changes for a specific unit of an entity type, documenting each change along with timestamps and user details.'
-      operationId: 'getUnitAuditLog'
-      parameters:
-        - name: entity_type_id
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: unit_id
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: 'Successfully retrieved audit log for the entity unit.'
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  entity_type_id:
-                    type: string
-                  unit_id:
-                    type: string
-                  audit_log:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        timestamp:
-                          type: string
-                        action:
-                          type: string
-                        user_id:
-                          type: string
-                        changes:
-                          type: object
-                          additionalProperties:
+                        audit_log:
+                          type: array
+                          items:
                             type: object
                             properties:
-                              old_value:
+                              timestamp:
                                 type: string
-                              new_value:
+                              action:
                                 type: string
-                  status:
-                    type: string
-                    enum: [success, error]
-                  message:
-                    type: string
+                              user_id:
+                                type: string
+                              changes:
+                                type: object
+                                additionalProperties:
+                                  type: object
+                                  properties:
+                                    old_value:
+                                      type: string
+                                    new_value:
+                                      type: string
 
   /entities/structure:
     get:
