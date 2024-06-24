@@ -87,6 +87,85 @@ paths:
                     type: string
                   message:
                     type: string
+    
+    get:
+      summary: Get an alert
+      requestBody:
+        description: Alert configuration details.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: [query, dashboard, metric]
+                target_id:
+                  type: string
+                content:
+                  type: object
+                  properties:
+                    include_images:
+                      type: boolean
+                    custom_message:
+                      type: string
+                threshold:
+                  type: number
+                  description: 'The threshold value for the metric (e.g., if CAC drops below 70%, the threshold is 70).'
+                  format: float
+                severity:
+                  type: string
+                  enum: [high, medium, low]
+                schedule:
+                  type: object
+                  properties:
+                    timezone:
+                      type: string
+                    date:
+                      type: string
+                      format: date
+                    time:
+                      type: string
+                      format: time
+                    frequency:
+                      type: string
+                      enum: [daily, weekly, hourly]
+                delivery:
+                  type: object
+                  properties:
+                    method:
+                      type: string
+                      enum: [slack, email]
+                    recipients:
+                      type: array
+                      items:
+                        type: string
+                        format: email
+                points_of_contact:
+                  type: array
+                  items:
+                    type: string
+                creator:
+                  type: string
+                created_at:
+                  type: string
+                  format: date-time
+      responses:
+        '200':
+          description: Successfully created an alert.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alert_id:
+                    type: string
+                  status:
+                    type: string
+                  message:
+                    type: string
+    
     delete:
       summary: Delete an alert
       parameters:

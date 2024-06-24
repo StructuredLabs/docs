@@ -165,6 +165,7 @@
       "group": "Alerts API",
       "pages": [
         "api-reference/alerts/create-alert",
+        "api-reference/alerts/get-alert",
         "api-reference/alerts/trigger-alert",
         "api-reference/alerts/delete-alert",
         "api-reference/alerts/get-alert-history",
