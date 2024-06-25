@@ -88,16 +88,14 @@
       "group": "Connections API",
       "pages": [
         "api-reference/connections/connect-data-source",
-        "api-reference/connections/refresh-data-connection",
-        "api-reference/connections/configure-connection-sync",
-        "api-reference/connections/update-connection-details",
-        "api-reference/connections/delete-connection",
         "api-reference/connections/get-connection-data",
-        "api-reference/connections/get-connection-schema",
-        "api-reference/connections/download-connection-data",
+        "api-reference/connections/delete-connection",
+        "api-reference/connections/test-connection",
         "api-reference/connections/get-metadata",
-        "api-reference/connections/get-connection-usage",
-        "api-reference/connections/test-data-connection"
+        "api-reference/connections/refresh-connection-data",
+        "api-reference/connections/configure-connection-sync",
+        "api-reference/connections/export-connection-data",
+        "api-reference/connections/get-connection-usage"
       ]
     },
     {

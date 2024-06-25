@@ -6,7 +6,7 @@ info:
     name: MIT
   version: 1.0.0
 servers:
-  - url: 'http://api.structuredlabs.com'
+  - url: "http://api.structuredlabs.com"
 security:
   - bearerAuth: []
 paths:
@@ -26,37 +26,48 @@ paths:
                   type: string
                   description: The type of data source.
                   example: csv|google_sheets|salesforce|hubspot|...
-                credentials:
+                userId:
+                  type: string
+                  description: The user's Id.
+                metadata:
                   type: object
-                  description: The credentials required for authentication.
-                  properties:
-                    username:
-                      type: string
-                      description: The username for authentication.
-                      example: user123
-                    password:
-                      type: string
-                      description: The password for authentication.
-                      example: pass123
-                    api_key:
-                      type: string
-                      description: The API key for authentication.
-                      example: key123
-                    other_params:
-                      type: object
-                      description: Additional parameters for authentication.
-                      additionalProperties: true
-                      example: {}
-                settings:
-                  type: object
-                  description: Configuration settings for the connection.
-                  properties:
-                    sync_period:
-                      type: string
-                      description: The synchronization period.
-                      example: 30 minutes|hourly|daily
+                  description: Connection specific metadata.
+                  # properties:
+                  #   sync_period:
+                  #     type: string
+                  #     description: The synchronization period.
+                  #     example: 30 minutes|hourly|daily
+                # credentials:
+                #   type: object
+                #   description: The credentials required for authentication.
+                #   properties:
+                #     username:
+                #       type: string
+                #       description: The username for authentication.
+                #       example: user123
+                #     password:
+                #       type: string
+                #       description: The password for authentication.
+                #       example: pass123
+                #     api_key:
+                #       type: string
+                #       description: The API key for authentication.
+                #       example: key123
+                #     other_params:
+                #       type: object
+                #       description: Additional parameters for authentication.
+                #       additionalProperties: true
+                #       example: {}
+                # settings:
+                #   type: object
+                #   description: Configuration settings for the connection.
+                #   properties:
+                #     sync_period:
+                #       type: string
+                #       description: The synchronization period.
+                #       example: 30 minutes|hourly|daily
       responses:
-        '200':
+        "200":
           description: Successfully connected to the data source.
           content:
             application/json:
@@ -67,20 +78,46 @@ paths:
                     type: string
                     description: The unique identifier for the established connection.
                     example: abc123
-                  status:
-                    type: string
-                    description: The status of the connection.
-                    example: connected
                   message:
                     type: string
                     description: Additional information about the connection status.
                     example: Successfully connected to the data source.
-        '400':
+        "400":
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
+    get:
+      summary: View data from a connection
+      description: Retrieves the data rows from a specified connection. This endpoint provides a snapshot of the current data within the connection based on the latest sync.
+      parameters:
+        - name: connection_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved data from the connection.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connection_id:
+                    type: string
+                    description: The unique identifier for the connection whose data is being accessed.
+                  data:
+                    type: array
+                    description: Array of data rows from the connection.
+                    items:
+                      type: object
+                      additionalProperties: true
+                      description: Key-value pairs representing column names and their corresponding values.
+                  message:
+                    type: string
+                    description: A message detailing the outcome of the operation. Provides details on success or describes the error if one occurred.
 
     delete:
       summary: Delete data connections
@@ -93,90 +130,10 @@ paths:
           required: false
           schema:
             type: string
-          description: The unique identifier for the connection. If provided, the specific connection will be deleted. If not provided, all connections will be deleted.
+          description: The unique identifier for the connection. If provided, the specific connection will be deleted. If not provided, delete will fail.
       responses:
-        '200':
+        "200":
           description: Successfully deleted the data connection(s).
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    enum:
-                      - deleted
-                      - error
-                    description: Status of the operation indicating success or error.
-                  message:
-                    type: string
-                    description: Detailed message about the outcome. Either a success message or an error description.
-
-    put:
-      summary: Update connection details
-      description: Updates the details of a specific data connection.
-      parameters:
-        - name: connection_id
-          in: query
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                new_settings:
-                  type: object
-                  description: The new settings to be applied to the connection.
-                  properties:
-                    username:
-                      type: string
-                      description: New username for the connection.
-                    password:
-                      type: string
-                      description: New password for the connection.
-                    host:
-                      type: string
-                      description: New host URL for the connection.
-                    port:
-                      type: integer
-                      description: New port for the connection.
-                    database:
-                      type: string
-                      description: New database name for the connection.
-      responses:
-        '200':
-          description: Successfully updated connection details.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    example: updated
-                    description: Indicates that the connection details were successfully updated.
-                  message:
-                    type: string
-                    example: Connection details updated successfully.
-                    description: A detailed message confirming the update.
-
-  /connections/refresh:
-    post:
-      summary: Refresh a Data Connection
-      description: Refreshes an existing data connection to ensure data is up-to-date.
-      parameters:
-        - name: connection_id
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Data connection refresh response.
           content:
             application/json:
               schema:
@@ -184,7 +141,33 @@ paths:
                 properties:
                   connection_id:
                     type: string
-                    description: The unique identifier of the refreshed data connection.
+                    description: The unique identifier for the established connection.
+                    example: abc123
+                  message:
+                    type: string
+                    description: Detailed message about the outcome. Either a success message or an error description.
+
+  /connections/refresh:
+    post:
+      summary: Refresh a Connection
+      description: Refreshes an existing connection to ensure data is up-to-date.
+      parameters:
+        - name: connection_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Connection refresh response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connection_id:
+                    type: string
+                    description: The unique identifier of the refreshed connection.
                   status:
                     type: string
                     enum:
@@ -225,7 +208,7 @@ paths:
                         type: string
                         description: How the column is mapped to an entity attribute.
       responses:
-        '200':
+        "200":
           description: Successfully configured synchronization settings.
           content:
             application/json:
@@ -241,44 +224,6 @@ paths:
                     example: Synchronization settings configured successfully.
                     description: A detailed message about the sync configuration status.
 
-  /connections/data:
-    get:
-      summary: View data from a connection
-      description: Retrieves the data rows from a specified connection. This endpoint provides a snapshot of the current data within the connection based on the latest sync.
-      parameters:
-        - name: connection_id
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successfully retrieved data from the connection.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  connection_id:
-                    type: string
-                    description: The unique identifier for the connection whose data is being accessed.
-                  data:
-                    type: array
-                    description: Array of data rows from the connection.
-                    items:
-                      type: object
-                      additionalProperties: true
-                      description: Key-value pairs representing column names and their corresponding values.
-                  status:
-                    type: string
-                    enum:
-                      - success
-                      - error
-                    description: Status of the data retrieval, indicating success or error.
-                  message:
-                    type: string
-                    description: A message detailing the outcome of the operation. Provides details on success or describes the error if one occurred.
-
   /connections/schema:
     get:
       summary: Get schema details of a connection
@@ -290,7 +235,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successfully retrieved schema details of the connection.
           content:
             application/json:
@@ -328,10 +273,10 @@ paths:
                     type: string
                     description: A message detailing the outcome of the operation, providing success details or error information.
 
-  /connections/download:
+  /connections/export:
     get:
-      summary: Download data from a connection
-      description: Allows users to download the data from a specified connection as a file. The endpoint supports various formats such as CSV, Excel, or other file types.
+      summary: Export data from a connection
+      description: Allows users to export the data from a specified connection as a file. The endpoint supports various formats such as CSV, Excel, or other file types.
       parameters:
         - name: connection_id
           in: query
@@ -343,10 +288,10 @@ paths:
           required: true
           schema:
             type: string
-            description: The format of the file to download (e.g., csv, xls, etc.).
+            description: The format of the file to export (e.g., csv, xls, etc.).
       responses:
-        '200':
-          description: Download ready.
+        "200":
+          description: export ready.
           content:
             application/json:
               schema:
@@ -355,10 +300,10 @@ paths:
                   connection_id:
                     type: string
                     description: The unique identifier for the connection.
-                  download_url:
+                  export_url:
                     type: string
                     format: uri
-                    description: URL to the file that can be downloaded.
+                    description: URL to the file that can be exported.
                   status:
                     type: string
                     enum:
@@ -381,7 +326,7 @@ paths:
             type: string
           description: The unique identifier for the connection. If provided, metadata for that specific connection will be retrieved. If not provided, metadata for all connections will be retrieved.
       responses:
-        '200':
+        "200":
           description: Successfully retrieved metadata about the connection(s).
           content:
             application/json:
@@ -479,7 +424,7 @@ paths:
             type: string
           description: The unique identifier for the connection.
       responses:
-        '200':
+        "200":
           description: Successfully retrieved usage details of the connection.
           content:
             application/json:
@@ -525,7 +470,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successfully tested the data connection.
           content:
             application/json:
