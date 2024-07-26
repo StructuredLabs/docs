@@ -136,30 +136,6 @@
       ]
     },
     {
-      "group": "Notes API",
-      "pages": [
-        "api-reference/notes/create-note",
-        "api-reference/notes/get-notes",
-        "api-reference/notes/edit-note",
-        "api-reference/notes/delete-note",
-        "api-reference/notes/export-note",
-        "api-reference/notes/share-note",
-        "api-reference/notes/get-note-metadata"
-      ]
-    },
-    {
-      "group": "Dashboards API",
-      "pages": [
-        "api-reference/dashboards/create-dashboard",
-        "api-reference/dashboards/get-dashboards",
-        "api-reference/dashboards/edit-dashboard",
-        "api-reference/dashboards/delete-dashboard",
-        "api-reference/dashboards/refresh-dashboard",
-        "api-reference/dashboards/embed-dashboard",
-        "api-reference/dashboards/get-dashboard-metadata"
-      ]
-    },
-    {
       "group": "Alerts API",
       "pages": [
         "api-reference/alerts/create-alert",
@@ -184,8 +160,6 @@
     "api-reference/entities.yml", 
     "api-reference/queries.yml", 
     "api-reference/metrics.yml", 
-    "api-reference/notes.yml", 
-    "api-reference/dashboards.yml", 
     "api-reference/alerts.yml"
   ]
 
