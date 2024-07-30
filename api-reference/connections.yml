@@ -95,7 +95,6 @@ paths:
                   success:
                     type: boolean
                     description: Indicates if the data retrieval was successful.
-
     delete:
       summary: Delete data connections
       description: |
@@ -247,7 +246,6 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Connection"
-
 
   /connections/source/csv:
     post:
