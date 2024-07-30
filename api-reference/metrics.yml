@@ -23,25 +23,15 @@ paths:
             schema:
               type: object
               properties:
-                metric_id:
+                metric:
                   type: string
-                  description: The ID of the metric to compute.
-                parameters:
-                  type: object
-                  description: Parameters for the metric computation.
-                  properties:
-                    date_range:
-                      type: string
-                      description: The date range for the metric computation.
-                    segments:
-                      type: array
-                      items:
-                        type: string
-                      description: Segments to include in the computation.
-                    filters:
-                      type: object
-                      description: Filters to apply to the data.
-                      additionalProperties: true
+                  description: The metric to compute.
+                userId:
+                  type: string
+                  description: The user ID for the metric computation.
+                workspaceId:
+                  type: string
+                  description: The workspace ID for the metric computation.
       responses:
         '200':
           description: Successfully computed the metric.
@@ -50,466 +40,56 @@ paths:
               schema:
                 type: object
                 properties:
-                  metric_id:
+                  metric:
                     type: string
+                    description: The computed metric.
                   value:
-                    type: string
+                    type: number
+                    description: The computed value of the metric.
                   raw_data:
-                    type: array
-                    items:
-                      type: object
-                      additionalProperties: true
+                    type: object
+                    description: The raw data used for the computation.
                   status:
                     type: string
-                    enum:
-                      - computed
-                      - failed
                   message:
                     type: string
-  /metrics:
+
+  /metrics/checkPrerequisite:
     post:
-      summary: Create a Custom Metric
+      summary: Check Prerequisite
       description: >-
-        Allows users to define and create custom metrics using the entire Harbor
-        as the data source.
-      operationId: createCustomMetric
+        Checks if the prerequisites for a metric computation are met.
+      operationId: checkPrerequisite
       requestBody:
-        description: Details required to create a custom metric.
+        description: Details required to check the prerequisites.
         required: true
         content:
           application/json:
             schema:
               type: object
               properties:
-                name:
+                nodeType:
                   type: string
-                  description: Name of the custom metric.
-                description:
+                  description: The node type for the metric computation.
+                userId:
                   type: string
-                  description: Description of the custom metric.
-                formula:
+                  description: The user ID for the metric computation.
+                workspaceId:
                   type: string
-                  description: Formula for the custom metric.
-                prerequisites:
-                  type: array
-                  items:
-                    type: string
-                  description: Prerequisites for the custom metric.
-                creator:
-                  type: string
-                  description: Creator of the custom metric.
-                created_at:
-                  type: string
-                  format: date-time
-                  description: Creation timestamp of the custom metric.
-                chart:
-                  type: object
-                  description: Chart configuration for the custom metric.
-                  properties:
-                    type:
-                      type: string
-                      enum:
-                        - line
-                        - bar
-                        - pie
-                      description: Type of the chart.
-                    color_scheme:
-                      type: string
-                      enum:
-                        - default
-                        - monochrome
-                        - pastel
-                      description: Color scheme for the chart.
+                  description: The workspace ID for the metric computation.
       responses:
         '200':
-          description: Successfully created a custom metric.
+          description: Successfully checked the prerequisites.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  metric_id:
-                    type: string
-                  status:
-                    type: string
-                    enum:
-                      - created
-                  message:
-                    type: string
-    put:
-      summary: Edit a Metric
-      description: >-
-        Edits details or formulas of an existing metric, updating chart settings
-        and other metadata.
-      operationId: editMetric
-      parameters:
-        - name: metric_id
-          in: query
-          required: true
-          schema:
-            type: string
-            description: The ID of the metric to edit.
-      requestBody:
-        description: Details required to edit the metric.
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Updated name of the metric.
-                description:
-                  type: string
-                  description: Updated description of the metric.
-                formula:
-                  type: string
-                  description: Updated formula for the metric.
-                chart:
-                  type: object
-                  description: Updated chart configuration for the metric.
-                  properties:
-                    type:
-                      type: string
-                      enum:
-                        - line
-                        - bar
-                        - pie
-                      description: Type of the chart.
-                    color_scheme:
-                      type: string
-                      enum:
-                        - default
-                        - monochrome
-                        - pastel
-                      description: Color scheme for the chart.
-                last_modified_by:
-                  type: string
-                  description: User who last modified the metric.
-                last_modified_at:
-                  type: string
-                  format: date-time
-                  description: Timestamp of the last modification.
-      responses:
-        '200':
-          description: Successfully edited the metric.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    enum:
-                      - updated
-                  message:
-                    type: string
-  /metrics/custom:
-    delete:
-      summary: Delete a Custom Metric
-      description: Deletes a custom metric.
-      operationId: deleteCustomMetric
-      parameters:
-        - name: metric_id
-          in: query
-          required: true
-          schema:
-            type: string
-            description: The ID of the custom metric to delete.
-      responses:
-        '200':
-          description: Successfully deleted the custom metric.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    enum:
-                      - deleted
-                  message:
-                    type: string
-  /metrics/export:
-    get:
-      summary: Export Metric Data
-      description: >-
-        Exports the metric data to the specified format along with the chart
-        image.
-      operationId: exportMetric
-      parameters:
-        - name: metric_id
-          in: query
-          required: true
-          schema:
-            type: string
-            description: The ID of the metric to export.
-        - name: format
-          in: query
-          required: true
-          schema:
-            type: string
-            enum:
-              - pdf
-              - csv
-              - image
-            description: The format to export the data in.
-        - name: include_chart
-          in: query
-          required: true
-          schema:
-            type: string
-            enum:
-              - 'yes'
-              - 'no'
-            description: Whether to include the chart image in the export.
-      responses:
-        '200':
-          description: Successfully exported metric data.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  download_url:
-                    type: string
-                    description: URL to download the exported data.
-                  status:
-                    type: string
-                    enum:
-                      - success
-                  message:
-                    type: string
-  /metrics/share:
-    post:
-      summary: Share a Metric
-      description: Creates a shareable link for a metric.
-      operationId: shareMetric
-      parameters:
-        - name: metric_id
-          in: query
-          required: true
-          schema:
-            type: string
-            description: The ID of the metric to share.
-      requestBody:
-        description: Details for sharing the metric.
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                medium:
-                  type: string
-                  enum:
-                    - email
-                    - slack
-                  description: Medium to share the metric.
-                recipients:
-                  type: array
-                  items:
-                    type: string
-                  description: List of recipients.
-                message:
-                  type: string
-                  description: Optional message to include with the shared metric.
-      responses:
-        '200':
-          description: Successfully shared the metric.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  link:
-                    type: string
-                  status:
-                    type: string
-                    enum:
-                      - shared
-                  message:
-                    type: string
-  /metrics/embed:
-    get:
-      summary: Embed a Metric
-      description: >-
-        Provides an embed code to integrate the metric into other platforms,
-        including customized charts.
-      operationId: embedMetric
-      parameters:
-        - name: metric_id
-          in: query
-          required: true
-          schema:
-            type: string
-            description: The ID of the metric to embed.
-      responses:
-        '200':
-          description: Successfully embedded the metric.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  embed_code:
-                    type: string
-                  status:
-                    type: string
-                    enum:
-                      - success
-  /metrics/segments:
-    post:
-      summary: Create a New Segment
-      description: Creates a new segment.
-      operationId: createSegment
-      requestBody:
-        description: Details required to create a new segment.
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Name of the segment.
-                description:
-                  type: string
-                  description: Description of the segment.
-                filters:
-                  type: object
-                  description: Filters for the segment.
-                  additionalProperties: true
-      responses:
-        '200':
-          description: Successfully created a new segment.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  segment_id:
-                    type: string
-                  status:
-                    type: string
-                    enum:
-                      - created
-                  message:
-                    type: string
-    get:
-      summary: List or Retrieve Segments
-      description: >-
-        Lists all segments or retrieves a specific segment based on the presence
-        of a segment_id parameter.
-      operationId: listOrGetSegment
-      parameters:
-        - name: segment_id
-          in: query
-          required: false
-          schema:
-            type: string
-            description: The ID of the segment to retrieve.
-      responses:
-        '200':
-          description: Successfully listed all segments or retrieved the specified segment.
-          content:
-            application/json:
-              schema:
-                oneOf:
-                  - type: object
-                    properties:
-                      segments:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            segment_id:
-                              type: string
-                            name:
-                              type: string
-                            description:
-                              type: string
-                  - type: object
-                    properties:
-                      segment_id:
-                        type: string
-                      name:
-                        type: string
-                      description:
-                        type: string
-                      filters:
-                        type: object
-                        additionalProperties: true
-    put:
-      summary: Edit a Segment
-      description: Edits a specific segment.
-      operationId: editSegment
-      parameters:
-        - name: segment_id
-          in: query
-          required: true
-          schema:
-            type: string
-            description: The ID of the segment to edit.
-      requestBody:
-        description: Details required to edit the segment.
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Updated name of the segment.
-                description:
-                  type: string
-                  description: Updated description of the segment.
-                filters:
-                  type: object
-                  description: Updated filters for the segment.
-                  additionalProperties: true
-      responses:
-        '200':
-          description: Successfully edited the segment.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    enum:
-                      - updated
-                  message:
-                    type: string
-    delete:
-      summary: Delete a Segment
-      description: Deletes a specific segment.
-      operationId: deleteSegment
-      parameters:
-        - name: segment_id
-          in: query
-          required: true
-          schema:
-            type: string
-            description: The ID of the segment to delete.
-      responses:
-        '200':
-          description: Successfully deleted the segment.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    enum:
-                      - deleted
-                  message:
-                    type: string
+                  exists:
+                    type: boolean
+                  success:
+                    type: boolean
+                  
 components:
   schemas:
     Error:
