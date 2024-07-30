@@ -18,80 +18,28 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                type:
-                  type: string
-                  enum: [query, dashboard, metric]
-                target_id:
-                  type: string
-                content:
-                  type: object
-                  properties:
-                    include_images:
-                      type: boolean
-                    custom_message:
-                      type: string
-                threshold:
-                  type: number
-                  description: 'The threshold value for the metric (e.g., if CAC drops below 70%, the threshold is 70).'
-                  format: float
-                severity:
-                  type: string
-                  enum: [high, medium, low]
-                schedule:
-                  type: object
-                  properties:
-                    timezone:
-                      type: string
-                    date:
-                      type: string
-                      format: date
-                    time:
-                      type: string
-                      format: time
-                    frequency:
-                      type: string
-                      enum: [daily, weekly, hourly]
-                delivery:
-                  type: object
-                  properties:
-                    method:
-                      type: string
-                      enum: [slack, email]
-                    recipients:
-                      type: array
-                      items:
-                        type: string
-                        format: email
-                points_of_contact:
-                  type: array
-                  items:
-                    type: string
-                creator:
-                  type: string
-                created_at:
-                  type: string
-                  format: date-time
+              $ref: '#/components/schemas/SaveScheduleApiRequest'
       responses:
         '200':
-          description: Successfully created an alert.
+          description: Successful response from server.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  alert_id:
-                    type: string
-                  status:
-                    type: string
-                  message:
-                    type: string
+                $ref: '#/components/schemas/CreateAlertResponse'
 
     get:
-      summary: Get an alert
+      summary: Get all alerts configured
       parameters:
-        - name: alert_id
+        - name: alertId
+          in: query
+          schema:
+            type: string
+        - name: workspaceId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: userId
           in: query
           required: true
           schema:
@@ -104,53 +52,58 @@ paths:
               schema:
                 type: object
                 properties:
-                  alert_name:
-                    type: string
-                  schedule:
-                    type: object
-                    properties:
-                      timezone:
-                        type: string
-                      date:
-                        type: string
-                        format: date
-                      time:
-                        type: string
-                        format: time
-                      frequency:
-                        type: string
-                        enum: [daily, weekly, hourly]
+                  schedules:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Schedule'
 
     delete:
-      summary: Delete an alert
+      summary: Delete a schedule
       parameters:
-        - name: alert_id
-          in: query
+        - in: query
+          name: userId
           required: true
           schema:
             type: string
+          description: ID of the user
+        - in: query
+          name: scheduleId
+          required: true
+          schema:
+            type: string
+          description: ID of the schedule
+        - in: query
+          name: workspaceId
+          required: true
+          schema:
+            type: string
+          description: ID of the workspace
       responses:
         '200':
-          description: Successfully deleted the alert.
+          description: Schedule deletion response
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  message:
-                    type: string
+                $ref: '#/components/schemas/DeleteAlertScheduleResponse'
+        '400':
+          description: Bad Request
 
   /alerts/trigger:
     post:
       summary: Trigger an alert
-      parameters:
-        - name: alert_id
-          in: query
-          required: true
-          schema:
-            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                scheduleId:
+                  type: string
+                workspaceId:
+                  type: string
       responses:
         '200':
           description: Successfully triggered the alert.
@@ -159,65 +112,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  alert_id:
-                    type: string
-                  status:
-                    type: string
-                  alert_summary:
-                    type: object
-                    properties:
-                      type:
-                        type: string
-                        enum: [query, dashboard, metric]
-                      content:
-                        type: object
-                        properties:
-                          include_images:
-                            type: boolean
-                          custom_message:
-                            type: string
-                      threshold:
-                        type: number
-                        format: float
-                      severity:
-                        type: string
-                        enum: [high, medium, low]
-                      schedule:
-                        type: object
-                        properties:
-                          timezone:
-                            type: string
-                          date:
-                            type: string
-                            format: date
-                          time:
-                            type: string
-                            format: time
-                          frequency:
-                            type: string
-                            enum: [daily, weekly, hourly]
-                      delivery:
-                        type: object
-                        properties:
-                          method:
-                            type: string
-                            enum: [slack, email]
-                          recipients:
-                            type: array
-                            items:
-                              type: string
-                              format: email
-                      points_of_contact:
-                        type: array
-                        items:
-                          type: string
-                      creator:
-                        type: string
-                      created_at:
-                        type: string
-                        format: date-time
-                  message:
-                    type: string
+                  sucess:
+                    type: boolean
+                  alert:
+                    $ref: '#/components/schemas/Alert'
 
   /alerts/history:
     get:
@@ -233,66 +131,24 @@ paths:
                   alerts:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        alert_id:
-                          type: string
-                        type:
-                          type: string
-                          enum: [query, dashboard, metric]
-                        created_by:
-                          type: string
-                        creation_date:
-                          type: string
-                          format: date
-                        run_history:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              run_id:
-                                type: string
-                              run_time:
-                                type: string
-                                format: date-time
-                              outcome:
-                                type: string
-                                enum: [success, failure]
-                              triggered_threshold:
-                                type: string
-                                enum: [info, low, medium, high]
-                        recipients:
-                          type: array
-                          items:
-                            type: string
-                            format: email
-    delete:
-      summary: Clear all alert history
-      responses:
-        '200':
-          description: Successfully cleared all alert history.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  message:
-                    type: string
+                      $ref: '#/components/schemas/Alert'
 
-  /alerts/history/run:
     delete:
-      summary: Delete a single alert run history entry
+      summary: Deletes an alert from history
       parameters:
-        - name: run_id
+        - name: alertId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: workspaceId
           in: query
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: Successfully deleted the alert run history entry.
+          description: Successfully cleared all alert history.
           content:
             application/json:
               schema:
@@ -316,7 +172,129 @@ components:
           format: int32
         message:
           type: string
+    SeverityStateEnum:
+      type: string
+      enum:
+        - High
+        - Medium
+        - Low
+        - Info
+    FREQUENCY_ENUM:
+      type: string
+      enum:
+        - Daily
+        - Weekly
+        - "Doesn't repeat"
+    TIMEZONE_ENUM:
+      type: string
+      enum:
+        - America/Los_Angeles
+        - America/New_York
+        - Europe/London
+    ScheduleConf:
+      type: object
+      properties:
+        timezone:
+          $ref: '#/components/schemas/TIMEZONE_ENUM'
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        time:
+          type: string
+          example: '12:00'
+        frequency:
+          $ref: '#/components/schemas/FREQUENCY_ENUM'
+    Schedule:
+      type: object
+      properties:
+        name:
+          type: string
+        user_id:
+          type: string
+        metric:
+          type: string
+        schedule:
+          $ref: '#/components/schemas/ScheduleConf'
+        severity:
+          $ref: '#/components/schemas/SeverityStateEnum'
+        workspaceId:
+          type: string
+        slack_enabled:
+          type: boolean
+        email_enabled:
+          type: boolean
+        assigned_emails:
+          type: array
+          items:
+            type: string
+            format: email
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        next_run_at:
+          type: string
+          format: date-time
+        ownerUserId:
+          type: string
+    SaveScheduleApiRequest:
+      type: object
+      properties:
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+    CreateAlertResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        scheduleId:
+          type: string
+    DeleteAlertScheduleApiRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+        scheduleId:
+          type: string
+        workspaceId:
+          type: string
+    DeleteAlertScheduleResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    Alert:
+      type: object
+      properties:
+        source:
+          type: string
+        alertId:
+          type: string
+        severity:
+          $ref: '#/components/schemas/SeverityStateEnum'
+        time:
+          type: string
+        alertName:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        workspaceId:
+          type: string
+        userId:
+          type: string
+        ownerUserId:
+          type: string    
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+  
