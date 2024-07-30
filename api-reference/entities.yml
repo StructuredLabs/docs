@@ -20,23 +20,10 @@ paths:
             schema:
               type: object
               properties:
-                warehouseCredentials:
-                  type: object
-                  properties:
-                    type:
-                      type: string
-                      enum: [bigquery, snowflake, redshift]
-                    projectId:
-                      type: string
-                    clientEmail:
-                      type: string
-                    privateKey:
-                      type: string
-                  required:
-                    - type
-                    - projectId
-                    - clientEmail
-                    - privateKey
+                userId:
+                  type: string
+                workspaceId:
+                  type: string
       responses:
         '200':
           description: 'Successfully loaded and transformed data.'
@@ -45,27 +32,215 @@ paths:
               schema:
                 type: object
                 properties:
-                  summary:
+                  entityDocuments:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        entity:
-                          type: string
-                        total:
-                          type: integer
-                        fields:
-                          type: array
-                          items:
-                            type: string
+                      $ref: '#/components/schemas/EntityDocument'
+  /entities/mapper:
+    post:
+      summary: 'Map Entities'
+      description: 'Maps entities to a specific entity type.'
+      operationId: 'mapEntities'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                workspaceId:
+                  type: string
+                entitiesMap:
+                  type: object
+
+      responses:
+        '200':
+          description: 'Successfully mapped entities to entity type.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+    get:
+      summary: 'Get Entity Mappings'
+      description: 'Lists all entities mapped to a specific entity type.'
+      operationId: 'getEntityMappings'
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: workspaceId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Successfully listed all entities mapped to the entity type.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  entitiesMap:
+                    type: object
+
+  /entities/mapper/magic:
+    post:
+      summary: 'Automatically Map Entities'
+      description: 'Automatically maps entities to a specific entity type.'
+      operationId: 'autoMapEntities'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                workspaceId:
+                  type: string
+      responses:
+        '200':
+          description: 'Successfully automatically mapped entities to entity type.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  entitiesMap:
+                    type: object
+
+  /entities/newMapperEntities:
+    post:
+      summary: 'Save Map and Create New Entities'
+      description: 'Saves the entity mapping and creates new entities.'
+      operationId: 'mapNewEntities'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                workspaceId:
+                  type: string
+                entitiesMap:
+                  type: object
+      responses:
+        '200':
+          description: 'Successfully mapped new entities to entity type.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nodes:
+                    type: object
+                  edges:
+                    type: object
+                  success:
+                    type: boolean
+                  errors:
+                    type: object
+                  units:
+                    type: object
+                    properties:
+                      units:
+                        type: array
+                        items:
+                          type: object
+
+  /entities/notes:
+    post:
+      summary: 'Add Notes to Entities'
+      description: 'Adds notes to entities.'
+      operationId: 'addNotes'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                workspaceId:
+                  type: string
+                unitId:
+                  type: string
+                notes:
+                  type: object
+      responses:
+        '200':
+          description: 'Successfully added notes to entities.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+    get:
+      summary: 'Get Notes for Entities'
+      description: 'Lists all notes for a specific entity unit.'
+      operationId: 'getNotes'
+      parameters:
+        - name: unitId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: workspaceId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Successfully listed all notes for the entity.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  notes:
+                    type: object
+                  success:
+                    type: boolean
 
   /entities/units:
     get:
       summary: 'Get Entity Units'
-      description: 'Lists all units of a specific entity type along with their audit logs.'
+      description: 'Lists all units of a specific entity type'
       operationId: 'listEntityUnits'
       parameters:
-        - name: entity_id
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: workspaceId
           in: query
           required: true
           schema:
@@ -78,43 +253,62 @@ paths:
               schema:
                 type: object
                 properties:
-                  entity_id:
+                  data:
+                    type: object
+                  success:
+                    type: boolean
+    post:
+      summary: 'Create Entity Unit'
+      description: 'Creates new unit of a specific entity type.'
+      operationId: 'createEntityUnit'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                workspaceId:
+                  type: string
+                nodeType:
+                  type: string
+                unit:
+                  type: object
+      responses:
+        '200':
+          description: 'Successfully created new units of the entity type.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
                     type: string
-                  units:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                        data:
-                          type: object
-                        audit_log:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              timestamp:
-                                type: string
-                              action:
-                                type: string
-                              user_id:
-                                type: string
-                              changes:
-                                type: object
-                                additionalProperties:
-                                  type: object
-                                  properties:
-                                    old_value:
-                                      type: string
-                                    new_value:
-                                      type: string
+                  schema:
+                    type: object
+                  unit:
+                    type: object
 
   /entities/structure:
     get:
       summary: 'Get Structured Data Model'
       description: 'Returns the nodes and edges for the Structured data model.'
       operationId: 'getStructuredDataModel'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                workspaceId:
+                  type: string
       responses:
         '200':
           description: 'Successfully retrieved structured data model.'
@@ -162,6 +356,35 @@ components:
           format: int32
         message:
           type: string
+    MaterializedView:
+      type: object
+      properties:
+        materialized_view_name:
+          type: string
+        sql:
+          type: string
+        key_column:
+          type: string
+        tables:
+          type: array
+          items:
+            type: string
+        node_type:
+          type: string
+    EntityDocument:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        workspaceId:
+          type: string
+        nodeType:
+          type: string
+        materializedView:
+          $ref: '#/components/schemas/MaterializedView'
+
   securitySchemes:
     bearerAuth:
       type: http
