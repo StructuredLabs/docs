@@ -112,9 +112,18 @@
     {
       "group": "Entities API",
       "pages": [
+        "api-reference/entities/get-entities-structure",
         "api-reference/entities/get-entity-structure",
+        "api-reference/entities/get-entity-units",
+        "api-reference/entities/get-magic-mappings",
+        "api-reference/entities/get-mapper",
+        "api-reference/entities/get-unit-notes",
+        "api-reference/entities/get-units",
         "api-reference/entities/load-entity",
-        "api-reference/entities/get-entity-units"
+        "api-reference/entities/save-mapper",
+        "api-reference/entities/save-mappings-and-gen-entities",
+        "api-reference/entities/save-unit-notes",
+        "api-reference/entities/save-unit"
       ]
     },
     {
