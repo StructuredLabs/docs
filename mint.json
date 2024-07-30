@@ -142,17 +142,8 @@
     {
       "group": "Metrics API",
       "pages": [
-        "api-reference/metrics/compute-metric",
-        "api-reference/metrics/create-custom-metric",
-        "api-reference/metrics/edit-metric",
-        "api-reference/metrics/delete-custom-metric",
-        "api-reference/metrics/export-metric-data",
-        "api-reference/metrics/share-metric",
-        "api-reference/metrics/embed-metric",
-        "api-reference/metrics/get-segments",
-        "api-reference/metrics/create-segment",
-        "api-reference/metrics/edit-segment",
-        "api-reference/metrics/delete-segment"
+        "api-reference/metrics/check-prerequisite",
+        "api-reference/metrics/compute-metric"
       ]
     },
     {
