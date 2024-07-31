@@ -1,0 +1,43 @@
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 129)     {
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 130)       "group": "Queries API",
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 131)       "pages": [
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 132)         "api-reference/queries/create-query-thread",
+9c928a4a (Amrutha Gujjar   2024-06-18 21:28:41 -0700 133)         "api-reference/queries/run-query",
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 134)         "api-reference/queries/get-suggested-queries",
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 135)         "api-reference/queries/get-dataset-summary",
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 136)         "api-reference/queries/export-query-results",
+9c928a4a (Amrutha Gujjar   2024-06-18 21:28:41 -0700 137)         "api-reference/queries/delete-query",
+9c928a4a (Amrutha Gujjar   2024-06-18 21:28:41 -0700 138)         "api-reference/queries/get-metadata",
+257acfcb (Amrutha Gujjar   2024-06-18 15:40:03 -0700 139)         "api-reference/queries/list-thread-queries"
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 140)       ]
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 141)     },
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 149)     {
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 150)       "group": "Alerts API",
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 151)       "pages": [
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 152)         "api-reference/alerts/create-alert",
+bbde30b9 (Jayanth Kumar    2024-07-31 02:17:33 +0530 153)         "api-reference/alerts/delete-alert-history",
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 154)         "api-reference/alerts/delete-alert",
+8b656e47 (Amrutha Gujjar   2024-06-18 22:21:57 -0700 155)         "api-reference/alerts/get-alert-history",
+bbde30b9 (Jayanth Kumar    2024-07-31 02:17:33 +0530 156)         "api-reference/alerts/get-alert",
+bbde30b9 (Jayanth Kumar    2024-07-31 02:17:33 +0530 157)         "api-reference/alerts/trigger-alert"
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 158)       ]
+^aec6dcc (Amrutha Gujjar   2023-07-18 20:00:13 -0700 159)     }
+^aec6dcc (Amrutha Gujjar   2023-07-18 20:00:13 -0700 160)   ],
+^aec6dcc (Amrutha Gujjar   2023-07-18 20:00:13 -0700 161)   "footerSocials": {
+9687147a (Amrutha Gujjar   2023-11-01 02:25:37 -0400 162)     "linkedin": "https://www.linkedin.com/company/structuredlabs/",
+dedc0193 (Amrutha Gujjar   2024-02-24 17:56:21 -0500 163)     "twitter": "https://twitter.com/StructuredLabs",
+9687147a (Amrutha Gujjar   2023-11-01 02:25:37 -0400 164)     "website": "https://www.structuredlabs.io",
+9687147a (Amrutha Gujjar   2023-11-01 02:25:37 -0400 165)     "email": "mailto:contact@structuredlabs.io",
+dedc0193 (Amrutha Gujjar   2024-02-24 17:56:21 -0500 166)     "slack": "https://structured-users.slack.com/",
+dedc0193 (Amrutha Gujjar   2024-02-24 17:56:21 -0500 167)     "github": "https://github.com/StructuredLabs"
+7d1216cc (Amrutha Gujjar   2024-06-18 01:50:18 -0700 168)   },
+373c6914 (Amrutha Gujjar   2024-06-18 12:25:51 -0700 169)   "openapi": [
+bbde30b9 (Jayanth Kumar    2024-07-31 02:17:33 +0530 170)     "api-reference/connections.yml",
+bbde30b9 (Jayanth Kumar    2024-07-31 02:17:33 +0530 171)     "api-reference/entities.yml",
+bbde30b9 (Jayanth Kumar    2024-07-31 02:17:33 +0530 172)     "api-reference/queries.yml",
+bbde30b9 (Jayanth Kumar    2024-07-31 02:17:33 +0530 173)     "api-reference/metrics.yml",
+373c6914 (Amrutha Gujjar   2024-06-18 12:25:51 -0700 174)     "api-reference/alerts.yml"
+373c6914 (Amrutha Gujjar   2024-06-18 12:25:51 -0700 175)   ]
+bbde30b9 (Jayanth Kumar    2024-07-31 02:17:33 +0530 176) }
+
+
