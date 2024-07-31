@@ -12,8 +12,8 @@ security:
 paths:
   /connections:
     post:
-      summary: Connect to a data source
-      description: Connects to a specified live data source.
+      summary: Connect to google sheets
+      description: Connects to a specified data source.
       requestBody:
         description: The details required to connect to the data source.
         required: true
@@ -22,66 +22,43 @@ paths:
             schema:
               type: object
               properties:
-                type:
-                  type: string
-                  description: The type of data source.
-                  example: csv|google_sheets|salesforce|hubspot|...
+                # {
+                #   userId: string;
+                #   connectionType: string;
+                #   workspaceId: string;
+                #   metadata: {
+                #     gsheetsUrl: string;
+                #   };
+                # }
                 userId:
                   type: string
-                  description: The user's Id.
+                  description: The unique identifier of the user.
+                connectionType:
+                  type: string
+                  description: The type of connection to establish, GoogleSheets
+                workspaceId:
+                  type: string
+                  description: The unique identifier of the workspace.
                 metadata:
                   type: object
-                  description: Connection specific metadata.
-                  # properties:
-                  #   sync_period:
-                  #     type: string
-                  #     description: The synchronization period.
-                  #     example: 30 minutes|hourly|daily
-                # credentials:
-                #   type: object
-                #   description: The credentials required for authentication.
-                #   properties:
-                #     username:
-                #       type: string
-                #       description: The username for authentication.
-                #       example: user123
-                #     password:
-                #       type: string
-                #       description: The password for authentication.
-                #       example: pass123
-                #     api_key:
-                #       type: string
-                #       description: The API key for authentication.
-                #       example: key123
-                #     other_params:
-                #       type: object
-                #       description: Additional parameters for authentication.
-                #       additionalProperties: true
-                #       example: {}
-                # settings:
-                #   type: object
-                #   description: Configuration settings for the connection.
-                #   properties:
-                #     sync_period:
-                #       type: string
-                #       description: The synchronization period.
-                #       example: 30 minutes|hourly|daily
+                  properties:
+                    gsheetsUrl:
+                      type: string
+                      description: The URL of the Google Sheets document to connect to.
       responses:
         "200":
           description: Successfully connected to the data source.
           content:
             application/json:
               schema:
+                # Connection array
                 type: object
                 properties:
-                  connection_id:
-                    type: string
-                    description: The unique identifier for the established connection.
-                    example: abc123
-                  message:
-                    type: string
-                    description: Additional information about the connection status.
-                    example: Successfully connected to the data source.
+                  # connections array
+                  connections:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Connection"
         "400":
           description: Unexpected error
           content:
@@ -92,7 +69,7 @@ paths:
       summary: View data from a connection
       description: Retrieves the data rows from a specified connection. This endpoint provides a snapshot of the current data within the connection based on the latest sync.
       parameters:
-        - name: connection_id
+        - name: connectionId
           in: query
           required: true
           schema:
@@ -105,7 +82,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  connection_id:
+                  connectionId:
                     type: string
                     description: The unique identifier for the connection whose data is being accessed.
                   data:
@@ -115,22 +92,31 @@ paths:
                       type: object
                       additionalProperties: true
                       description: Key-value pairs representing column names and their corresponding values.
-                  message:
-                    type: string
-                    description: A message detailing the outcome of the operation. Provides details on success or describes the error if one occurred.
-
+                  success:
+                    type: boolean
+                    description: Indicates if the data retrieval was successful.
     delete:
       summary: Delete data connections
       description: |
         Deletes data connections. This action is irreversible and should be
         used with caution to avoid unintentional data loss.
       parameters:
-        - name: connection_id
+      # {
+        - name: connectionId
           in: query
-          required: false
+          required: true
           schema:
             type: string
-          description: The unique identifier for the connection. If provided, the specific connection will be deleted. If not provided, delete will fail.
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: workspaceId
+          in: query
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Successfully deleted the data connection(s).
@@ -139,24 +125,35 @@ paths:
               schema:
                 type: object
                 properties:
-                  connection_id:
+                  connection_idconnectionId:
                     type: string
                     description: The unique identifier for the established connection.
                     example: abc123
-                  message:
-                    type: string
-                    description: Detailed message about the outcome. Either a success message or an error description.
+                  success:
+                    type: boolean
+                    description: Indicates if the deletion was successful.
 
   /connections/refresh:
     post:
       summary: Refresh a Connection
       description: Refreshes an existing connection to ensure data is up-to-date.
-      parameters:
-        - name: connection_id
-          in: query
-          required: true
-          schema:
-            type: string
+      requestBody:
+        description: The details required to refresh the connection.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: The unique identifier of the user.
+                connectionId:
+                  type: string
+                  description: The unique identifier of the connection to refresh.
+                workspaceId:
+                  type: string
+                  description: The unique identifier of the workspace.
       responses:
         "200":
           description: Connection refresh response.
@@ -165,324 +162,329 @@ paths:
               schema:
                 type: object
                 properties:
-                  connection_id:
-                    type: string
-                    description: The unique identifier of the refreshed connection.
-                  status:
-                    type: string
-                    enum:
-                      - refreshed
-                      - error
-                    description: Status of the refresh operation.
+                  # array of connections
+                  connections:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Connection"
+                  success:
+                    type: boolean
+                    description: Indicates if the refresh was successful.
                   message:
                     type: string
                     description: A message detailing the outcome of the refresh operation.
 
-  /connections/configure_sync:
+  /connections/source/bigquery:
     post:
-      summary: Configure Sync for a Connection
-      description: Configures which columns to sync for a specific data connection.
-      parameters:
-        - name: connection_id
-          in: query
-          required: true
-          schema:
-            type: string
+      summary: Connect to BigQuery
+      description: Connects to a specified BigQuery data source.
       requestBody:
+      # userId: string;
+      # workspaceId: string;
+      # conn: BigQueryConnectionFormInputs;
+        description: The details required to connect to the BigQuery data source.
         required: true
         content:
           application/json:
             schema:
               type: object
               properties:
-                columns_to_sync:
-                  type: array
-                  description: Specifies which columns to sync.
-                  items:
-                    type: object
-                    properties:
-                      column_name:
-                        type: string
-                        description: The name of the column to sync.
-                      mapped_to:
-                        type: string
-                        description: How the column is mapped to an entity attribute.
+                userId:
+                  type: string
+                  description: The unique identifier of the user.
+                workspaceId:
+                  type: string
+                  description: The unique identifier of the workspace.
+                conn:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      description: The type of connection to establish, BigQuery
+                    project_id:
+                      type: string
+                      description: The project ID of the BigQuery project.
+                    private_key_id:
+                      type: string
+                      description: The private key ID for the BigQuery project.
+                    private_key:
+                      type: string
+                      description: The private key for the BigQuery project.
+                    client_email:
+                      type: string
+                      description: The client email for the BigQuery project.
+                    client_id:
+                      type: string
+                      description: The client ID for the BigQuery project.
+                    auth_uri:
+                      type: string
+                      description: The authentication URI for the BigQuery project.
+                    token_uri:
+                      type: string
+                      description: The token URI for the BigQuery project.
+                    auth_provider_x509_cert_url:
+                      type: string
+                      description: The authentication provider x509 certificate URL for the BigQuery project.
+                    client_x509_cert_url:
+                      type: string
+                      description: The client x509 certificate URL for the BigQuery project.
+                    universe_domain:
+                      type: string
+                      description: The universe domain for the BigQuery project.
+                    dataset:
+                      type: string
+                      description: The dataset to connect to in the BigQuery project.
       responses:
         "200":
-          description: Successfully configured synchronization settings.
+          description: Successfully connected to the BigQuery data source.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  status:
-                    type: string
-                    example: success
-                    description: Indicates if the sync configuration was successful.
-                  message:
-                    type: string
-                    example: Synchronization settings configured successfully.
-                    description: A detailed message about the sync configuration status.
+                  connections:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Connection"
 
-  /connections/schema:
-    get:
-      summary: Get schema details of a connection
-      description: Provides the schema details for a specific data connection, showing the structure of the data including column names, data types, and any other relevant metadata.
-      parameters:
-        - name: connection_id
-          in: query
-          required: true
-          schema:
-            type: string
+  /connections/source/csv:
+    post:
+      summary: Connect to CSV
+      description: Connects to a specified CSV data source.
+      requestBody:
+        description: The details required to connect to the CSV data source.
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The CSV file to upload.
+                userId:
+                  type: string
+                  description: The unique identifier of the user.
+                workspaceId:
+                  type: string
+                  description: The unique identifier of the workspace.
       responses:
         "200":
-          description: Successfully retrieved schema details of the connection.
+          description: Successfully connected to the BigQuery data source.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  connection_id:
-                    type: string
-                    description: The unique identifier for the connection whose schema is being retrieved.
-                  schema:
+                  connection:
                     type: object
-                    properties:
-                      fields:
-                        type: array
-                        description: List of fields describing the schema of the connection.
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                              description: Name of the column.
-                            type:
-                              type: string
-                              description: Data type of the column.
-                            source:
-                              type: string
-                              description: Source of the data if applicable.
-                  status:
-                    type: string
-                    enum:
-                      - success
-                      - error
-                    description: Status of the schema retrieval operation.
-                  message:
-                    type: string
-                    description: A message detailing the outcome of the operation, providing success details or error information.
+                    $ref: "#/components/schemas/Connection"
 
-  /connections/export:
-    get:
-      summary: Export data from a connection
-      description: Allows users to export the data from a specified connection as a file. The endpoint supports various formats such as CSV, Excel, or other file types.
-      parameters:
-        - name: connection_id
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: format
-          in: query
-          required: true
-          schema:
-            type: string
-            description: The format of the file to export (e.g., csv, xls, etc.).
+  /connections/source/firestore:
+    post:
+      summary: Connect to Firestore
+      description: Connects to a Firestore collection
+      requestBody:
+      # userId: string;
+      # workspaceId: string;
+      # conn: BigQueryConnectionFormInputs;
+        description: The details required to connect to the BigQuery data source.
+        required: true
+        content:
+          application/json:
+            schema:
+            # userId
+            # workspaceId
+            # conn
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: The unique identifier of the user.
+                workspaceId:
+                  type: string
+                  description: The unique identifier of the workspace.
+                conn:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      description: The type of connection to establish, Firestore
+                    project_id:
+                      type: string
+                      description: The project ID of the Firestore project.
+                    private_key_id:
+                      type: string
+                      description: The private key ID for the Firestore project.
+                    private_key:
+                      type: string
+                      description: The private key for the Firestore project.
+                    client_email:
+                      type: string
+                      description: The client email for the Firestore project.
+                    client_id:
+                      type: string
+                      description: The client ID for the Firestore project.
+                    auth_uri:
+                      type: string
+                      description: The authentication URI for the Firestore project.
+                    token_uri:
+                      type: string
+                      description: The token URI for the Firestore project.
+                    auth_provider_x509_cert_url:
+                      type: string
+                      description: The authentication provider x509 certificate URL for the Firestore project.
+                    client_x509_cert_url:
+                      type: string
+                      description: The client x509 certificate URL for the Firestore project.
+                    universe_domain:
+                      type: string
+                      description: The universe domain for the Firestore project.
+                    firestore_database_name:
+                      type: string
+                      description: The Firestore database name.
+                    firestore_collection_name:
+                      type: string
+                      description: The Firestore collection name.
       responses:
         "200":
-          description: export ready.
+          description: Successfully connected to the Firestore data source.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  connection_id:
-                    type: string
-                    description: The unique identifier for the connection.
-                  export_url:
-                    type: string
-                    format: uri
-                    description: URL to the file that can be exported.
-                  status:
-                    type: string
-                    enum:
-                      - success
-                      - error
-                    description: Status indicating whether the download was prepared successfully or if an error occurred.
-                  message:
-                    type: string
-                    description: A message indicating that the download is ready or detailing any error that might have occurred.
+                  connection:
+                    type: object
+                    $ref: "#/components/schemas/Connection"
+
+  /connections/source/postgres:
+    post:
+      summary: Connect to Postgres
+      description: Connects to a Postgres database
+      requestBody:
+        description: The details required to connect to the Postgres data source.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: The unique identifier of the user.
+                workspaceId:
+                  type: string
+                  description: The unique identifier of the workspace.
+                conn:
+                  type: object
+                  # {
+                  #   hostName: string;
+                  #   port: number;
+                  #   databaseName: string;
+                  #   userName: string;
+                  #   password: string;
+                  #   tableName: string;
+                  # }
+                  properties:
+                    hostName:
+                      type: string
+                      description: The hostname of the Postgres database.
+                    port:
+                      type: integer
+                      description: The port number of the Postgres database.
+                    databaseName:
+                      type: string
+                      description: The name of the Postgres database.
+                    userName:
+                      type: string
+                      description: The username to connect to the Postgres database.
+                    password:
+                      type: string
+                      description: The password to connect to the Postgres database.
+                    tableName:
+                      type: string
+                      description: The name of the table to connect to in the Postgres database.
+      responses:
+        "200":
+          description: Successfully connected to the Postgres data source.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connection:
+                    type: object
+                    $ref: "#/components/schemas/Connection"
+
+  /connections/source/xlsx:
+    post:
+      summary: Connect to XLSX
+      description: Connects to a specified XLSX data source.
+      requestBody:
+        description: The details required to connect to the XLSX data source.
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The XLSX file to upload.
+                userId:
+                  type: string
+                  description: The unique identifier of the user.
+                workspaceId:
+                  type: string
+                  description: The unique identifier of the workspace.
+      responses:
+        "200":
+          description: Successfully connected to the BigQuery data source.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connections:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Connection"
 
   /connections/metadata:
     get:
       summary: Retrieve metadata about connections
-      description: Get connection metadata. This can either be metadata about a specific connection, including details such as who created it, when it was connected, last sync time, and the connection schema.
+      description: Get connection metadata. This can either be metadata about a specific connection, including details such as who created it, when it was connected, and the connection schema.
       parameters:
-        - name: connection_id
+        - name: connectionId
           in: query
           required: false
           schema:
             type: string
-          description: The unique identifier for the connection. If provided, metadata for that specific connection will be retrieved. If not provided, metadata for all connections will be retrieved.
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: workspaceId
+          in: query
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Successfully retrieved metadata about the connection(s).
           content:
             application/json:
               schema:
-                oneOf:
-                  - type: object
-                    properties:
-                      connection_id:
-                        type: string
-                        description: The unique identifier for the connection.
-                      created_by:
-                        type: string
-                        description: Username of the person who created the connection.
-                      connected_at:
-                        type: string
-                        format: date-time
-                        description: Timestamp when the connection was established.
-                      last_synced:
-                        type: string
-                        format: date-time
-                        description: Timestamp of the last synchronization.
-                      connection_type:
-                        type: string
-                        enum:
-                          - csv
-                          - google_sheets
-                          - salesforce
-                          - hubspot
-                          - ...
-                        description: Type of the connection.
-                      schema:
-                        type: object
-                        properties:
-                          fields:
-                            type: array
-                            description: List of fields describing the schema of the connection.
-                            items:
-                              type: object
-                              properties:
-                                name:
-                                  type: string
-                                  description: Name of the column.
-                                type:
-                                  type: string
-                                  description: Data type of the column.
-                                source:
-                                  type: string
-                                  description: Source of the data if applicable.
-                      status:
-                        type: string
-                        enum:
-                          - active
-                          - inactive
-                        description: Current status of the connection.
-                      error:
-                        type: string
-                        description: Error details if applicable.
-                  - type: object
-                    properties:
-                      connections:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            connection_id:
-                              type: string
-                              description: The unique identifier for the connection.
-                            created_by:
-                              type: string
-                              description: Username of the user who created the connection.
-                            connected_at:
-                              type: string
-                              format: date-time
-                              description: Timestamp of when the connection was established.
-                            last_synced:
-                              type: string
-                              format: date-time
-                              description: Timestamp of the last successful synchronization with the connection.
-                            connection_type:
-                              type: string
-                              description: The type of the connection, such as 'csv', 'google_sheets', etc.
-                            status:
-                              type: string
-                              description: Current status of the connection, can be 'active' or 'inactive'.
-
-  /connections/usage:
-    get:
-      summary: View usage details of a connection
-      description: Provides usage statistics and performance metrics for a specific connection, helpful for monitoring and optimizing data flows.
-      parameters:
-        - name: connection_id
-          in: query
-          required: true
-          schema:
-            type: string
-          description: The unique identifier for the connection.
-      responses:
-        "200":
-          description: Successfully retrieved usage details of the connection.
-          content:
-            application/json:
-              schema:
                 type: object
                 properties:
-                  connection_id:
-                    type: string
-                    description: The unique identifier for the connection.
-                  data_usage:
-                    type: object
-                    properties:
-                      last_month:
-                        type: string
-                        description: Data amount used in the last month in GB.
-                      current_month:
-                        type: string
-                        description: Data amount used in the current month in GB.
-                  query_performance:
+                  connections:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        query_id:
-                          type: string
-                          description: Unique identifier for the query.
-                        execution_time:
-                          type: string
-                          description: The time taken to execute the query in milliseconds.
-                        status:
-                          type: string
-                          description: The status of the query execution, can be either 'completed' or 'failed'.
-
-  /connections/test:
-    post:
-      summary: Test a data connection
-      description: Tests if a specific data connection is successful, ensuring that the system can communicate effectively with the connection source.
-      parameters:
-        - name: connection_id
-          in: query
-          required: true
-          description: The unique identifier for the connection to be tested.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successfully tested the data connection.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    description: Result of the connection test, typically 'success' or 'failure'.
-                  details:
-                    type: string
-                    description: Detailed message explaining the test result or any issues encountered.
+                      $ref: "#/components/schemas/Connection"
 
 components:
   schemas:
@@ -497,6 +499,49 @@ components:
           format: int32
         message:
           type: string
+    Connection:
+      type: object
+      properties:
+        source:
+          type: string
+          description: The source of the connection.
+        connectionId:
+          type: string
+          description: The unique identifier for the connection.
+        connectionName:
+          type: string
+          description: The name of the connection.
+        connectionType:
+          type: string
+          description: The type of connection.
+        userId:
+          type: string
+          description: The unique identifier of the user.
+        workspaceId:
+          type: string
+          description: The unique identifier of the workspace.
+        dateAdded:
+          type: string
+          description: The date when the connection was added.
+        state:
+          type: string
+          description: The state of the connection.
+        datasetId:
+          type: string
+          description: The unique identifier of the dataset.
+        tableIds:
+          type: array
+          items:
+            type: string
+          description: Array of unique identifiers for tables.
+        metadata:
+          type: object
+          description: Additional metadata for the connection.
+        schema:
+          type: array
+          items:
+            type: object
+          description: Array of objects representing the schema of the connection.
   securitySchemes:
     bearerAuth:
       type: http

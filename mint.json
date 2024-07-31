@@ -19,7 +19,7 @@
     }
   },
   "topbarLinks": [
-     {
+    {
       "name": "Website",
       "url": "https://structuredlabs.io"
     },
@@ -53,9 +53,11 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["intro", "how"]
+      "pages": [
+        "intro",
+        "how"
+      ]
     },
-    
     {
       "group": "Features",
       "pages": [
@@ -66,7 +68,7 @@
         "features/alerts"
       ]
     },
-     {
+    {
       "group": "Integrations",
       "pages": [
         "integrations/data",
@@ -74,9 +76,13 @@
         "integrations/comms"
       ]
     },
-     {
+    {
       "group": "Security Policies",
-      "pages": ["datapolicy", "privacypolicy", "termsofservice"]
+      "pages": [
+        "datapolicy",
+        "privacypolicy",
+        "termsofservice"
+      ]
     },
     {
       "group": "API Documentation",
@@ -87,63 +93,76 @@
     {
       "group": "Connections API",
       "pages": [
-        "api-reference/connections/connect-data-source",
-        "api-reference/connections/get-connection-data",
+        "api-reference/connections/configure-connection-sync",
+        "api-reference/connections/create-bigquery-conn",
+        "api-reference/connections/create-csv-conn",
+        "api-reference/connections/create-firestore-conn copy",
+        "api-reference/connections/create-gsheet-conn",
+        "api-reference/connections/create-postgres-conn",
+        "api-reference/connections/create-xlsx-conn",
         "api-reference/connections/delete-connection",
-        "api-reference/connections/test-connection",
+        "api-reference/connections/export-connection-data",
+        "api-reference/connections/get-connection-data",
+        "api-reference/connections/get-connection-usage",
         "api-reference/connections/get-metadata",
         "api-reference/connections/refresh-connection-data",
-        "api-reference/connections/configure-connection-sync",
-        "api-reference/connections/export-connection-data",
-        "api-reference/connections/get-connection-usage"
+        "api-reference/connections/test-connection"
       ]
     },
     {
       "group": "Entities API",
       "pages": [
+        "api-reference/entities/get-entities-structure",
         "api-reference/entities/get-entity-structure",
+        "api-reference/entities/get-entity-units",
+        "api-reference/entities/get-magic-mappings",
+        "api-reference/entities/get-mapper",
+        "api-reference/entities/get-unit-notes",
+        "api-reference/entities/get-units",
         "api-reference/entities/load-entity",
-        "api-reference/entities/get-entity-units"
+        "api-reference/entities/save-mapper",
+        "api-reference/entities/save-mappings-and-gen-entities",
+        "api-reference/entities/save-unit-notes",
+        "api-reference/entities/save-unit"
       ]
     },
     {
       "group": "Queries API",
       "pages": [
         "api-reference/queries/create-query-thread",
-        "api-reference/queries/run-query",
-        "api-reference/queries/get-suggested-queries",
-        "api-reference/queries/get-dataset-summary",
-        "api-reference/queries/export-query-results",
         "api-reference/queries/delete-query",
-        "api-reference/queries/get-metadata",
-        "api-reference/queries/list-thread-queries"
+        "api-reference/queries/get-history",
+        "api-reference/queries/run-query"
       ]
     },
     {
       "group": "Metrics API",
       "pages": [
-        "api-reference/metrics/compute-metric",
-        "api-reference/metrics/create-custom-metric",
-        "api-reference/metrics/edit-metric",
-        "api-reference/metrics/delete-custom-metric",
-        "api-reference/metrics/export-metric-data",
-        "api-reference/metrics/share-metric",
-        "api-reference/metrics/embed-metric",
-        "api-reference/metrics/get-segments",
-        "api-reference/metrics/create-segment",
-        "api-reference/metrics/edit-segment",
-        "api-reference/metrics/delete-segment"
+        "api-reference/metrics/check-prerequisite",
+        "api-reference/metrics/compute-metric"
       ]
     },
     {
       "group": "Alerts API",
       "pages": [
         "api-reference/alerts/create-alert",
-        "api-reference/alerts/get-alert",
-        "api-reference/alerts/trigger-alert",
+        "api-reference/alerts/delete-alert-history",
         "api-reference/alerts/delete-alert",
         "api-reference/alerts/get-alert-history",
-        "api-reference/alerts/delete-alert-history"
+        "api-reference/alerts/get-alert",
+        "api-reference/alerts/trigger-alert"
+      ]
+    },
+    {
+      "group": "Tickets API",
+      "pages": [
+        "api-reference/tickets/create-comment",
+        "api-reference/tickets/create-ticket",
+        "api-reference/tickets/delete-column",
+        "api-reference/tickets/delete-tickets",
+        "api-reference/tickets/get-comments",
+        "api-reference/tickets/get-tickets",
+        "api-reference/tickets/update-column-name"
       ]
     }
   ],
@@ -156,11 +175,11 @@
     "github": "https://github.com/StructuredLabs"
   },
   "openapi": [
-    "api-reference/connections.yml", 
-    "api-reference/entities.yml", 
-    "api-reference/queries.yml", 
-    "api-reference/metrics.yml", 
-    "api-reference/alerts.yml"
+    "api-reference/connections.yml",
+    "api-reference/entities.yml",
+    "api-reference/queries.yml",
+    "api-reference/metrics.yml",
+    "api-reference/alerts.yml",
+    "api-reference/tickets.yml"
   ]
-
 }
