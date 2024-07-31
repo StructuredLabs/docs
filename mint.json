@@ -152,6 +152,18 @@
         "api-reference/alerts/get-alert",
         "api-reference/alerts/trigger-alert"
       ]
+    },
+    {
+      "group": "Tickets API",
+      "pages": [
+        "api-reference/tickets/create-comment",
+        "api-reference/tickets/create-ticket",
+        "api-reference/tickets/delete-column",
+        "api-reference/tickets/delete-tickets",
+        "api-reference/tickets/get-comments",
+        "api-reference/tickets/get-tickets",
+        "api-reference/tickets/update-column-name"
+      ]
     }
   ],
   "footerSocials": {
@@ -167,6 +179,7 @@
     "api-reference/entities.yml",
     "api-reference/queries.yml",
     "api-reference/metrics.yml",
-    "api-reference/alerts.yml"
+    "api-reference/alerts.yml",
+    "api-reference/tickets.yml"
   ]
 }
