@@ -32,12 +32,6 @@
     "name": "App",
     "url": "https://app.structuredlabs.io"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
   "anchors": [
     {
       "name": "Community",
@@ -82,87 +76,6 @@
         "datapolicy",
         "privacypolicy",
         "termsofservice"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Connections API",
-      "pages": [
-        "api-reference/connections/configure-connection-sync",
-        "api-reference/connections/create-bigquery-conn",
-        "api-reference/connections/create-csv-conn",
-        "api-reference/connections/create-firestore-conn copy",
-        "api-reference/connections/create-gsheet-conn",
-        "api-reference/connections/create-postgres-conn",
-        "api-reference/connections/create-xlsx-conn",
-        "api-reference/connections/delete-connection",
-        "api-reference/connections/export-connection-data",
-        "api-reference/connections/get-connection-data",
-        "api-reference/connections/get-connection-usage",
-        "api-reference/connections/get-metadata",
-        "api-reference/connections/refresh-connection-data",
-        "api-reference/connections/test-connection"
-      ]
-    },
-    {
-      "group": "Entities API",
-      "pages": [
-        "api-reference/entities/get-entities-structure",
-        "api-reference/entities/get-entity-structure",
-        "api-reference/entities/get-entity-units",
-        "api-reference/entities/get-magic-mappings",
-        "api-reference/entities/get-mapper",
-        "api-reference/entities/get-unit-notes",
-        "api-reference/entities/get-units",
-        "api-reference/entities/load-entity",
-        "api-reference/entities/save-mapper",
-        "api-reference/entities/save-mappings-and-gen-entities",
-        "api-reference/entities/save-unit-notes",
-        "api-reference/entities/save-unit"
-      ]
-    },
-    {
-      "group": "Queries API",
-      "pages": [
-        "api-reference/queries/create-query-thread",
-        "api-reference/queries/delete-query",
-        "api-reference/queries/get-history",
-        "api-reference/queries/run-query"
-      ]
-    },
-    {
-      "group": "Metrics API",
-      "pages": [
-        "api-reference/metrics/check-prerequisite",
-        "api-reference/metrics/compute-metric"
-      ]
-    },
-    {
-      "group": "Alerts API",
-      "pages": [
-        "api-reference/alerts/create-alert",
-        "api-reference/alerts/delete-alert-history",
-        "api-reference/alerts/delete-alert",
-        "api-reference/alerts/get-alert-history",
-        "api-reference/alerts/get-alert",
-        "api-reference/alerts/trigger-alert"
-      ]
-    },
-    {
-      "group": "Tickets API",
-      "pages": [
-        "api-reference/tickets/create-comment",
-        "api-reference/tickets/create-ticket",
-        "api-reference/tickets/delete-column",
-        "api-reference/tickets/delete-tickets",
-        "api-reference/tickets/get-comments",
-        "api-reference/tickets/get-tickets",
-        "api-reference/tickets/update-column-name"
       ]
     }
   ],
