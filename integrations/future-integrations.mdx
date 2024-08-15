@@ -1,0 +1,102 @@
+---
+title: "Future Integrations"
+icon: "link"
+---
+
+Structured is continuously expanding its capabilities to support a wider range of data sources and platforms. Below are some of the future integrations we're planning to introduce, which will allow you to bring even more data into Structured’s semantic layer, enhancing your ability to standardize and analyze your business metrics.
+
+<CardGroup cols={3}>
+  <Card title="Snowflake" icon="snowflake" href="#snowflake-integration"></Card>
+  <Card
+    title="PostgreSQL"
+    icon="database"
+    href="#postgresql-integration"
+  ></Card>
+</CardGroup>
+
+## **Snowflake Integration (Planned)**
+
+### **Overview**
+
+Snowflake is a highly scalable cloud data warehouse that provides robust data storage and analytics capabilities. Integrating Snowflake with Structured will allow you to pull in data directly from your Snowflake environment, enabling seamless data standardization and metric governance.
+
+### **Planned Integration Steps**
+
+1. **Integration Selection:**
+
+   - Structured will feature Snowflake in the "Integrations" section, allowing you to easily select and configure the integration.
+
+2. **Authentication Process:**
+
+   - You will authenticate using your Snowflake account credentials, enabling Structured to securely access and query your Snowflake data.
+
+3. **Data Selection and Syncing:**
+   - You’ll be able to choose specific databases, schemas, and tables within Snowflake to sync with Structured. This integration will support filtering and syncing frequency settings to ensure that the data pulled into Structured is both relevant and up-to-date.
+
+## **PostgreSQL Integration (Planned)**
+
+### **Overview**
+
+PostgreSQL is a powerful, open-source relational database system that is widely used for various applications. The future integration with PostgreSQL will enable Structured to pull in data from your PostgreSQL tables, allowing you to define and manage business metrics directly from your relational databases.
+
+### **Planned Integration Steps**
+
+1. **Integration Selection:**
+
+   - PostgreSQL will appear in the "Integrations" section, where you can initiate the connection process.
+
+2. **Database Connection:**
+
+   - You will connect Structured to your PostgreSQL database by providing the necessary credentials, including host, port, database name, and authentication details.
+
+3. **Table and Schema Selection:**
+   - Once connected, you’ll be able to select specific schemas and tables within your PostgreSQL database to sync with Structured. This selection process will include options for setting up custom data filters and sync intervals to optimize data management within the semantic layer.
+
+## **Other Potential Integrations**
+
+<AccordionGroup>
+  <Accordion title="dbt" icon="code-branch">
+    - **Overview:** dbt is a data transformation tool that allows teams to
+    transform raw data into clean, tested, and documented datasets ready for
+    analysis. Integrating dbt with Structured will enable RevOps teams to
+    automatically apply standardized transformations before pulling the data
+    into Structured’s semantic layer, ensuring consistent metric calculations
+    across all data sources. - **Planned Steps:** Connect dbt projects, select
+    transformation models, and configure automated syncs to ensure the latest
+    transformed data is always available for analysis in Structured.
+  </Accordion>
+  <Accordion title="Looker" icon="chart-bar">
+    - **Overview:** Looker is a data exploration and business intelligence
+    platform. Integrating Looker with Structured will allow RevOps teams to
+    directly pull in insights and visualizations, making it easier to align BI
+    dashboards with the standardized metrics governed by Structured’s semantic
+    layer. - **Planned Steps:** OAuth authentication with Looker, selection of
+    key Looker views and dashboards, and setup of data syncs to keep insights
+    aligned with real-time data changes in Structured.
+  </Accordion>
+  <Accordion title="Databricks" icon="database">
+    - **Overview:** Databricks is a unified data analytics platform, known for
+    its ability to handle big data and advanced analytics. Integrating
+    Databricks with Structured will allow teams to streamline the process of
+    pulling in large-scale data transformations and machine learning outputs
+    into the semantic layer, ensuring that all predictive metrics are
+    standardized and governed. - **Planned Steps:** Secure integration with
+    Databricks, selection of relevant data pipelines and notebooks, and
+    configuration of real-time data feeds into Structured to ensure seamless
+    integration of advanced analytics.
+  </Accordion>
+  <Accordion title="Fivetran" icon="plug">
+    - **Overview:** Fivetran provides fully managed data connectors that sync
+    data from various sources into your data warehouse. Integrating Fivetran
+    with Structured will allow RevOps teams to automatically sync data from
+    multiple platforms into Structured’s semantic layer, making it easier to
+    standardize and analyze metrics from diverse data sources. - **Planned
+    Steps:** Set up Fivetran connectors, map data sources to Structured, and
+    configure continuous syncs to ensure data freshness and accuracy across all
+    integrated platforms.
+  </Accordion>
+</AccordionGroup>
+
+## **Conclusion**
+
+As Structured continues to grow, these future integrations will further enhance the platform’s ability to pull in diverse data sources, creating a unified semantic layer that supports reliable, consistent, and scalable business metrics. These integrations will ensure that Structured remains at the forefront of data governance and metric standardization, providing your organization with the tools needed to make data-driven decisions with confidence.

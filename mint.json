@@ -21,16 +21,16 @@
   "topbarLinks": [
     {
       "name": "Website",
-      "url": "https://structuredlabs.io"
+      "url": "https://structuredlabs.com"
     },
     {
       "name": "Support",
-      "url": "mailto:contact@structuredlabs.io"
+      "url": "mailto:amrutha@structuredlabs.com"
     }
   ],
   "topbarCtaButton": {
     "name": "App",
-    "url": "https://app.structuredlabs.io"
+    "url": "https://app.structuredlabs.com"
   },
   "anchors": [
     {
@@ -41,7 +41,7 @@
     {
       "name": "Blog",
       "icon": "newspaper",
-      "url": "https://www.structuredlabs.io/blog"
+      "url": "https://www.structuredlabs.com/blog"
     }
   ],
   "navigation": [
@@ -49,25 +49,25 @@
       "group": "Get Started",
       "pages": [
         "intro",
-        "how"
+        "quickstart"
       ]
     },
     {
       "group": "Features",
       "pages": [
-        "features/harbor",
-        "features/queries",
-        "features/reports",
-        "features/metrics",
-        "features/alerts"
+        "features/semantic-layer",
+        "features/knowledge-base",
+        "features/alerts",
+        "features/tickets",
+        "features/metric-standardization",
+        "features/governance-control"
       ]
     },
     {
       "group": "Integrations",
       "pages": [
-        "integrations/data",
-        "integrations/sales",
-        "integrations/comms"
+        "integrations/google-bigquery",
+        "integrations/future-integrations"
       ]
     },
     {
