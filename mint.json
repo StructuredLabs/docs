@@ -9,6 +9,7 @@
     "default": "light",
     "isHidden": true
   },
+  "theme": "prism",
   "favicon": "/favicon.png",
   "colors": {
     "primary": "#3b82f6",
@@ -69,7 +70,8 @@
       "group": "Appendix",
       "pages": [
         "appendix/glossary",
-        "appendix/troubleshooting"
+        "appendix/troubleshooting",
+        "appendix/usermanagement"
       ]
     },
     {
