@@ -11,12 +11,9 @@
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#1074ac",
-    "light": "#8cadd3",
-    "dark": "#1074ac",
-    "background": {
-      "dark": "#141518"
-    }
+    "primary": "#1d4ed8",
+    "light": "#1d4ed8",
+    "dark": "#1d4ed8"
   },
   "topbarLinks": [
     {
@@ -55,19 +52,7 @@
     {
       "group": "Features",
       "pages": [
-        "features/semantic-layer",
-        "features/knowledge-base",
-        "features/alerts",
-        "features/tickets",
-        "features/metric-standardization",
-        "features/governance-control"
-      ]
-    },
-    {
-      "group": "Integrations",
-      "pages": [
-        "integrations/google-bigquery",
-        "integrations/future-integrations"
+        "features/comingsoon"
       ]
     },
     {
@@ -79,20 +64,16 @@
       ]
     }
   ],
+  "feedback": {
+    "thumbsRating":true,
+    "suggestEdit":true,
+    "raiseIssue": true
+  },
   "footerSocials": {
     "linkedin": "https://www.linkedin.com/company/structuredlabs/",
     "twitter": "https://twitter.com/StructuredLabs",
-    "website": "https://www.structuredlabs.io",
-    "email": "mailto:contact@structuredlabs.io",
+    "website": "https://www.structuredlabs.com",
     "slack": "https://structured-users.slack.com/",
     "github": "https://github.com/StructuredLabs"
-  },
-  "openapi": [
-    "api-reference/connections.yml",
-    "api-reference/entities.yml",
-    "api-reference/queries.yml",
-    "api-reference/metrics.yml",
-    "api-reference/alerts.yml",
-    "api-reference/tickets.yml"
-  ]
+  }
 }
