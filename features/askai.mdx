@@ -3,4 +3,66 @@ title: "Ask AI"
 icon: "brain"
 ---
 
-Coming Soon.
+Ask AI in Structured is a feature designed to give you quick, natural-language access to your metadata. Instead of directly querying raw data or metrics, you can ask questions about the structure, relationships, and definitions of your data. This feature makes it easy to explore your tables, columns, models, and business objects without needing to dive deep into technical documentation or SQL code.
+Introduction to Ask AI
+Ask AI is your shortcut to understanding the shape and structure of your data. Think of it as a way to query your data’s blueprint, helping you make sense of the metadata behind your datasets. Whether you’re trying to understand how tables are connected, figure out what business objects are available, or see which columns contain specific types of data, Ask AI can give you the answers.
+Instead of opening up a database and manually browsing through tables and columns, Ask AI lets you ask questions like, “What does this table represent?” or “Which columns in the Customer object contain dates?” This allows anyone in your team—technical or not—to explore the data landscape quickly.
+What Ask AI Can Do and When to Use It
+Ask AI shines when you need to:
+Understand Your Data Structure: Quickly get insights into how your tables, models, and columns are organized.
+Explore Business Objects: Understand which business objects have been created, what they represent, and how they are built.
+Trace Data Lineage: See how data flows between tables or how changes in one table might impact another.
+Find Definitions: Identify the metadata-level definitions behind tables, columns, or business objects to ensure you're using the data correctly.
+Validate Documentation: Check the completeness or accuracy of your metadata documentation.
+
+Examples of Questions You Can Ask Ask AI
+Here are some common questions you might ask Ask AI at the metadata level:
+Table Structure: “What columns are in the Orders table?”
+Column Definitions: “What does the Customer ID column represent?”
+Data Relationships: “How is the Orders table linked to the Customers table?”
+Business Object Details: “What are the attributes of the Customer business object?”
+Lineage and Dependencies: “Which tables depend on the Product table?”
+Documentation Health: “Which tables are missing descriptions?”
+These questions give you insight into the structure and organization of your data, helping both technical and non-technical users stay aligned on how the data is being used and interpreted.
+Using Ask AI via Dashboard
+How to Ask Questions in the Admin Dashboard
+Using Ask AI from the admin dashboard is simple:
+Open Ask AI: Navigate to the Ask AI section in your Structured dashboard.
+Type Your Question: Enter your question in natural language. For example, you might ask, “What is the primary key in the Customers table?” or “How does the Orders table connect to the Products table?”
+Get Your Answer: Ask AI will instantly pull up the relevant metadata and give you a clear, straightforward response. It might show you the primary key column, the foreign key relationships, or even provide a description if it’s documented.
+Interpreting the Answers Provided by Ask AI
+When Ask AI responds, it will typically give you:
+Table or Column Details: If you asked about a specific table or column, you’ll see its name, description, data type, and any relevant relationships or constraints.
+Business Object Overview: For business objects, Ask AI will show you the object’s attributes (e.g., all the columns and tables associated with the business object) and any linked objects.
+Data Lineage: If you inquire about relationships, Ask AI will visually or textually explain how tables are connected, showing you the dependencies between them.
+This helps you understand not just what your data is, but how it’s structured and interconnected.
+Using Ask AI via Slack Bot
+Ask AI is also accessible through Slack, making it even easier to integrate into your daily workflow without needing to switch between platforms.
+How to Integrate Structured with Slack
+Connect Structured to Slack: In the Structured dashboard, go to the Connections section and connect your Slack workspace, and invite StructuredBot to a specific channel.
+Enable Ask AI: Once connected, you can start asking questions directly in your Slack workspace using the Ask AI bot.
+Start Asking Questions: Just like in the dashboard, you can now ask metadata-related questions in Slack. Type something like “What is the primary key of the Users table?” or “Which tables are related to the Sales table?”
+Asking Questions and Making Data Requests in Slack
+Using Slack to interact with your metadata means you don’t have to leave your messaging app to explore data structures. For example:
+Quick Table Lookups: "Which columns are in the Orders table?"
+Column Type Check: "What is the data type of the Order Date column in the Orders table?"
+Data Relationships: "Show me how Customers and Orders are linked."
+The answers will be displayed directly in Slack, making it easy to share with your team or reference in a conversation.
+
+Advanced Use Cases for Ask AI
+As you and your team get more familiar with Ask AI, you’ll start using it for more complex scenarios:
+Answering Complex Data Questions
+Sometimes, understanding your data structure requires more than just looking up a table or column. Ask AI can help you with more complex questions like:
+Tracing Data Lineage: “Which columns in the Sales table are dependent on data from the Products table?”
+Tracking Changes: “Has the structure of the Orders table changed in the last 30 days?”
+Exploring Model Relationships: “What models rely on the Customer business object?”
+These questions allow you to dive deeper into your data’s organization and understand how changes or updates might impact your entire stack.
+Common Workflows for Business Users and Analysts
+For business users and analysts, Ask AI helps streamline workflows by providing instant access to metadata. For example:
+Validating Documentation: Before creating a report, an analyst might ask, “What’s the definition of the Revenue metric?” to ensure they’re using the correct data.
+Exploring Data Models: A business user might ask, “What are the available attributes in the Customer business object?” to understand what data they can work with.
+Checking Data Health: Users can ask things like, “Are there any missing descriptions in the Product table?” to ensure documentation is complete.
+These workflows save time and help make sure that everyone has the information they need to use data accurately and efficiently.
+Summary
+Ask AI is a powerful tool in Structured that simplifies exploring and understanding your metadata. Whether you’re looking to understand your tables, columns, or business objects, Ask AI allows you to ask natural language questions and get clear, structured answers.
+By integrating Ask AI into your daily workflow—whether through the Structured admin dashboard or directly in your Slack workspace—you can improve data literacy, get accurate documentation, and trace relationships within your data. As you become more familiar with the tool, you’ll discover even more ways it can help with your data management and exploration efforts.
