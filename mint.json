@@ -11,9 +11,9 @@
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#1d4ed8",
-    "light": "#1d4ed8",
-    "dark": "#1d4ed8"
+    "primary": "#3b82f6",
+    "light": "#3b82f6",
+    "dark": "#3b82f6"
   },
   "topbarLinks": [
     {
@@ -45,7 +45,7 @@
     {
       "group": "Get Started",
       "pages": [
-        "intro",
+        "introduction",
         "quickstart"
       ]
     },
