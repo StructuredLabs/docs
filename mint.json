@@ -46,13 +46,30 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart"
+        "gettingstarted"
       ]
     },
     {
       "group": "Features",
       "pages": [
-        "features/comingsoon"
+        "features/datadefinitions",
+        "features/modelingmetrics",
+        "features/askai",
+        "features/datarequests",
+        "features/metadataanalytics"
+      ]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        "integrations"
+      ]
+    },
+    {
+      "group": "Appendix",
+      "pages": [
+        "appendix/glossary",
+        "appendix/troubleshooting"
       ]
     },
     {
