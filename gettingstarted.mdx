@@ -1,0 +1,65 @@
+---
+title: Getting Started
+icon: "lightbulb"
+---
+
+In this section, we’ll walk you through how to get up and running with Structured. Whether you’re just exploring the platform or you’re ready to dive deep, these steps will help you navigate the onboarding process smoothly.
+
+Step 1: Sign Up & Onboarding
+How to Create an Account
+Getting started with Structured is quick and simple. Here’s how you create your account:
+Go to the Sign-Up Page – Head over to the Structured homepage and click on "Sign Up."
+Enter Your Details – Provide the necessary information like your name, email.
+Set Up Your Workspace – After signing up, you’ll be prompted to create a workspace. A workspace is where all your data sources, business objects, and metrics will live, so give it a name that makes sense for your team or project.
+Once your account is created and your workspace is set up, you’ll land in the Structured dashboard. This is where all the magic happens.
+Navigating the Dashboard
+The dashboard is the central hub of Structured. It’s designed to give you a clear view of your connected data, business objects, and metrics.
+Here’s a quick overview of what you’ll see:
+Connections: A section that shows all your connected databases and platforms.
+Definitions: This is where you’ll find the high-level concepts (like "Customer" or "Order") that Structured generates from your data.
+Ask AI: Your go-to place for asking questions about your data in plain language.
+Alerts: If there are any issues, like a breaking change in a data source, you’ll see it here.
+Tickets: This section tracks all open and resolved tickets for data requests or changes, allowing you to manage ongoing tasks and see the status of pending actions.
+Spend a few minutes clicking around the dashboard to get comfortable. Everything is designed to be intuitive, so you should be able to find your way around pretty quickly.
+
+Step 2: Connecting Your Data Sources
+Supported Data Platforms
+Structured integrates with a variety of modern data platforms. Here are the ones we support out of the box:
+BigQuery
+Postgres
+Snowflake
+Redshift
+Databricks
+Clickhouse
+Motherduck
+Cube
+dbt
+If your company uses one (or more) of these platforms, connecting them to Structured is simple. And don’t worry if your data stack is complex—we can handle it.
+How to Securely Connect to a Data Source
+Select Your Data Source: In the dashboard, go to the Connections section and click on "+ New." You’ll be prompted to select from the list of supported platforms.
+Enter Connection Details: For each platform, you’ll need to provide specific connection information (e.g., credentials, API keys, server addresses). Structured handles these securely, so you don’t have to worry about your data being compromised.
+Test the Connection: Before finalizing, you can test the connection to make sure everything is set up correctly. If something doesn’t work, Structured will let you know what’s wrong and suggest troubleshooting steps.
+Authorize Access: For cloud-based platforms like BigQuery or Snowflake, you might need to authorize Structured to access your data. This process is straightforward and usually involves logging in with your credentials and granting permissions.
+Once you’re connected, Structured will automatically start scanning your data sources and pulling in the metadata. This is where things get exciting.
+Common Connection Issues and Troubleshooting
+Here are a few common issues that might come up when connecting your data sources and how to troubleshoot them:
+Incorrect Credentials: Double-check that you’re using the correct API keys, credentials, or passwords. Structured will let you know if there’s an authentication problem.
+Firewall Restrictions: If your data source is behind a firewall, you may need to whitelist Structured’s IP addresses.
+Permissions: Make sure the user account or API token you’re using has the correct permissions to access the data you want to pull into Structured.
+If you run into any issues, Structured provides detailed error messages and troubleshooting guides to help you fix them quickly. Contact support@structuredlabs.com if you need additional support.
+
+Step 3: First Data Sync
+What Happens During the Initial Data Sync?
+After you’ve connected your data sources, Structured will start its first data sync. This is where the platform scans your tables, columns, models, and other metadata, and starts building the semantic layer and business objects. This process can take anywhere from a few minutes to a few hours, depending on how much data you have.
+Here’s what’s happening under the hood:
+Metadata Extraction: Structured pulls in all the information about your tables, models, columns, and relationships from your data sources.
+Business Object Generation: Based on your data, Structured starts building high-level business objects. For example, if you have a table called "customers" in one platform and "client_data" in another, Structured might group those into a single business object called "Customer."
+Metrics Identification: Structured will also look for any pre-defined metrics you have, and begin setting those up for management and tracking.
+Once this process is complete, you’ll be able to explore your data in a much more organized and meaningful way.
+Viewing Your Synced Tables, Models, and Metadata
+After the initial sync, go to your Definitions page in the admin dashboard. You’ll now see all the tables and models Structured has pulled in from each connected source. You can click on each table to view its structure, the columns it contains, and how it connects to other tables.
+But that’s not all. Remember, Structured doesn’t just show you the raw data; it shows you business objects. So instead of just seeing a list of tables, you’ll see things like "Customers," "Orders," "Revenue," and other business concepts that make sense to everyone, not just your technical team.
+This is where the power of Structured really comes into play. All your data, regardless of where it’s stored, is now organized in a way that’s easy to understand, work with, and—most importantly—act on.
+Summary
+Getting started with Structured is straightforward, but behind the scenes, it’s doing a lot of heavy lifting. You’ve signed up, connected your data sources, and completed your first data sync. Now you’ve got your data documented, organized into business objects, and ready to be explored.
+In the next section, we’ll dive deeper into how to start exploring your definitions, managing your metrics, and making the most of the semantic layer Structured has built for you.
