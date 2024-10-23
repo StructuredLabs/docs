@@ -47,7 +47,14 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "gettingstarted"
+        {
+          "group":  "Getting Started",
+          "pages": [
+            "gettingstarted/signup",
+            "gettingstarted/connect",
+            "gettingstarted/sync"
+          ]
+        }
       ]
     },
     {
