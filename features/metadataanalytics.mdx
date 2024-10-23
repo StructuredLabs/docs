@@ -4,60 +4,141 @@ icon: "ruler"
 ---
 
 The Analytics page in Structured is your central hub for monitoring the health, activity, and changes across your business data environment. It provides a comprehensive view of your connected data sources, business objects, definitions, and metrics, helping you stay on top of changes, track historical trends, and set up alerts for breaking issues. In this section, we’ll dive into how to use the dashboard to track key metrics, monitor changes, and configure alerts to keep your data environment in check.
-Understanding the Analytics Dashboard
+
+## Understanding the Analytics Dashboard
+
 The Analytics page in Structured gives you a high-level overview of your entire data landscape. It’s a real-time window into how your data environment is evolving, including the state of your connections, data definitions, changes over time, and potential issues. Whether you’re a data engineer or a business user, the dashboard ensures you always know what’s happening behind the scenes.
-Overview of the Metrics Tracked in the Dashboard
+
+### Overview of the Metrics Tracked in the Dashboard
+
 Here’s a breakdown of the core metrics tracked in the dashboard:
-Connected Data Sources: The number and status of all the data sources that are currently connected to Structured. This includes platforms like BigQuery, Postgres, Snowflake, and others.
-Definitions and Business Objects: A count of the total number of table definitions, model definitions, and business objects that have been synced and documented. This helps track how much of your data is fully documented and available to users.
-Change History: A log of recent changes in your data environment—this includes updates to data definitions, modifications to business objects, and structural changes in your data models.
-Tickets and Alerts: Any open tickets (created by StructuredBot or users) and active alerts for issues such as schema changes or breaking errors.
-These metrics are presented in a clear, visual format, helping you get an at-a-glance snapshot of your data landscape at a glance.
-How to Interpret Data Source Connections, Definitions, Changes, and More
-Data Source Connections: In this section, you’ll see all your connected data sources. Each data source shows a status indicator (e.g., healthy, at risk, or disconnected). You can click into any source to view specific details, such as when it was last synced, the number of tables it’s pulling in, and any recent issues with connectivity or data health.
 
-Definitions and Business Objects: This section shows how many data definitions (tables, columns, models) and business objects have been documented. If you see a drop in documented definitions, it could indicate that new tables were added to a data source without proper documentation, which might need attention.
+- **Connected Data Sources:** The number and status of all the data sources that are currently connected to Structured, such as BigQuery, Postgres, and Snowflake.
+- **Definitions and Business Objects:** A count of table definitions, model definitions, and business objects that have been synced and documented, helping you track documentation coverage.
+- **Change History:** A log of recent changes in your data environment, including updates to data definitions, modifications to business objects, and structural changes in data models.
+- **Tickets and Alerts:** Open tickets (created by StructuredBot or users) and active alerts for issues like schema changes or breaking errors.
 
-Change Logs: The change log section shows you a timeline of updates, such as:
-Modifications to data definitions (e.g., changing column types or renaming tables)
-Updates to business objects
-Version changes to metrics This helps you monitor what’s changed in your data stack and understand the impact of those changes on your data models and reports.
+<Info>
+  These metrics are presented in a clear, visual format, helping you get an
+  at-a-glance snapshot of your data landscape.
+</Info>
 
-Tickets and Alerts: Any unresolved tickets or active alerts are prominently displayed, letting you know if immediate action is required. For example, if there’s an alert for a breaking change, you can click on it to see more details and resolve it.
+### How to Interpret Data Source Connections, Definitions, Changes, and More
 
-Tracking Definitions and Changes Over Time
-Monitoring Definition Changes and Alerts
-Data environments are dynamic, and it’s critical to stay on top of changes to your data definitions and models. Structured’s dashboard automatically tracks and logs any updates to definitions—whether it’s a new column being added, a business object being modified, or a metric being updated.
+- **Data Source Connections:** Shows the status of your connected data sources, with a status indicator (e.g., healthy, at risk, or disconnected). You can click into any source for details such as the number of tables and any connectivity issues.
+- **Definitions and Business Objects:** Displays the number of documented data definitions and business objects. A drop in documented definitions could signal new tables added without proper documentation.
+
+- **Change Logs:** Shows a timeline of updates like:
+
+  - Modifications to data definitions (e.g., changing column types or renaming tables)
+  - Updates to business objects
+  - Version changes to metrics
+
+- **Tickets and Alerts:** Displays unresolved tickets or active alerts for immediate action, such as breaking changes or schema errors.
+
+<Check>
+  Tracking these metrics helps you stay informed about changes and potential
+  issues in your data stack, ensuring a well-documented and stable environment.
+</Check>
+
+## Tracking Definitions and Changes Over Time
+
+### Monitoring Definition Changes and Alerts
+
+Data environments are dynamic, and it’s critical to stay on top of changes to your data definitions and models. Structured’s dashboard automatically tracks and logs updates to definitions—whether it’s a new column, a modified business object, or a metric update.
+
 Here’s how to monitor changes:
-View Recent Changes: On the dashboard, you’ll see a list of recent changes in your environment. You can filter these changes by data source, date, or type of change (e.g., schema update, metadata change).
-Set up Notifications: Structured can notify you of specific changes through the dashboard or Slack. For example, if a column definition changes in a critical table, you’ll receive an alert, ensuring you’re aware of the update.
-Drill Down into Specific Changes: For more detail, click on any change in the log. This will show you exactly what was modified (e.g., a column renamed from cust_id to customer_id), who made the change, and when it was applied.
-Tracking changes over time helps you maintain data consistency and ensures that any shifts in your data structure are documented and communicated to relevant stakeholders.
-Viewing Historical Data About Connected Sources and Metrics
-One of the key features of Structured’s Analytics page is the ability to view historical data about your connected data sources and metrics. This helps you spot trends, track growth, or identify recurring issues over time.
-To view historical data:
-Select a Time Range: At the top of the dashboard, you can select a custom time range (e.g., last 7 days, last month, or last year) to view historical trends for your data sources, definitions, and metrics.
-Track Growth or Decline: You’ll see trends in the number of connected sources, definitions documented, and metrics tracked. For example, if your definitions count dropped after a recent data migration, that might signal tables were missed during the update process.
-Investigate Anomalies: If you notice a sudden spike in changes or alerts, you can drill down to see what caused it. For instance, if there’s a surge in change logs, it could be due to a significant update or an issue with one of your data sources.
-Historical data gives you insights into the long-term health and stability of your data environment, helping you make informed decisions about improvements or troubleshooting.
 
-Setting Up Alerts for Breaking Changes
-How to Configure Alerts for Breaking Changes in the Data Environment
-Structured’s alert system ensures you’re always aware of critical issues in your data environment. Breaking changes—such as a missing table, schema mismatch, or failed data source connection—can cause major disruptions if not addressed immediately. You can set up alerts to catch these issues early.
-Here’s how to configure alerts:
-Open the Alerts Section: In the dashboard, go to the Alerts & Notifications settings.
-Select Alert Criteria: You can customize which events trigger alerts. For example:
-Breaking changes: Receive alerts if a critical table or column is removed or renamed.
-Connection issues: Get notified if a data source fails to sync or if there’s a connection error.
-Metric inconsistencies: Alerts for any major discrepancies or missing data in your key metrics.
-Choose Alert Channels: You can choose how you’d like to receive alerts—whether via Slack, email, or directly in the Structured admin dashboard.
-Set Alert Thresholds: Define the conditions under which alerts are triggered. For example, you can set an alert to notify you if more than 10 columns change in a day or if a key metric doesn’t update within a certain timeframe.
-Understanding the Different Types of Alerts and What They Mean
+<Steps>
+  <Step title="View Recent Changes">
+    On the dashboard, you’ll see a list of recent changes in your environment.
+    Filter changes by data source, date, or type (e.g., schema update, metadata
+    change).
+  </Step>
+  <Step title="Set up Notifications">
+    Structured can notify you of specific changes through the dashboard or
+    Slack. For instance, if a column definition changes in a critical table,
+    you’ll receive an alert.
+  </Step>
+  <Step title="Drill Down into Specific Changes">
+    Click on any change in the log to see exactly what was modified, who made
+    the change, and when it was applied.
+  </Step>
+</Steps>
+
+Tracking changes over time helps you maintain data consistency and ensures that any shifts in your data structure are documented and communicated to relevant stakeholders.
+
+### Viewing Historical Data About Connected Sources and Metrics
+
+One of the key features of Structured’s Analytics page is the ability to view historical data about your connected data sources and metrics. This helps you spot trends, track growth, or identify recurring issues over time.
+
+- **Select a Time Range:** At the top of the dashboard, select a custom time range (e.g., last 7 days, last month, or last year) to view historical trends for data sources, definitions, and metrics.
+- **Track Growth or Decline:** View trends in connected sources, documented definitions, and tracked metrics. For example, a drop in definitions after a data migration may indicate missed tables.
+- **Investigate Anomalies:** If you see a sudden spike in changes or alerts, drill down to see the cause—such as a major update or a connectivity issue with a data source.
+
+<Info>
+  Historical data provides long-term insights into the health and stability of
+  your data environment, helping you make informed decisions for troubleshooting
+  or improvement.
+</Info>
+
+## Setting Up Alerts for Breaking Changes
+
+### How to Configure Alerts for Breaking Changes in the Data Environment
+
+Structured’s alert system ensures you’re always aware of critical issues in your data environment. Breaking changes—like missing tables, schema mismatches, or failed data source connections—can disrupt operations if not addressed immediately. You can set up alerts to catch these issues early.
+
+<Steps>
+  <Step title="Open the Alerts Section">
+    In the dashboard, go to the **Alerts & Notifications** settings.
+  </Step>
+  <Step title="Select Alert Criteria">
+    Customize which events trigger alerts. For example: - **Breaking changes:**
+    Alerts for critical table or column removals or renaming. - **Connection
+    issues:** Notifications for data source sync failures or connection errors.
+    - **Metric inconsistencies:** Alerts for discrepancies or missing data in
+    key metrics.
+  </Step>
+  <Step title="Choose Alert Channels">
+    Select how you’d like to receive alerts—via Slack, email, or directly in the
+    Structured admin dashboard.
+  </Step>
+  <Step title="Set Alert Thresholds">
+    Define conditions under which alerts are triggered, like notifying you if
+    more than 10 columns change in a day or if a key metric isn’t updated within
+    a set timeframe.
+  </Step>
+</Steps>
+
+### Understanding the Different Types of Alerts and What They Mean
+
 There are several types of alerts you can configure in Structured, each designed to keep you informed about different aspects of your data environment:
-Breaking Change Alerts: These are the highest priority. They notify you when a table, column, or data source is modified in a way that could break downstream reports, dashboards, or workflows. For example, if a primary key is removed from a table, you’ll get an alert to address the issue immediately.
-Sync Failure Alerts: These alerts notify you if a data source fails to sync, which could indicate a connection problem or permission issue. This ensures your data pipeline stays intact.
-Data Integrity Alerts: If the data in a table doesn’t meet expected conditions (e.g., missing data in key columns, metric discrepancies), you’ll receive an alert. These help you catch errors in the data before they affect reports or analytics.
-By setting up alerts, you can ensure that your data operations remain stable and that any disruptions are addressed quickly, minimizing their impact.
-Summary
+
+<CardGroup cols={2}>
+  <Card title="Breaking Change Alerts" icon="alert-triangle">
+    These alerts notify you when a table, column, or data source is modified in
+    a way that could break downstream reports or workflows, like a removed
+    primary key.
+  </Card>
+  <Card title="Sync Failure Alerts" icon="sync">
+    Alerts for data source sync failures, ensuring you’re aware of connection
+    problems or permission issues.
+  </Card>
+  <Card title="Data Integrity Alerts" icon="file-warning">
+    Alerts for discrepancies or missing data in key tables, helping you catch
+    data issues before they affect analytics or reports.
+  </Card>
+</CardGroup>
+
+By setting up alerts, you ensure that your data operations remain stable and disruptions are addressed quickly, minimizing their impact.
+
+## Summary
+
 The Analytics page in Structured provides a powerful view of your entire data environment. From tracking connected sources to monitoring changes in data definitions, it gives you the tools you need to stay informed and proactive. You can view historical data to spot trends, set up alerts for critical issues, and drill into the details of recent changes.
-By using the dashboard, your team can stay on top of your data health, ensure definitions are up to date, and catch breaking changes before they become problems. This real-time insight ensures your data-driven operations remain smooth and consistent, allowing your business to rely on accurate and timely data for decision-making.
+
+<Check>
+  By using the dashboard, your team can stay on top of data health, ensure
+  definitions are up to date, and catch breaking changes before they become
+  problems. This real-time insight ensures smooth and consistent data-driven
+  operations for your business.
+</Check>

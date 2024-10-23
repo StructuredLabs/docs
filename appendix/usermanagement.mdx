@@ -4,46 +4,133 @@ icon: "user"
 ---
 
 Structured is designed to make collaboration around your data seamless and intuitive. Whether you’re working with technical teams or business users, the platform allows for easy sharing, tracking, and collaboration on data definitions, metrics, and changes. This section will guide you through how to create and manage workspaces, collaborate on data definitions and metrics, and integrate with other tools like Notion and GitHub.
-Creating and Managing Workspaces
-Workspaces in Structured are where your data sources, definitions, metrics, and users come together. They provide an organized environment for teams to collaborate on data without stepping on each other’s toes. Each workspace can be configured to meet the needs of specific teams or projects.
-How to Set Up and Organize Your Workspaces
-Create a New Workspace: From the main dashboard, navigate to the Workspaces section. Click on Create Workspace and give your workspace a name. It could be based on a project, team, or department (e.g., "Marketing Analytics" or "Finance Metrics").
-Add Data Sources: Once your workspace is created, you can start connecting the relevant data sources. This ensures that all the data needed for that team or project is available in one place.
-Organize Data Definitions and Metrics: Group your data definitions and metrics within the workspace. You can categorize definitions by source, function, or business object, making it easier for team members to find the data they need.
-Customizing Views: Structured allows you to create custom views of your data definitions, metrics, and business objects. You can tailor these views based on specific team needs, so everyone sees the most relevant data when they log in.
-Sharing Workspace Access with Colleagues
-Invite Team Members: Once your workspace is set up, you can invite colleagues to collaborate. Go to Manage Users in the workspace settings, and send invitations via email. Assign roles (e.g., admin, editor, viewer) based on their responsibilities.
-Define User Roles: Structured supports role-based access control, which allows you to manage what each team member can do in the workspace. For example:
-Admins can manage data sources, definitions, and settings.
-Members can only explore the data but not make changes.
-This ensures that users have the right level of access based on their roles, protecting sensitive data and avoiding accidental changes.
-Collaborating on Data Definitions and Metrics
-Collaboration is key to keeping your data environment clean and consistent. Structured allows teams to work together on definitions and metrics, ensuring that everyone is aligned on how data is used and interpreted.
-Best Practices for Team Collaboration Within Structured
-Establish Clear Data Definitions: Make sure every data definition (e.g., tables, columns, business objects) is well-documented. Collaborate with subject matter experts to ensure the documentation is accurate and useful. Structured makes it easy for team members to add descriptions and notes directly within the platform.
-Shared Ownership of Metrics: Your metrics, such as Monthly Recurring Revenue or Customer Lifetime Value, should be shared across teams. Ensure that everyone understands the definitions behind these metrics and is using them consistently across reports and dashboards.
-Version Control for Definitions and Metrics: When collaborating on key definitions or metrics, enable version control so changes are tracked and reversible. This ensures accountability and transparency when making updates to core business objects or metrics.
-Collaborate in Real-Time: Structured supports real-time collaboration, allowing multiple users to work on data definitions simultaneously. You can leave comments, discuss changes, and refine definitions without needing to hop between tools or conversations.
-Collaboration Tools
-To truly integrate data into your organization’s workflows, Structured allows you to sync with external tools like Notion and GitHub, making data definitions, metrics, and changes visible in the tools your team is already using.
-Integrating Structured with Other Collaboration Tools (e.g., Notion, GitHub)
-Notion Integration: If your team uses Notion for documentation, you can sync Structured’s data definitions directly into your Notion workspace.
-Sync Definitions: Navigate to the Settings > Organization > Notion Sync tab in Structured, select Notion, and choose which data definitions or business objects you want to sync.
-Real-Time Updates: Once synced, any changes made to the data definitions in Structured will automatically update in Notion, ensuring your documentation stays current without any manual effort.
 
-GitHub Integration: If your team uses GitHub for version control, Structured’s GitHub integration helps track changes to data models and definitions through pull requests.
-PR Automation: StructuredBot can automatically generate PRs in GitHub for any schema or model changes requested through Structured. This keeps your data models and GitHub repository in sync.
-Change Review: Your data team can review, approve, and merge PRs directly in GitHub, and Structured will track these changes for future reference.
+## Creating and Managing Workspaces
+
+Workspaces in Structured are where your data sources, definitions, metrics, and users come together. They provide an organized environment for teams to collaborate on data without stepping on each other’s toes. Each workspace can be configured to meet the needs of specific teams or projects.
+
+### How to Set Up and Organize Your Workspaces
+
+<Steps>
+  <Step title="Create a New Workspace">
+    From the main dashboard, navigate to the **Workspaces** section. Click on
+    **Create Workspace** and give your workspace a name based on a project,
+    team, or department (e.g., "Marketing Analytics" or "Finance Metrics").
+  </Step>
+  <Step title="Add Data Sources">
+    Once your workspace is created, connect relevant data sources. This ensures
+    all the data needed for that team or project is available in one place.
+  </Step>
+  <Step title="Organize Data Definitions and Metrics">
+    Group your data definitions and metrics within the workspace. Categorize
+    definitions by source, function, or business object, making it easier for
+    team members to find the data they need.
+  </Step>
+  <Step title="Customizing Views">
+    Create custom views of your data definitions, metrics, and business objects.
+    Tailor these views based on specific team needs, so everyone sees the most
+    relevant data when they log in.
+  </Step>
+</Steps>
+
+### Sharing Workspace Access with Colleagues
+
+<Info>
+  Structured supports role-based access control, which allows you to manage what
+  each team member can do in the workspace.
+</Info>
+
+- **Invite Team Members:** Go to **Manage Users** in the workspace settings and send invitations via email. Assign roles (e.g., admin, editor, viewer) based on their responsibilities.
+- **Define User Roles:**
+  - **Admins** can manage data sources, definitions, and settings.
+  - **Members** can only explore the data but not make changes.
+
+This ensures that users have the right level of access based on their roles, protecting sensitive data and avoiding accidental changes.
+
+## Collaborating on Data Definitions and Metrics
+
+Collaboration is key to keeping your data environment clean and consistent. Structured allows teams to work together on definitions and metrics, ensuring that everyone is aligned on how data is used and interpreted.
+
+### Best Practices for Team Collaboration Within Structured
+
+- **Establish Clear Data Definitions:** Collaborate with subject matter experts to ensure data definitions (e.g., tables, columns, business objects) are well-documented. Structured allows team members to add descriptions and notes directly within the platform.
+- **Shared Ownership of Metrics:** Metrics like Monthly Recurring Revenue or Customer Lifetime Value should be shared across teams. Ensure everyone understands the definitions behind these metrics and uses them consistently across reports and dashboards.
+- **Version Control for Definitions and Metrics:** Enable version control so changes to key definitions or metrics are tracked and reversible, ensuring accountability and transparency when making updates to core business objects or metrics.
+- **Collaborate in Real-Time:** Structured supports real-time collaboration, allowing multiple users to work on data definitions simultaneously. Leave comments, discuss changes, and refine definitions without needing to switch between tools or conversations.
+
+## Collaboration Tools
+
+To truly integrate data into your organization’s workflows, Structured allows you to sync with external tools like Notion and GitHub, making data definitions, metrics, and changes visible in the tools your team is already using.
+
+### Integrating Structured with Other Collaboration Tools (e.g., Notion, GitHub)
+
+<CardGroup cols={2}>
+  <Card title="Notion Integration" icon="link">
+    Sync your data definitions with Notion, ensuring that your documentation
+    stays up-to-date in real time.
+  </Card>
+  <Card title="GitHub Integration" icon="github">
+    Use Structured’s GitHub integration to track changes to data models and
+    definitions through pull requests, keeping your data models in sync with
+    your GitHub repository.
+  </Card>
+</CardGroup>
+
+#### Notion Integration
+
+<Steps>
+  <Step title="Sync Definitions">
+    Navigate to **Settings > Organization > Notion Sync** in Structured. Select
+    Notion and choose which data definitions or business objects to sync.
+  </Step>
+  <Step title="Real-Time Updates">
+    Once synced, any changes made to the data definitions in Structured will
+    automatically update in Notion, keeping documentation current without manual
+    effort.
+  </Step>
+</Steps>
+
+#### GitHub Integration
+
+<Steps>
+  <Step title="PR Automation">
+    StructuredBot can automatically generate PRs in GitHub for any schema or
+    model changes requested through Structured.
+  </Step>
+  <Step title="Change Review">
+    Your data team can review, approve, and merge PRs directly in GitHub, and
+    Structured will track these changes for future reference.
+  </Step>
+</Steps>
+
 These integrations help reduce friction between your data operations and existing collaboration workflows, ensuring everyone has access to the latest definitions and changes without needing to manually update multiple systems.
-Real-Time Updates and Notifications for Team Members
+
+## Real-Time Updates and Notifications for Team Members
+
 Structured ensures that your team is always in the loop with real-time updates and notifications, keeping everyone aligned on what’s happening across your data environment.
-Slack Notifications: Integrate Structured with Slack so that team members receive instant notifications when key events happen, such as:
-A new data definition being added or modified.
-A metric being updated or versioned.
-An alert for a breaking change in a data model.
-Email Updates: For users who aren’t constantly in Slack, you can set up email notifications for similar events, ensuring that important updates reach all stakeholders.
-Change Logs and Audit Trails: Every change in Structured—whether it’s a definition update, a new metric, or a schema modification—is logged. Team members can view these logs to see who made changes and when, helping maintain transparency and accountability in collaborative efforts.
-Summary
+
+- **Slack Notifications:** Integrate Structured with Slack so team members receive instant notifications when key events happen, such as:
+  - A new data definition being added or modified.
+  - A metric being updated or versioned.
+  - An alert for a breaking change in a data model.
+- **Email Updates:** For users not constantly in Slack, set up email notifications for similar events, ensuring that important updates reach all stakeholders.
+
+- **Change Logs and Audit Trails:** Every change in Structured—whether it’s a definition update, a new metric, or a schema modification—is logged. Team members can view these logs to see who made changes and when, maintaining transparency and accountability in collaborative efforts.
+
+<Info>
+  Structured makes it easy to stay up-to-date on important changes without
+  missing any details, whether through Slack or email.
+</Info>
+
+## Summary
+
 Structured makes team collaboration around data efficient, transparent, and scalable. By setting up workspaces and organizations, you can ensure that each team has the right data and tools at their fingertips, while managing access and permissions to keep everything secure.
-With real-time collaboration on data definitions and metrics, integrated workflows with tools like Notion and GitHub, and automated notifications for updates, Structured turns your data operations into a streamlined, collaborative environment. This ensures that everyone in your organization—technical or not—can work together to keep your data accurate, consistent, and actionable.
+
+With real-time collaboration on data definitions and metrics, integrated workflows with tools like Notion and GitHub, and automated notifications for updates, Structured turns your data operations into a streamlined, collaborative environment.
+
+<Check>
+  This ensures that everyone in your organization—technical or not—can work
+  together to keep your data accurate, consistent, and actionable.
+</Check>
+
 In the next section, we’ll explore more advanced features, such as the API and custom automation options, to further extend Structured’s capabilities across your organization.

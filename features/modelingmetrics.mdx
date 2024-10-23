@@ -4,55 +4,136 @@ icon: "diagram-project"
 ---
 
 In Structured, the way you interact with data becomes streamlined and intuitive. Instead of dealing with a tangled mess of raw tables and columns, Structured transforms that complexity into coherent, understandable models. These models represent the key concepts your business revolves around—like "Customer," "Order," or "Revenue"—bringing structure to your data and making it usable for everyone, not just the technical folks.
+
 Next, we’ll dive into how you can take this foundation of models and use it to build and manage your company’s key metrics, ensuring consistency and clarity in your reporting and decision-making.
-In any data-driven business, metrics are essential. They’re the numbers that inform your decisions, track your progress, and measure your success. But without consistency, metrics can lead to confusion. Structured’s metrics management makes sure your key metrics are defined once and used consistently across your entire organization, providing a single source of truth for everyone. Let's explore how to define, manage, and track metrics in Structured.
-Introduction to Metrics in Structured
+
+## Introduction to Metrics in Structured
+
+In any data-driven business, metrics are essential. They’re the numbers that inform your decisions, track your progress, and measure your success. But without consistency, metrics can lead to confusion. Structured’s metrics management makes sure your key metrics are defined once and used consistently across your entire organization, providing a single source of truth for everyone.
+
+<Info>
+  **Key Point**: Metrics in Structured are always tied directly to your business
+  objects, ensuring that they are consistent and reliable across your
+  organization.
+</Info>
+
 Metrics in Structured are not just out-of-context numbers anymore. They are tied directly to your business objects. This connection between business objects and metrics makes sure that your metrics are always grounded in your core business concepts. Instead of having multiple teams define their own version of “revenue” or “customer churn,” Structured makes it possible to centralize these definitions, so that everyone is working with the same understanding.
-By associating metrics with business objects, you can ensure that the data behind each metric comes from reliable, relevant sources. Whether it’s calculating Monthly Recurring Revenue or tracking Customer Lifetime Value, Structured helps you automate, manage, and maintain these metrics across your entire data stack.
-Understanding Metric Definitions and Usage
+
+<Check>
+  This ensures that all teams within your organization are working with the same
+  definitions and calculations, reducing confusion and improving data integrity.
+</Check>
+
+## Understanding Metric Definitions and Usage
+
 Every metric in Structured starts with a definition. A definition is simply a rule for calculating the metric. For example, Customer Churn Rate might be defined as the number of customers lost during a period, divided by the total number of customers at the start of that period.
+
 Structured ensures that these definitions are easy to find and use, so no one has to guess how a particular metric is calculated. These metric definitions are also self-documenting, meaning they include:
-The data source(s): Where the data behind the metric comes from.
-The calculation method: How the metric is calculated (e.g., sum, average, ratio).
-The business object: The high-level concept the metric is tied to (like Customer or Revenue).
+
+- **The data source(s):** Where the data behind the metric comes from.
+- **The calculation method:** How the metric is calculated (e.g., sum, average, ratio).
+- **The business object:** The high-level concept the metric is tied to (like Customer or Revenue).
+
 This documentation helps ensure everyone understands the meaning behind the metrics and uses them consistently.
-Creating and Managing Metrics
+
+## Creating and Managing Metrics
+
 Creating and managing metrics in Structured is a straightforward process. Whether you’re defining a new key metric or managing existing ones, Structured gives you the tools to ensure accuracy and consistency.
-Step-by-Step Guide to Defining Metrics
-Go to the Metrics Section: From the dashboard, navigate to the Definitions > Metrics tab. Here, you’ll see all the existing metrics defined in Structured.
-Click "Create New Metric": In the upper right corner, you’ll find a button to create a new metric.
-Define Your Metric:
-Name the Metric: Choose a clear, recognizable name like "Monthly Recurring Revenue" or "Customer Churn Rate."
-Select the Business Object: Choose the business object that this metric will be based on. For instance, "Customer Churn Rate" would be tied to the Customer business object.
-Choose the Calculation Method: Select how the metric is calculated (e.g., sum, count, average, ratio). You can define formulas using columns from the relevant tables associated with the business object.
-Define Time Periods (if applicable): Some metrics need to be tracked over time (e.g., revenue by month or customer retention by quarter). Structured allows you to specify the time period to calculate the metric.
-Save and Review: Once you’ve defined the metric, save it. Structured will automatically calculate it based on the most current data.
+
+### Step-by-Step Guide to Defining Metrics
+
+<Steps>
+  <Step title="Go to the Metrics Section">
+    From the dashboard, navigate to the Definitions > Metrics tab. Here, you’ll
+    see all the existing metrics defined in Structured.
+  </Step>
+  <Step title="Click 'Create New Metric'">
+    In the upper right corner, you’ll find a button to create a new metric.
+  </Step>
+  <Step title="Define Your Metric">
+    - **Name the Metric:** Choose a clear, recognizable name like "Monthly
+    Recurring Revenue" or "Customer Churn Rate." - **Select the Business
+    Object:** Choose the business object that this metric will be based on. For
+    instance, "Customer Churn Rate" would be tied to the Customer business
+    object. - **Choose the Calculation Method:** Select how the metric is
+    calculated (e.g., sum, count, average, ratio). You can define formulas using
+    columns from the relevant tables associated with the business object. -
+    **Define Time Periods (if applicable):** Some metrics need to be tracked
+    over time (e.g., revenue by month or customer retention by quarter).
+    Structured allows you to specify the time period to calculate the metric.
+  </Step>
+  <Step title="Save and Review">
+    Once you’ve defined the metric, save it. Structured will automatically
+    calculate it based on the most current data.
+  </Step>
+</Steps>
+
 Now, the new metric is available for reporting, dashboards, and queries across the platform. And because it’s tied to your business objects, it will update automatically as new data comes in.
-Organizing and Managing Existing Metrics
+
+## Organizing and Managing Existing Metrics
+
 Once you’ve defined a few metrics, you’ll want to keep them organized and easy to manage. Structured offers a simple way to:
-Search and Filter Metrics: You can filter metrics by business object, data source, or type (e.g., financial metrics, customer metrics).
-Edit or Update Metrics: If the underlying business logic changes (e.g., you change how you calculate customer churn), you can easily update the metric’s definition. Structured will apply the new logic across the platform automatically.
-Archive Deprecated Metrics: As your business evolves, some metrics may no longer be relevant. You can archive those metrics without deleting them, preserving historical data while keeping your current metrics list clean.
-How to Track and Monitor Metrics Over Time
+
+- **Search and Filter Metrics:** You can filter metrics by business object, data source, or type (e.g., financial metrics, customer metrics).
+- **Edit or Update Metrics:** If the underlying business logic changes (e.g., you change how you calculate customer churn), you can easily update the metric’s definition. Structured will apply the new logic across the platform automatically.
+- **Archive Deprecated Metrics:** As your business evolves, some metrics may no longer be relevant. You can archive those metrics without deleting them, preserving historical data while keeping your current metrics list clean.
+
+## How to Track and Monitor Metrics Over Time
+
 Structured’s dashboard lets you not only define metrics but also track them over time. This is key for understanding trends and spotting anomalies.
+
+<Info>
+  Tracking and monitoring your metrics over time helps you stay ahead of
+  potential issues, such as a spike in churn or a sudden drop in revenue.
+</Info>
+
 Here’s how to monitor your metrics:
-View Historical Data: Each metric comes with a timeline view where you can track how it has performed over days, weeks, months, or years. This is particularly useful for metrics like Revenue or Customer Growth.
-Set Alerts: You can set up alerts that notify you when a metric crosses a specific threshold (e.g., if churn rate spikes or revenue drops).
-Export or Share: Structured allows you to export metric data for further analysis or share it with key stakeholders. You can also sync metrics to tools like Notion or Slack for real-time updates.
-Best Practices for Metric Management
+
+- **View Historical Data:** Each metric comes with a timeline view where you can track how it has performed over days, weeks, months, or years. This is particularly useful for metrics like Revenue or Customer Growth.
+- **Set Alerts:** You can set up alerts that notify you when a metric crosses a specific threshold (e.g., if churn rate spikes or revenue drops).
+- **Export or Share:** Structured allows you to export metric data for further analysis or share it with key stakeholders. You can also sync metrics to tools like Notion or Slack for real-time updates.
+
+## Best Practices for Metric Management
+
 Good metric management goes beyond defining metrics—it’s about making sure the metrics stay consistent and relevant as your business changes. Here are a few best practices:
-Keeping Metric Definitions Consistent Across the Organization
+
+### Keeping Metric Definitions Consistent Across the Organization
+
 Inconsistent metrics are one of the biggest causes of confusion. If two departments define “Revenue” differently, you’ll end up with conflicting reports. Structured ensures consistency by centralizing metric definitions. Once a metric is defined, everyone uses the same version of that metric, no matter where they are in the company.
+
+<Warning>
+  Make sure to communicate changes to metric definitions clearly, so that
+  everyone in the organization is aware of updates and can adjust accordingly.
+</Warning>
+
 Here’s how Structured helps:
-Define Metrics Once: Set up key metrics centrally in Structured, and make sure everyone uses these standardized definitions.
-Document Changes: If you update a metric definition (e.g., changing how you calculate churn), document why the change was made and how it affects your reports.
-Communicate with Stakeholders: Make sure relevant teams know when key metrics change to avoid confusion.
-Example Use Cases for Metrics in Decision-Making
+
+- **Define Metrics Once:** Set up key metrics centrally in Structured, and make sure everyone uses these standardized definitions.
+- **Document Changes:** If you update a metric definition (e.g., changing how you calculate churn), document why the change was made and how it affects your reports.
+- **Communicate with Stakeholders:** Make sure relevant teams know when key metrics change to avoid confusion.
+
+### Example Use Cases for Metrics in Decision-Making
+
 Metrics are only useful if they help drive decisions. Here are some real-world examples of how companies use metrics in Structured to inform their strategies:
-SaaS Company: A SaaS company tracks Monthly Recurring Revenue (MRR) and Churn Rate to measure the health of its subscription business. By keeping a close eye on these metrics, the company can quickly spot if customer churn is increasing and take action to address the issue.
-E-commerce Business: An online retailer tracks metrics like Average Order Value and Customer Acquisition Cost. These metrics help the company decide where to allocate its marketing budget and which products to promote more heavily.
-Product Teams: A product team might define User Engagement metrics to measure how often users interact with key features. These metrics help prioritize product development, ensuring resources go toward features that will drive the most engagement.
-In all of these cases, the key is consistency. With Structured, you can ensure that the metrics your team is relying on are accurate, up-to-date, and universally understood across the business.
-Summary
+
+<CardGroup cols={2}>
+  <Card title="SaaS Company" icon="square-1">
+    A SaaS company tracks Monthly Recurring Revenue (MRR) and Churn Rate to
+    measure the health of its subscription business. By keeping a close eye on
+    these metrics, the company can quickly spot if customer churn is increasing
+    and take action to address the issue.
+  </Card>
+  <Card title="E-commerce Business" icon="square-2">
+    An online retailer tracks metrics like Average Order Value and Customer
+    Acquisition Cost. These metrics help the company decide where to allocate
+    its marketing budget and which products to promote more heavily.
+  </Card>
+</CardGroup>
+
+---
+
+## Summary
+
 Metrics are the heartbeat of any data-driven business. In Structured, metrics are tied to your business objects, ensuring they’re always accurate, consistent, and actionable. You can easily define, manage, and track metrics, ensuring everyone in the company is on the same page when it comes to key numbers.
+
 By connecting metrics to your core business objects and tracking them over time, you get a full view of your company’s performance without worrying about miscalculations or conflicting reports. In the next section, we’ll explore best practices for collaborating with your team and using Structured to share insights across your organization.
