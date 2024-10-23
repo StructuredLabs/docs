@@ -4,69 +4,168 @@ icon: "clipboard-question"
 ---
 
 StructuredBot is your go-to assistant for making data requests and collaborating directly from Slack. It integrates with your data stack to help manage data requests, automate ticket creation, and even generate pull requests for changes—all without leaving your chat! This section will walk you through setting up and using StructuredBot to simplify your work and keep your data operations running smoothly.
-Setting Up StructuredBot in Slack
-Getting StructuredBot set up in Slack is straightforward, and once it’s connected, your team will be able to make data requests, ask questions about data structures, and trigger automated workflows all from within your Slack channels.
-Step-by-Step Guide to Connecting StructuredBot to Slack
-Add Slack: In your Structured admin dashboard, navigate to Settings > Organization > Slack. Here, you’ll find the option to connect Slack.
-Authorize the Slack App: Click on Connect Slack and follow the prompts to authorize Structured to integrate with your Slack workspace. During this process, you’ll need to grant StructuredBot permission to send and receive messages in the selected channel.
-Select a Channel: After clicking Add to Slack, a confirmation dialog will appear: "Structured requires a channel to post to as an app". Select the appropriate channel where you want StructuredBot to be active.
-Note: If you need to connect StructuredBot to a private channel, please reach out to amrutha@structuredlabs.com for assistance.
-Configure Notifications (Optional): You can set up notifications for specific events such as ticket creation, pull request generation, or data alerts, allowing you to stay updated on changes without leaving Slack.
-Configuring Permissions and Settings
-To get StructuredBot to work smoothly across your organization, you’ll need to configure the right permissions:
-User Permissions: Decide who in your team can make data requests or trigger workflows through StructuredBot. This could be set for specific roles, such as analysts or engineers, while business users may have restricted access.
-Channel-Specific Permissions: You can limit StructuredBot’s activity to specific channels, ensuring it only responds to data requests or tickets in the appropriate places.
-Notification Settings: Configure the types of alerts and notifications you want to receive in Slack—like updates on data requests or alerts for breaking changes.
-Once permissions and settings are configured, StructuredBot is ready to help your team with real-time data requests and collaboration!
-Making Data Requests Through Slack
-StructuredBot allows you to interact with your data and team workflows directly through Slack. Whether you’re requesting a report, pulling metadata, or needing to make changes in the data, StructuredBot simplifies the process with just a few commands.
-How to Create Data Requests with StructuredBot
-Creating a data request is easy, and it doesn’t require technical expertise. Here’s how you can do it:
-Request a Data Pull: In any Slack channel where StructuredBot is active, simply type your request. For example:
-“@StructuredBot, can you pull the customer churn data for Q1?”
-“@StructuredBot, give me the column definitions for the Orders table.”
-Review Request Options: Once you make the request, StructuredBot will prompt you with options if additional clarification is needed (e.g., asking for filters or date ranges). For example:
-Bot: "Do you want this data broken down by region or by product category?"
-Submit the Request: Confirm your choices, and StructuredBot will handle the rest—whether it’s pulling the requested data or gathering metadata.
-StructuredBot works by connecting to your data sources, performing the data pulls, and delivering the results directly in Slack, often with additional context, such as a summary of the data or a preview.
-Example Requests and Their Workflows
-Pulling Data: “@StructuredBot, show me all active customer accounts from the last 30 days.” StructuredBot fetches the data and delivers it in a Slack message or via a link to a report.
-Requesting Metadata: “@StructuredBot, what are the columns in the Revenue table?” StructuredBot provides the column names, data types, and descriptions from your metadata documentation.
-Checking Data Health: “@StructuredBot, are there any recent changes to the Customer data model?” StructuredBot will check recent changes, alert you to any modifications, and provide links to related PRs or tickets.
-Each workflow is designed to be quick and intuitive, helping business users, analysts, and technical teams to interact with data directly through Slack.
-Integrating GitHub with Structured for PR Reviews
-For teams that rely on GitHub for version control, Structured offers deep integration, allowing you to manage changes to your data models through pull requests (PRs). With Structured’s GitHub integration, you can automatically generate PRs for schema or model changes and use StructuredBot to comment on PRs with helpful insights, making collaboration smoother.
-How to Connect a dbt Project and Enable GitHub Integration
-Link Your GitHub Account: In the Integrations tab of Structured, select GitHub. You’ll be prompted to authenticate with GitHub and grant Structured the necessary permissions to create PRs and comment on your repositories.
-Connect Your dbt Project: Structured integrates with dbt (Data Build Tool) to help manage your data transformations and models. To connect your dbt project:
-In the dbt Integration section of Structured, link your dbt project by providing the repository details where the dbt models are stored.
-Structured will scan the project and import the models, creating automated documentation for the dbt models and making them available in your Structured workspace.
-Enable PR Automation: Once the integration is active, Structured can automatically generate pull requests for any data model changes triggered by your team’s requests or by StructuredBot itself. This means whenever there’s a data change—such as adding a column or updating a model definition—Structured can generate the PR with the necessary code changes, ensuring version control is maintained.
-StructuredBot Commenting on PRs with Relevant Insights
-After a PR is created in GitHub, StructuredBot will automatically comment on the PR with relevant information, such as:
-Summary of the change: What data model or schema change is being proposed, and why it’s necessary.
-Impact analysis: How the change might affect other data models, tables, or metrics, allowing reviewers to see the broader implications.
-Lineage information: Details on how this change ties into related tables, metrics, or business objects in Structured, so the team can understand the downstream impact.
-This functionality improves collaboration between data engineers and other teams, providing everyone with the context they need to review and approve changes.
-Automated Ticket Creation and PR Generation
-StructuredBot is also designed to automate more complex workflows like creating tickets for data changes or even generating pull requests when you need adjustments in the underlying data models. This reduces the manual back-and-forth between teams and speeds up your data operations.
-How StructuredBot Handles Data Requests with Tickets
-Whenever a data request requires more than just a data pull—such as changes to a data model or resolving an issue—StructuredBot can automatically create a ticket in the Structured platform. Here’s how it works:
-Trigger a Ticket Request: After you make a request in Slack that requires deeper action (e.g., adding a new column to a table or fixing a schema issue), StructuredBot will ask if you’d like to create a ticket.
-Create the Ticket: If confirmed, StructuredBot automatically creates a ticket in the Structured Tickets system. The ticket will contain details of the request, such as:
-The user who made the request
-The specific data change needed
-Links to the relevant data models or tables
 
-Ticket Status Updates: You can track the status of the ticket directly in Slack. StructuredBot will notify you when the ticket is being worked on, and when it’s completed or requires further input.
-This automation ensures that no request falls through the cracks and that your team has a clear process for handling data changes.
-Understanding PRs Created by the AI Agent for Data Changes
+## Setting Up StructuredBot in Slack
+
+Getting StructuredBot set up in Slack is straightforward, and once it’s connected, your team will be able to make data requests, ask questions about data structures, and trigger automated workflows all from within your Slack channels.
+
+### Step-by-Step Guide to Connecting StructuredBot to Slack
+
+<Steps>
+  <Step title="Add Slack">
+    In your Structured admin dashboard, navigate to **Settings > Organization >
+    Slack**. Here, you’ll find the option to connect Slack.
+  </Step>
+  <Step title="Authorize the Slack App">
+    Click on **Connect Slack** and follow the prompts to authorize Structured to
+    integrate with your Slack workspace. During this process, you’ll need to
+    grant StructuredBot permission to send and receive messages in the selected
+    channel.
+  </Step>
+  <Step title="Select a Channel">
+    After clicking **Add to Slack**, a confirmation dialog will appear:
+    "Structured requires a channel to post to as an app." Select the appropriate
+    channel where you want StructuredBot to be active.
+  </Step>
+  <Step title="Configure Notifications (Optional)">
+    You can set up notifications for specific events such as ticket creation,
+    pull request generation, or data alerts, allowing you to stay updated on
+    changes without leaving Slack.
+  </Step>
+</Steps>
+
+<Info>
+  **Note:** If you need to connect StructuredBot to a private channel, please
+  reach out to amrutha@structuredlabs.com for assistance.
+</Info>
+
+### Configuring Permissions and Settings
+
+To get StructuredBot to work smoothly across your organization, you’ll need to configure the right permissions:
+
+- **User Permissions:** Decide who in your team can make data requests or trigger workflows through StructuredBot. This could be set for specific roles, such as analysts or engineers, while business users may have restricted access.
+- **Channel-Specific Permissions:** You can limit StructuredBot’s activity to specific channels, ensuring it only responds to data requests or tickets in the appropriate places.
+- **Notification Settings:** Configure the types of alerts and notifications you want to receive in Slack—like updates on data requests or alerts for breaking changes.
+
+Once permissions and settings are configured, StructuredBot is ready to help your team with real-time data requests and collaboration!
+
+## Making Data Requests Through Slack
+
+StructuredBot allows you to interact with your data and team workflows directly through Slack. Whether you’re requesting a report, pulling metadata, or needing to make changes in the data, StructuredBot simplifies the process with just a few commands.
+
+### How to Create Data Requests with StructuredBot
+
+Creating a data request is easy, and it doesn’t require technical expertise. Here’s how you can do it:
+
+- **Request a Data Pull:** In any Slack channel where StructuredBot is active, simply type your request. For example:
+  - “@StructuredBot, can you pull the customer churn data for Q1?”
+  - “@StructuredBot, give me the column definitions for the Orders table.”
+- **Review Request Options:** Once you make the request, StructuredBot will prompt you with options if additional clarification is needed (e.g., asking for filters or date ranges). For example:
+
+  Bot: "Do you want this data broken down by region or by product category?"
+
+- **Submit the Request:** Confirm your choices, and StructuredBot will handle the rest—whether it’s pulling the requested data or gathering metadata.
+
+StructuredBot works by connecting to your data sources, performing the data pulls, and delivering the results directly in Slack, often with additional context, such as a summary of the data or a preview.
+
+### Example Requests and Their Workflows
+
+<CardGroup cols={2}>
+  <Card title="Pulling Data" icon="database">
+    “@StructuredBot, show me all active customer accounts from the last 30
+    days.” StructuredBot fetches the data and delivers it in a Slack message or
+    via a link to a report.
+  </Card>
+  <Card title="Requesting Metadata" icon="list">
+    “@StructuredBot, what are the columns in the Revenue table?” StructuredBot
+    provides the column names, data types, and descriptions from your metadata
+    documentation.
+  </Card>
+  <Card title="Checking Data Health" icon="heartbeat">
+    “@StructuredBot, are there any recent changes to the Customer data model?”
+    StructuredBot will check recent changes, alert you to any modifications, and
+    provide links to related PRs or tickets.
+  </Card>
+</CardGroup>
+
+Each workflow is designed to be quick and intuitive, helping business users, analysts, and technical teams to interact with data directly through Slack.
+
+## Integrating GitHub with Structured for PR Reviews
+
+For teams that rely on GitHub for version control, Structured offers deep integration, allowing you to manage changes to your data models through pull requests (PRs). With Structured’s GitHub integration, you can automatically generate PRs for schema or model changes and use StructuredBot to comment on PRs with helpful insights, making collaboration smoother.
+
+### How to Connect a dbt Project and Enable GitHub Integration
+
+<Steps>
+  <Step title="Link Your GitHub Account">
+    In the **Integrations** tab of Structured, select GitHub. You’ll be prompted
+    to authenticate with GitHub and grant Structured the necessary permissions
+    to create PRs and comment on your repositories.
+  </Step>
+  <Step title="Connect Your dbt Project">
+    Structured integrates with dbt (Data Build Tool) to help manage your data
+    transformations and models. To connect your dbt project: - In the dbt
+    Integration section of Structured, link your dbt project by providing the
+    repository details where the dbt models are stored.
+  </Step>
+  <Step title="Enable PR Automation">
+    Once the integration is active, Structured can automatically generate pull
+    requests for any data model changes triggered by your team’s requests or by
+    StructuredBot itself.
+  </Step>
+</Steps>
+
+### StructuredBot Commenting on PRs with Relevant Insights
+
+After a PR is created in GitHub, StructuredBot will automatically comment on the PR with relevant information, such as:
+
+- **Summary of the change:** What data model or schema change is being proposed, and why it’s necessary.
+- **Impact analysis:** How the change might affect other data models, tables, or metrics, allowing reviewers to see the broader implications.
+- **Lineage information:** Details on how this change ties into related tables, metrics, or business objects in Structured, so the team can understand the downstream impact.
+
+<Info>
+  This functionality improves collaboration between data engineers and other
+  teams, providing everyone with the context they need to review and approve
+  changes.
+</Info>
+
+## Automated Ticket Creation and PR Generation
+
+StructuredBot is also designed to automate more complex workflows like creating tickets for data changes or even generating pull requests when you need adjustments in the underlying data models. This reduces the manual back-and-forth between teams and speeds up your data operations.
+
+### How StructuredBot Handles Data Requests with Tickets
+
+Whenever a data request requires more than just a data pull—such as changes to a data model or resolving an issue—StructuredBot can automatically create a ticket in the Structured platform. Here’s how it works:
+
+- **Trigger a Ticket Request:** After you make a request in Slack that requires deeper action (e.g., adding a new column to a table or fixing a schema issue), StructuredBot will ask if you’d like to create a ticket.
+- **Create the Ticket:** If confirmed, StructuredBot automatically creates a ticket in the Structured Tickets system. The ticket will contain details of the request, such as:
+  - The user who made the request
+  - The specific data change needed
+  - Links to the relevant data models or tables
+- **Ticket Status Updates:** You can track the status of the ticket directly in Slack. StructuredBot will notify you when the ticket is being worked on, and when it’s completed or requires further input.
+
+<Check>
+  This automation ensures that no request falls through the cracks and that your
+  team has a clear process for handling data changes.
+</Check>
+
+### Understanding PRs Created by the AI Agent for Data Changes
+
 One of the most powerful features of StructuredBot is its ability to generate pull requests when data model changes are required. When a request requires modification to your data structure—like adding a column or adjusting a model—StructuredBot can automate the process:
-AI Agent Creates a PR: Once a ticket is generated and approved, StructuredBot’s AI agent will automatically generate a PR to address the data change. For example, if a user requests a new column in the Customers table, the AI will create a PR with the necessary code changes to update the schema.
-PR Review Process: The PR is sent to your GitHub (or other version control system) for review. Your data engineering team can review the PR, approve it, and merge the changes into your data models.
-Slack Notifications: StructuredBot will notify the relevant users in Slack when the PR is created, approved, or merged, ensuring everyone is kept in the loop.
+
+- **AI Agent Creates a PR:** Once a ticket is generated and approved, StructuredBot’s AI agent will automatically generate a PR to address the data change. For example, if a user requests a new column in the Customers table, the AI will create a PR with the necessary code changes to update the schema.
+- **PR Review Process:** The PR is sent to your GitHub (or other version control system) for review. Your data engineering team can review the PR, approve it, and merge the changes into your data models.
+- **Slack Notifications:** StructuredBot will notify the relevant users in Slack when the PR is created, approved, or merged, ensuring everyone is kept in the loop.
+
 This workflow allows for faster implementation of data changes, reducing the need for manual intervention and streamlining collaboration between data teams and business users.
-Summary
+
+## Summary
+
 StructuredBot brings data requests, collaboration, and automation directly into Slack, making it easier than ever for teams to manage their data workflows. From creating data requests to automating ticket generation and PRs for data model changes and providing contextualized feedback, StructuredBot helps streamline operations while keeping everyone in the loop.
-This allows both technical and non-technical users to collaborate effectively, so data changes are handled efficiently and transparently.
+
+<Info>
+  This allows both technical and non-technical users to collaborate effectively,
+  so data changes are handled efficiently and transparently.
+</Info>
+
 In the next section, we’ll explore Structured’s internal analytics dashboard, which provides a comprehensive view of your connected data sources, changes over time, and key metrics—all in one place.

@@ -5,72 +5,144 @@ icon: "wrench"
 
 In this section, we’ll go over common problems you might encounter in Structured and how to solve them. From connection issues with data sources to ensuring Ask AI returns accurate results, this guide will help you quickly troubleshoot and resolve issues.
 
-Common Issues and How to Solve Them
-Connection Issues with Data Sources
+## Common Issues and How to Solve Them
+
+### Connection Issues with Data Sources
+
 Connecting to data sources is usually seamless, but there are times when things don’t go as planned. If you’re having trouble connecting Structured to a data source (e.g., BigQuery, Postgres, Snowflake), here’s what to check:
-Incorrect Credentials:
-Solution: Double-check that the API keys, connection strings, and credentials you’ve provided are accurate. Common errors include mistyped usernames, passwords, or wrong database URLs.
-Firewall or Network Restrictions:
-Solution: If your data source is behind a firewall or a VPN, ensure Structured’s IP addresses are whitelisted. Contact your IT or DevOps team to verify this.
-Missing Permissions:
-Solution: Ensure the user account or API key you’re using has the necessary permissions to access the data source. For example, the user might need read access to specific schemas or tables in the database.
-Data Source Outages:
-Solution: Check the status of the data source to ensure it’s online. Occasionally, services like Snowflake or BigQuery may experience downtime, which could cause connection failures.
-If the issue persists after trying these solutions, check the error logs in Structured for detailed error messages or contact Structured support for additional help.
-Syncing Errors and How to Resolve Them
+
+<Steps>
+  <Step title="Incorrect Credentials">
+    **Solution:** Double-check that the API keys, connection strings, and
+    credentials you’ve provided are accurate. Common errors include mistyped
+    usernames, passwords, or wrong database URLs.
+  </Step>
+  <Step title="Firewall or Network Restrictions">
+    **Solution:** If your data source is behind a firewall or VPN, ensure
+    Structured’s IP addresses are whitelisted. Contact your IT or DevOps team to
+    verify this.
+  </Step>
+  <Step title="Missing Permissions">
+    **Solution:** Ensure the user account or API key you’re using has the
+    necessary permissions to access the data source (e.g., read access to
+    specific schemas or tables).
+  </Step>
+  <Step title="Data Source Outages">
+    **Solution:** Check the status of the data source to ensure it’s online.
+    Services like Snowflake or BigQuery may experience downtime, causing
+    connection failures.
+  </Step>
+</Steps>
+
+<Check>
+  If the issue persists after trying these solutions, check the error logs in
+  Structured for detailed error messages or contact Structured support for
+  additional help.
+</Check>
+
+### Syncing Errors and How to Resolve Them
+
 Sometimes, data source syncing may fail or incomplete data might be synced. Here are common causes and how to fix them:
-Partial Syncs:
-Cause: This might occur if there are large tables or data sources with high query costs.
-Solution: Review the sync logs in the dashboard to check for any throttling limits from your data provider. You might need to adjust your data source’s sync frequency or query limits.
-Stale Data:
-Cause: Data hasn’t been updated as expected after a sync.
-Solution: Manually trigger a sync from the dashboard. If the problem continues, confirm that the data source is providing fresh data, and no caching settings are affecting updates.
-Missing Tables or Columns:
-Cause: Sometimes, newly added tables or columns aren’t synced correctly.
-Solution: Ensure that the sync settings in Structured include all relevant tables or models. If the missing tables are in a new schema, make sure that schema has been included in the sync configuration.
 
-Ask AI Not Returning Accurate Results?
+- **Partial Syncs:**
+
+  - **Cause:** This might occur if there are large tables or data sources with high query costs.
+  - **Solution:** Review the sync logs in the dashboard for throttling limits from your data provider. Adjust the sync frequency or query limits as needed.
+
+- **Stale Data:**
+
+  - **Cause:** Data hasn’t been updated as expected after a sync.
+  - **Solution:** Manually trigger a sync from the dashboard. If the problem continues, confirm that the data source is providing fresh data and no caching settings are affecting updates.
+
+- **Missing Tables or Columns:**
+  - **Cause:** Newly added tables or columns might not sync correctly.
+  - **Solution:** Ensure the sync settings in Structured include all relevant tables or models. If the missing tables are in a new schema, ensure that schema is included in the sync configuration.
+
+### Ask AI Not Returning Accurate Results?
+
 Ask AI is powerful for exploring your data, but occasionally, it may not return the precise results you’re looking for. Here’s how to troubleshoot and fine-tune your queries for better results.
-How to Fine-Tune Questions for Better Results
-Use Clear and Specific Language:
-Issue: If Ask AI returns incomplete or irrelevant results, the problem might be due to vague or ambiguous phrasing.
-Solution: Be specific in your questions. For example, instead of asking "What are the customer metrics?", ask "Show me the customer churn rate for Q1."
-Check for Synced Data Definitions:
-Issue: If Ask AI can’t find certain tables or business objects, it could be because they aren’t synced yet.
-Solution: Verify that the relevant data definitions are available in Structured by checking the Data Definitions section. If necessary, trigger a new sync to make sure all tables and models are updated.
-Ask for Metadata Insights:
-Issue: If Ask AI struggles with a data request, remember that its strength is in answering metadata-level questions.
-Solution: Instead of asking for raw data or reports, ask for metadata-related insights. For instance, "What columns are in the Orders table?" or "How is the Customer object defined?"
-Break Down Complex Questions:
-Issue: Complex, multi-part questions might confuse Ask AI.
-Solution: Simplify your query. For example, break "What is the churn rate for customers in the US in Q2 and how does it compare to Q1?" into two simpler questions: "What was the churn rate for customers in the US in Q2?" and "What was the churn rate in Q1?"
-By refining your questions, you can help Ask AI better understand your intent and return more accurate results.
 
-Alerts and Notifications
+#### How to Fine-Tune Questions for Better Results
+
+<Steps>
+  <Step title="Use Clear and Specific Language">
+    **Issue:** If Ask AI returns incomplete or irrelevant results, the problem
+    might be due to vague or ambiguous phrasing. **Solution:** Be specific in
+    your questions. Instead of asking "What are the customer metrics?", try
+    "Show me the customer churn rate for Q1."
+  </Step>
+  <Step title="Check for Synced Data Definitions">
+    **Issue:** If Ask AI can’t find certain tables or business objects, they may
+    not be synced yet. **Solution:** Verify that the relevant data definitions
+    are available in Structured by checking the **Data Definitions** section.
+    Trigger a new sync if necessary.
+  </Step>
+  <Step title="Ask for Metadata Insights">
+    **Issue:** Ask AI struggles with data requests outside its strength
+    (metadata-level questions). **Solution:** Instead of asking for raw data,
+    ask for metadata-related insights. For example, "What columns are in the
+    Orders table?" or "How is the Customer object defined?"
+  </Step>
+  <Step title="Break Down Complex Questions">
+    **Issue:** Complex, multi-part questions may confuse Ask AI. **Solution:**
+    Simplify your queries. For example, instead of asking "What is the churn
+    rate for customers in the US in Q2 and how does it compare to Q1?" break it
+    down into two questions.
+  </Step>
+</Steps>
+
+<Info>
+  By refining your questions, you can help Ask AI better understand your intent
+  and return more accurate results.
+</Info>
+
+## Alerts and Notifications
+
 Structured has a robust alerting system that notifies you of critical changes or issues in your data environment. Here’s how to manage alerts and what to do when you receive one.
-What to Do If You Receive a Breaking Change Alert
+
+### What to Do If You Receive a Breaking Change Alert
+
 A breaking change alert indicates that something critical has changed in your data environment—typically a change that might affect downstream processes or reporting.
-Identify the Issue:
-Solution: Go to the Alerts section in your Structured dashboard, where you’ll see details about the breaking change. This could be a missing column, a table deletion, or a significant schema change.
-Check Impact on Business Objects and Metrics:
-Solution: Once you identify the issue, check the related business objects or metrics in Structured. Structured will typically highlight which objects or metrics are affected by the breaking change.
-Resolve the Change:
-Solution: If the change was unintended (e.g., a table was accidentally deleted or a column renamed), resolve the issue by restoring the correct data structure. If the change was intentional, update any related business objects or metrics to reflect the new structure.
-Trigger Resync:
-Solution: After resolving the breaking change, trigger a resync to ensure that all data sources and definitions are updated across Structured.
-How to Manage Alert Settings
+
+<Steps>
+  <Step title="Identify the Issue">
+    **Solution:** Go to the **Alerts** section in your Structured dashboard to
+    see details about the breaking change, such as a missing column or table
+    deletion.
+  </Step>
+  <Step title="Check Impact on Business Objects and Metrics">
+    **Solution:** Once you identify the issue, check the related business
+    objects or metrics in Structured. Structured will highlight which objects or
+    metrics are affected by the breaking change.
+  </Step>
+  <Step title="Resolve the Change">
+    **Solution:** If the change was unintended, resolve the issue by restoring
+    the correct data structure. If intentional, update related business objects
+    or metrics to reflect the new structure.
+  </Step>
+  <Step title="Trigger Resync">
+    **Solution:** After resolving the breaking change, trigger a resync to
+    ensure that all data sources and definitions are updated across Structured.
+  </Step>
+</Steps>
+
+### How to Manage Alert Settings
+
 Structured allows you to customize alert settings so you only receive notifications that matter most to your team.
-Open Alert Settings:
-Go to the Alerts page in your Structured dashboard. Here, you can view all existing alerts and customize new ones.
-Customize Alert Types:
-Data Source Alerts: Get notified when a data source connection fails or when there’s an issue syncing data.
-Schema Changes: Receive alerts when tables, columns, or models are modified, added, or deleted.
-Metric Anomalies: Set up alerts for when key metrics fall outside expected ranges.
-Choose Notification Channels:
-You can decide whether to receive alerts via Slack, email, or directly within the Structured dashboard. Choose the channel that works best for your team’s workflow.
-Set Thresholds and Frequency:
-For specific types of alerts (e.g., metric anomalies), you can set thresholds. For example, you can receive an alert if Customer Churn increases by more than 5% in a given period.
-You can also control how frequently you receive these alerts—whether immediately or as a daily summary.
-By managing alert settings, you can ensure that your team is informed of critical changes without being overwhelmed by unnecessary notifications.
-Summary
-Troubleshooting common issues in Structured is simple once you understand the key areas to check. If you need additional support, message support@structuredlabs.com.
+
+- **Open Alert Settings:** Navigate to the **Alerts** page in your Structured dashboard to view and customize existing alerts.
+- **Customize Alert Types:** Choose from the following:
+  - **Data Source Alerts:** Get notified if a data source connection fails or if there’s an issue syncing data.
+  - **Schema Changes:** Receive alerts when tables, columns, or models are modified, added, or deleted.
+  - **Metric Anomalies:** Set up alerts when key metrics fall outside expected ranges.
+- **Choose Notification Channels:** Select whether to receive alerts via Slack, email, or directly within the Structured dashboard.
+- **Set Thresholds and Frequency:** For alerts like metric anomalies, you can set thresholds (e.g., receive an alert if Customer Churn increases by more than 5% in a period). Control the frequency—whether immediately or as a daily summary.
+
+<Check>
+  By managing alert settings, your team stays informed of critical changes
+  without being overwhelmed by unnecessary notifications.
+</Check>
+
+## Summary
+
+Troubleshooting common issues in Structured is simple once you understand the key areas to check. Whether it’s connection problems, syncing errors, or fine-tuning Ask AI queries, Structured provides tools and logs to help resolve issues. If you need additional support, message **support@structuredlabs.com**.
