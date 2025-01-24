@@ -9,12 +9,11 @@
     "default": "light",
     "isHidden": true
   },
-  "theme": "prism",
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#3b82f6",
-    "light": "#3b82f6",
-    "dark": "#3b82f6"
+    "primary": "#000000",
+    "light": "#000000",
+    "dark": "#000000"
   },
   "topbarLinks": [
     {
@@ -27,8 +26,8 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "App",
-    "url": "https://app.structuredlabs.com"
+    "name": "Console",
+    "url": "https://cloud.structuredlabs.com"
   },
   "anchors": [
     {
@@ -58,22 +57,6 @@
       ]
     },
     {
-      "group": "Features",
-      "pages": [
-        "features/datadefinitions",
-        "features/modelingmetrics",
-        "features/askai",
-        "features/datarequests",
-        "features/metadataanalytics"
-      ]
-    },
-    {
-      "group": "Integrations",
-      "pages": [
-        "integrations"
-      ]
-    },
-    {
       "group": "Appendix",
       "pages": [
         "appendix/glossary",
@@ -84,7 +67,6 @@
     {
       "group": "Security Policies",
       "pages": [
-        "datapolicy",
         "privacypolicy",
         "termsofservice"
       ]
