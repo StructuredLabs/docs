@@ -1,148 +1,127 @@
 ---
 title: "Troubleshooting"
 icon: "wrench"
+description: "A comprehensive guide to troubleshooting issues in Structured"
 ---
 
-In this section, we’ll go over common problems you might encounter in Structured and how to solve them. From connection issues with data sources to ensuring Ask AI returns accurate results, this guide will help you quickly troubleshoot and resolve issues.
-
-## Common Issues and How to Solve Them
-
-### Connection Issues with Data Sources
-
-Connecting to data sources is usually seamless, but there are times when things don’t go as planned. If you’re having trouble connecting Structured to a data source (e.g., BigQuery, Postgres, Snowflake), here’s what to check:
+## ▪️ Authentication with GitHub
 
 <Steps>
-  <Step title="Incorrect Credentials">
-    **Solution:** Double-check that the API keys, connection strings, and
-    credentials you’ve provided are accurate. Common errors include mistyped
-    usernames, passwords, or wrong database URLs.
+  <Step title="Failed to Authenticate with GitHub">
+    **Solution:** Grant the necessary permissions for Preswald to access your
+    GitHub account. - Go to **GitHub Settings** → **Applications** →
+    **Authorized OAuth Apps** and confirm that Preswald has the required
+    repository permissions. - If authentication still fails, try logging out of
+    Preswald and logging back in.
   </Step>
-  <Step title="Firewall or Network Restrictions">
-    **Solution:** If your data source is behind a firewall or VPN, ensure
-    Structured’s IP addresses are whitelisted. Contact your IT or DevOps team to
-    verify this.
+  <Step title="GitHub Account Not Found">
+    **Solution:** Verify that you’re using the correct GitHub account. Verify
+    that the account has access to the repository you’re trying to import.
   </Step>
-  <Step title="Missing Permissions">
-    **Solution:** Ensure the user account or API key you’re using has the
-    necessary permissions to access the data source (e.g., read access to
-    specific schemas or tables).
+</Steps>
+
+<Check>If the issue persists, contact Preswald support for assistance.</Check>
+
+## ▪️ Importing a Repository with a Config File
+
+<Steps>
+  <Step title="Repository Not Found">
+    **Solution:** Verify the repository is public or that your GitHub account
+    has access to it. For private repos, confirm that you’ve granted the
+    required permissions during GitHub authentication.
   </Step>
-  <Step title="Data Source Outages">
-    **Solution:** Check the status of the data source to ensure it’s online.
-    Services like Snowflake or BigQuery may experience downtime, causing
-    connection failures.
+  <Step title="Config File Not Detected">
+    **Solution:** Verify that your repository contains a valid `config.toml`
+    file in the root directory. Check for typos or misplacement of the file.
+  </Step>
+  <Step title="Import Fails with an Error">
+    **Solution:** Review the error logs in the Preswald dashboard for details.
+    Common issues include missing dependencies or unsupported configurations.
+    Update the `config.toml` file as needed and re-import the repository.
+  </Step>
+</Steps>
+
+## ▪️ Creating an App
+
+<Steps>
+  <Step title="App Fails to Initialize">
+    **Solution:** Check the `config.toml` file for missing or invalid fields,
+    such as `title`, `port`, or `data connections`. Update the `config.toml` to
+    be valid.
+  </Step>
+  <Step title="Error in App Code">
+    **Solution:** Run a local version of your app using `preswald run` before
+    deploying it in the cloud. Fix any errors or syntax issues in your codebase.
   </Step>
 </Steps>
 
 <Check>
-  If the issue persists after trying these solutions, check the error logs in
-  Structured for detailed error messages or contact Structured support for
-  additional help.
+  For more detailed debugging, view your app’s logs in the Preswald dashboard.
 </Check>
 
-### Syncing Errors and How to Resolve Them
-
-Sometimes, data source syncing may fail or incomplete data might be synced. Here are common causes and how to fix them:
-
-- **Partial Syncs:**
-
-  - **Cause:** This might occur if there are large tables or data sources with high query costs.
-  - **Solution:** Review the sync logs in the dashboard for throttling limits from your data provider. Adjust the sync frequency or query limits as needed.
-
-- **Stale Data:**
-
-  - **Cause:** Data hasn’t been updated as expected after a sync.
-  - **Solution:** Manually trigger a sync from the dashboard. If the problem continues, confirm that the data source is providing fresh data and no caching settings are affecting updates.
-
-- **Missing Tables or Columns:**
-  - **Cause:** Newly added tables or columns might not sync correctly.
-  - **Solution:** Ensure the sync settings in Structured include all relevant tables or models. If the missing tables are in a new schema, ensure that schema is included in the sync configuration.
-
-### Ask AI Not Returning Accurate Results?
-
-Ask AI is powerful for exploring your data, but occasionally, it may not return the precise results you’re looking for. Here’s how to troubleshoot and fine-tune your queries for better results.
-
-#### How to Fine-Tune Questions for Better Results
+## ▪️ Deploying an Endpoint
 
 <Steps>
-  <Step title="Use Clear and Specific Language">
-    **Issue:** If Ask AI returns incomplete or irrelevant results, the problem
-    might be due to vague or ambiguous phrasing. **Solution:** Be specific in
-    your questions. Instead of asking "What are the customer metrics?", try
-    "Show me the customer churn rate for Q1."
+  <Step title="Deployment Fails">
+    **Solution:** Confirm that your `secrets.toml` file contains valid cloud
+    credentials for your hosting platform (e.g., Google Cloud, AWS). Check for
+    typos or missing fields.
   </Step>
-  <Step title="Check for Synced Data Definitions">
-    **Issue:** If Ask AI can’t find certain tables or business objects, they may
-    not be synced yet. **Solution:** Verify that the relevant data definitions
-    are available in Structured by checking the **Data Definitions** section.
-    Trigger a new sync if necessary.
-  </Step>
-  <Step title="Ask for Metadata Insights">
-    **Issue:** Ask AI struggles with data requests outside its strength
-    (metadata-level questions). **Solution:** Instead of asking for raw data,
-    ask for metadata-related insights. For example, "What columns are in the
-    Orders table?" or "How is the Customer object defined?"
-  </Step>
-  <Step title="Break Down Complex Questions">
-    **Issue:** Complex, multi-part questions may confuse Ask AI. **Solution:**
-    Simplify your queries. For example, instead of asking "What is the churn
-    rate for customers in the US in Q2 and how does it compare to Q1?" break it
-    down into two questions.
+  <Step title="Endpoint Not Accessible">
+    **Solution:** Verify that the deployment URL is correct and that your app is
+    running. Check for firewall or network restrictions that might block traffic
+    to your endpoint.
   </Step>
 </Steps>
-
-<Info>
-  By refining your questions, you can help Ask AI better understand your intent
-  and return more accurate results.
-</Info>
-
-## Alerts and Notifications
-
-Structured has a robust alerting system that notifies you of critical changes or issues in your data environment. Here’s how to manage alerts and what to do when you receive one.
-
-### What to Do If You Receive a Breaking Change Alert
-
-A breaking change alert indicates that something critical has changed in your data environment—typically a change that might affect downstream processes or reporting.
-
-<Steps>
-  <Step title="Identify the Issue">
-    **Solution:** Go to the **Alerts** section in your Structured dashboard to
-    see details about the breaking change, such as a missing column or table
-    deletion.
-  </Step>
-  <Step title="Check Impact on Business Objects and Metrics">
-    **Solution:** Once you identify the issue, check the related business
-    objects or metrics in Structured. Structured will highlight which objects or
-    metrics are affected by the breaking change.
-  </Step>
-  <Step title="Resolve the Change">
-    **Solution:** If the change was unintended, resolve the issue by restoring
-    the correct data structure. If intentional, update related business objects
-    or metrics to reflect the new structure.
-  </Step>
-  <Step title="Trigger Resync">
-    **Solution:** After resolving the breaking change, trigger a resync to
-    ensure that all data sources and definitions are updated across Structured.
-  </Step>
-</Steps>
-
-### How to Manage Alert Settings
-
-Structured allows you to customize alert settings so you only receive notifications that matter most to your team.
-
-- **Open Alert Settings:** Navigate to the **Alerts** page in your Structured dashboard to view and customize existing alerts.
-- **Customize Alert Types:** Choose from the following:
-  - **Data Source Alerts:** Get notified if a data source connection fails or if there’s an issue syncing data.
-  - **Schema Changes:** Receive alerts when tables, columns, or models are modified, added, or deleted.
-  - **Metric Anomalies:** Set up alerts when key metrics fall outside expected ranges.
-- **Choose Notification Channels:** Select whether to receive alerts via Slack, email, or directly within the Structured dashboard.
-- **Set Thresholds and Frequency:** For alerts like metric anomalies, you can set thresholds (e.g., receive an alert if Customer Churn increases by more than 5% in a period). Control the frequency—whether immediately or as a daily summary.
 
 <Check>
-  By managing alert settings, your team stays informed of critical changes
-  without being overwhelmed by unnecessary notifications.
+  Use the deployment logs in the dashboard to identify specific issues during
+  deployment.
 </Check>
 
-## Summary
+## ▪️ Setting Up Authentication for an App
 
-Troubleshooting common issues in Structured is simple once you understand the key areas to check. Whether it’s connection problems, syncing errors, or fine-tuning Ask AI queries, Structured provides tools and logs to help resolve issues. If you need additional support, message **support@structuredlabs.com**.
+<Steps>
+  <Step title="Auth Configuration Errors">
+    **Solution:** Verify the `auth` section in your `config.toml` file.
+    Correctly set up authentication providers (e.g., GitHub) and provide valid
+    client IDs and secrets.
+  </Step>
+  <Step title="Users Unable to Log In">
+    **Solution:** Check the authentication provider’s settings. Correctly
+    configure app’s redirect URI. For example, make sure it matches the Preswald
+    app’s domain and endpoint.
+  </Step>
+</Steps>
+
+<Check>
+  Test your authentication setup using multiple accounts to make sure everything
+  works as expected.
+</Check>
+
+## ▪️ Sharing a Workspace with Teammates
+
+<Steps>
+  <Step title="Unable to Share Workspace">
+    **Solution:** Only organization admins can invite collaborators. If you’re
+    not the workspace owner, contact the owner to manage sharing settings.
+  </Step>
+  <Step title="Invitation Not Received">
+    **Solution:** Verify the email address or GitHub account of the teammate
+    you’re inviting. Ask them to check their spam folder or notification
+    settings.
+  </Step>
+  <Step title="Collaborators Can’t Access Resources">
+    **Solution:** Check that the invited teammates have the correct roles and
+    permissions. Use the Preswald dashboard to update roles if necessary.
+  </Step>
+</Steps>
+
+<Check>
+  Use the **Workspace Settings** page to review sharing configurations and
+  permissions.
+</Check>
+
+# Summary
+
+Troubleshooting Structured often comes down to checking permissions, configurations, and logs. For persistent issues, contact **support@structuredlabs.com** for help.

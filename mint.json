@@ -31,6 +31,11 @@
   },
   "anchors": [
     {
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/StructuredLabs/preswald"
+    },
+    {
       "name": "Community",
       "icon": "slack",
       "url": "https://join.slack.com/t/structured-users/shared_invite/zt-265ong01f-UHP6BP3FzvOmMQDIKty_JQ"
@@ -45,23 +50,13 @@
     {
       "group": "Get Started",
       "pages": [
-        "introduction",
-        {
-          "group":  "Getting Started",
-          "pages": [
-            "gettingstarted/signup",
-            "gettingstarted/connect",
-            "gettingstarted/sync"
-          ]
-        }
+        "introduction"
       ]
     },
     {
       "group": "Appendix",
       "pages": [
-        "appendix/glossary",
-        "appendix/troubleshooting",
-        "appendix/usermanagement"
+        "appendix/troubleshooting"
       ]
     },
     {
